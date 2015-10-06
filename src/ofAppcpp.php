@@ -1,4 +1,11 @@
 <?php
+/***********
+
+ofApp.cpp for translate P5 code into OF code
+Code developed by Ignacio Buioli
+
+***********/
+
 	include 'conversor.php';
 	include 'sacar.php';
 

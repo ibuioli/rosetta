@@ -1,4 +1,11 @@
 <?php
+/***********
+
+Conversor function for translate P5 code into OF code
+Code developed by Ignacio Buioli - v pre-alpha 0.0.1
+
+***********/
+
 function conversor($p5){
 	//Reseteadores
 	$p5 = str_replace('boolean (', 'boolean (', $p5);
