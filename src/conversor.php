@@ -2,7 +2,7 @@
 /***********
 
 Conversor function for translate P5 code into OF code
-Code developed by Ignacio Buioli - v pre-alpha 0.0.1
+Code developed by Ignacio Buioli
 
 ***********/
 

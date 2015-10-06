@@ -12,7 +12,7 @@
 <body>
 	<header>
 		<h1>
-			<img src="img/logo.png"><img src="img/rosetta.png" id="rosetta" alt="rosetta"><span>| pre-alpha 0.0.1</span>
+			<img src="img/logo.png"><img src="img/rosetta.png" id="rosetta" alt="rosetta"><span>| pre-alpha 0.0.2</span>
 		</h1>
 	</header>
 
@@ -23,9 +23,9 @@
 		<div id="oftxt3" class="txt">of | ofApp.h</div>
 		<textarea id="p5" type="text"></textarea>
 		<div id="tras"></div>
-		<textarea id="of" readonly type="text"></textarea>
-		<textarea id="of2" readonly type="text"></textarea>
-		<textarea id="of3" readonly type="text"></textarea>
+		<textarea id="of" onclick="this.focus();this.select()" readonly="readonly" type="text"></textarea>
+		<textarea id="of2" onclick="this.focus();this.select()" readonly="readonly" type="text"></textarea>
+		<textarea id="of3" onclick="this.focus();this.select()" readonly="readonly" type="text"></textarea>
 
 		<div id="boton1" class="botones">
 		</div>

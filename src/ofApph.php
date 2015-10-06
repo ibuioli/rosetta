@@ -1,7 +1,7 @@
 <?php
 /***********
 
-ofApp.cpp for translate P5 code into OF code
+ofApp.h for translate P5 code into OF code
 Code developed by Ignacio Buioli
 
 ***********/
@@ -30,34 +30,16 @@ Code developed by Ignacio Buioli
 	$p5 = str_replace('PVector', 'PVector ', $p5);
 	$p5 = str_replace('Array', 'Array ', $p5);
 	$p5 = str_replace('ArrayList', 'ArrayList ', $p5);
-	$sp5 = $p5;
-	if(strstr($p5,'}')){
-		$p5 = $p5 . '-';
-	}
-
-	if(strpos($p5, "void draw(){") == true){
-		$p5 = sacar($p5, "draw(){", "}-");
-	}
-
-	if(strpos($sp5, "} void draw") == true){
-		$sp5 = sacar($sp5, "void setup(){", "} void");
-	}else{
-		$sp5 = sacar($sp5, "void setup(){", "}void");
-	}
 
 	$p5 = conversor($p5);
-	$sp5 = conversor($sp5);
 
-	echo "#include \"ofApp.h\"\n\n";
+	echo "#pragma once\n\n";
+	echo "#include \"ofMain.h\"\n\n";
 
-	echo "void ofApp::setup(){\n\n";
-	echo "\t".$sp5."\n";
+	echo "class ofApp : public ofBaseApp{\n\n";
+	echo "\t public:\n";
+	echo "\t\t setup();\n";
+	echo "\t\t update();\n";
+	echo "\t\t draw();\n";
 	echo "}\n\n";
-
-	echo "void ofApp::update(){\n";
-	echo "}\n\n";
-
-	echo "void ofApp::draw(){\n\n";
-	echo "\t".$p5."\n";
-	echo "}\n";
 ?>

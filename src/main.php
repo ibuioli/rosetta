@@ -19,10 +19,15 @@ Code developed by Ignacio Buioli
 	$p5 = str_replace('float', 'float ', $p5);
 	$p5 = str_replace('byte', 'byte ', $p5);
 	$p5 = str_replace('char', 'char ', $p5);
+	$p5 = str_replace('long', 'long ', $p5);
+	$p5 = str_replace('doble', 'doble ', $p5);
+	$p5 = str_replace('color', 'color ', $p5);
 	$p5 = str_replace('PImage', 'PImage ', $p5);
 	$p5 = str_replace('String', 'String ', $p5);
 	$p5 = str_replace('PFont', 'PFont ', $p5);
 	$p5 = str_replace('PVector', 'PVector ', $p5);
+	$p5 = str_replace('Array', 'Array ', $p5);
+	$p5 = str_replace('ArrayList', 'ArrayList ', $p5);
 	$p5 = str_replace('P2D', 'OF_WINDOW', $p5);
 	$p5 = str_replace('P3D', 'OF_WINDOW', $p5);
 	$p5 = str_replace('JAVA2D', 'OF_WINDOW', $p5);
