@@ -1,0 +1,177 @@
+/*Documento, Limpiadores*/
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {margin:0;padding:0;}table {border-collapse:collapse;border-spacing:0;}fieldset, img {border:0;}address, caption, cite, code, strong, dfn, em, th, var {font-style:normal;font-weight:normal;}ol, ul {list-style:none;}caption, th {text-align:left;}h1, h2, h3, h4, h5, h6 {font-size:100%;font-weight:normal;}q:before, q:after {content:'';}abbr, acronym {border:0;}input:focus{outline:0px;}html {overflow-x:hidden;overflow-y:hidden;}
+/*Contenido*/
+@font-face {
+	font-family: 'theSerif';
+	src: url('font/TheSerif_B4_Plain_.eot'),
+		 url('font/TheSerif_B4_Plain_.woff') format("woff");
+	font-weight: 400;
+	font-style: normal;
+}
+body {
+	position:relative;
+	font-family: 'theSerif', georgia, times, serif; 	
+	-webkit-font-smoothing: antialiased; 
+	-webkit-text-size-adjust: none;
+	font-size: 100%; 
+    font-size: 0.79em;
+	font-weight: normal;
+	line-height: 1.5em;
+	color:#252525;
+	background:#eee;
+	width:100%;
+	height:100%;
+}
+
+header{
+	width:100%;
+	height:40px;
+	overflow: hidden;
+	-webkit-box-shadow: 0px 0px 8px 1px rgba(100,100,100,1);
+	-moz-box-shadow: 0px 0px 8px 1px rgba(100,100,100,1);
+	box-shadow: 0px 0px 8px 1px rgba(100,100,100,1);
+	opacity:.8;
+}
+h1{
+	font-size:20px;
+	color:#444;
+	margin:10px 0 0 10px;
+	letter-spacing:1px;
+	text-shadow:1px 1px 3px #777;
+}
+h1 img{
+	float:left;
+}
+h1 span{
+	display:block;
+	margin:0 0 0 10px;
+	font-size:10px;
+	float:left;
+}
+#rosetta{
+	margin-left:12px;
+}
+
+#con{
+	position:absolute;
+	width:734px;
+	overflow:hidden;
+	padding:10px;
+	left:0px;
+	margin:0 auto;
+	position:relative;
+	margin-top:10px;
+}
+
+textarea {
+	width:350px;
+	height:92%;
+	resize:none;
+	padding:5px;
+	float:left;
+	color:#000;
+	background:#fafafa;
+	border:1px solid #999;
+	-webkit-box-shadow: inset 0px 0px 8px 1px rgba(220,220,220,1);
+	-moz-box-shadow: inset 0px 0px 8px 1px rgba(220,220,220,1);
+	box-shadow: inset 0px 0px 8px 1px rgba(220,220,220,1);
+}
+
+#tras{
+	width:10px;
+	height:5px;
+	float:left;
+}
+#p5txt{
+	color:#0f4676;
+	left:345px;
+	top:15px;
+	width:20px;
+}
+#oftxt{
+	color:#ee3987;
+	left:655px;
+	top:15px;
+	width:82px;
+}
+.txt{
+	opacity:.8;
+	position:absolute;
+	border:#ccc 1px solid;
+	text-align:center;
+	display:block;
+}
+
+#refp5{
+	top:40px;
+	left:-20px;
+	width:200px;
+	height:100%;
+	position:fixed;
+	background:#e9e9e9;
+	opacity:0.8;
+	-webkit-box-shadow: inset 0px 0px 8px 1px rgba(100,100,100,1);
+	-moz-box-shadow: inset 0px 0px 8px 1px rgba(100,100,100,1);
+	box-shadow: inset 0px 0px 8px 1px rgba(100,100,100,1);
+}
+#refof{
+	top:40px;
+	right:-20px;
+	width:200px;
+	height:100%;
+	position:fixed;
+	background:#e9e9e9;
+	opacity:0.8;
+	-webkit-box-shadow: inset 0px 0px 8px 1px rgba(100,100,100,1);
+	-moz-box-shadow: inset 0px 0px 8px 1px rgba(100,100,100,1);
+	box-shadow: inset 0px 0px 8px 1px rgba(100,100,100,1);
+}
+#refp5 img, #refof img{
+	opacity:.7;
+}
+#img-r-of{
+	margin:10px 0 0 130px;
+}
+#img-r-p5{
+	margin:8px 0 0 20px;
+}
+
+#of2{
+	display:none;
+}
+#oftxt2{
+	display:none;
+	color:#ee3987;
+	left:655px;
+	top:15px;
+	width:82px;
+}
+#of3{
+	display:none;
+}
+#oftxt3{
+	display:none;
+	color:#ee3987;
+	left:655px;
+	top:15px;
+	width:82px;
+}
+.botones{
+	position:absolute;
+	width:20px;
+	height:20px;
+	border:#999 1px solid;
+	opacity:.85;
+}
+#boton1{
+	right:15px;
+	bottom:50px;
+}
+#boton2{
+	right:40px;
+	bottom:50px;
+}
+#boton3{
+	right:65px;
+	bottom:50px;
+}
