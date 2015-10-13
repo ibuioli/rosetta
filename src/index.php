@@ -4,16 +4,23 @@
 <head>
     <title>Rosetta</title>
     <meta charset="UTF-8">
-    <link href='estilo.css' rel='stylesheet' type='text/css'>
+    <link href='estilo.css' rel='stylesheet' type='text/css' />
+    <link rel=stylesheet href="lib/codemirror.css">
+    <link href='sintaxis.css' rel='stylesheet' type='text/css' />
     <script src="jquery.min.js" type="text/javascript"></script>
     <script src="mainli.js" type="text/javascript"></script>
+    <script src="lib/codemirror.js"></script>
+    <script src="mode/clike/clike.js"></script>
 </head>
 
 <body>
 	<header>
 		<h1>
-			<img src="img/logo.png"><img src="img/rosetta.png" id="rosetta" alt="rosetta"><span>| pre-alpha 0.0.2</span>
+			<img src="img/logo.png"><img src="img/rosetta.png" id="rosetta" alt="rosetta"><span>alpha 0.1</span>
 		</h1>
+		<p id="git">
+			<a href="https://github.com/ibuioli/rosetta" target="blank">GitHub</a>
+		<p>
 	</header>
 
 	<div id="con">
@@ -21,17 +28,20 @@
 		<div id="oftxt" class="txt">of | ofApp.cpp</div>
 		<div id="oftxt2" class="txt">of | main.cpp</div>
 		<div id="oftxt3" class="txt">of | ofApp.h</div>
-		<textarea id="p5" type="text"></textarea>
+		<div id="cp5"><textarea id="p5"></textarea></div>
 		<div id="tras"></div>
-		<textarea id="of" onclick="this.focus();this.select()" readonly="readonly" type="text"></textarea>
-		<textarea id="of2" onclick="this.focus();this.select()" readonly="readonly" type="text"></textarea>
-		<textarea id="of3" onclick="this.focus();this.select()" readonly="readonly" type="text"></textarea>
+		<pre id="of" ondblclick="this.focus();this.select()"></pre>
+		<pre id="of2" ondblclick="this.focus();this.select()"></pre>
+		<pre id="of3" ondblclick="this.focus();this.select()"></pre>
 
 		<div id="boton1" class="botones">
+			.cpp
 		</div>
 		<div id="boton2" class="botones">
+			.cpp
 		</div>
 		<div id="boton3" class="botones">
+			.h
 		</div>
 	</div>
 
@@ -40,80 +50,15 @@
 	</div>
 	<div id="refof">
 		<img src="img/of-logo.png" alt="openframeworks" id="img-r-of">
+		<p id="copy">&copy; Ignacio Buioli</p>
 	</div>
 
+	<script src="programa.js" type="text/javascript"></script>
 	<script>
-		$(document).ready(function(){
-
-		$("#con").css("height", window.innerHeight - 40);
-
-		$("#boton1").click(function() {
-  			$("#of").fadeIn(100);
-			$("#of2").fadeOut(100);
-			$("#of3").fadeOut(100);
-		});
-		$("#boton2").click(function() {
-  			$("#of").fadeOut(100);
-			$("#of2").fadeIn(100);
-			$("#of3").fadeOut(100);
-		});
-		$("#boton3").click(function() {
-  			$("#of").fadeOut(100);
-			$("#of2").fadeOut(100);
-			$("#of3").fadeIn(100);
-		});
-
-		$("header").mouseenter(function() {
-	    	$(this).animate({opacity: 0.95},800);
-	  	}).mouseleave(function() {
-	    	$(this).animate({opacity: 0.8},800);
-	  	});
-
-	  	$("#p5").mouseenter(function() {
-	    	$("#p5txt").fadeOut(500);
-	  	}).mouseleave(function() {
-	    	$("#p5txt").fadeIn(500);
-	  	});
-	  	$("#of").mouseenter(function() {
-			$("#oftxt").fadeOut(500);
-			$("#oftxt2").fadeOut(1);
-			$("#oftxt3").fadeOut(1);
-	  	}).mouseleave(function() {
-			$("#oftxt").fadeIn(500);
-			$("#oftxt2").fadeOut(1);
-			$("#oftxt3").fadeOut(1);
-	  	});
-	  	$("#of2").mouseenter(function() {
-			$("#oftxt2").fadeOut(500);
-			$("#oftxt").fadeOut(1);
-			$("#oftxt3").fadeOut(1);
-	  	}).mouseleave(function() {
-			$("#oftxt2").fadeIn(500);
-			$("#oftxt").fadeOut(1);
-			$("#oftxt3").fadeOut(1);
-	  	});
-	  	$("#of3").mouseenter(function() {
-	  		$("#oftxt3").fadeOut(500);
-			$("#oftxt2").fadeOut(1);
-			$("#oftxt").fadeOut(1);
-	  	}).mouseleave(function() {
-	  		$("#oftxt3").fadeIn(500);
-			$("#oftxt2").fadeOut(1);
-			$("#oftxt").fadeOut(1);
-	  	});
-
-	  	$("#refp5").mouseenter(function() {
-	    	$("#img-r-p5").animate({opacity: 0.99},800);
-	  	}).mouseleave(function() {
-	    	$("#img-r-p5").animate({opacity: 0.7},800);
-	  	});
-	  	$("#refof").mouseenter(function() {
-	    	$("#img-r-of").animate({opacity: 0.99},800);
-	  	}).mouseleave(function() {
-	    	$("#img-r-of").animate({opacity: 0.7},800);
-	  	});
-
-	  	});
-	</script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("p5"), {
+      matchBrackets: true,
+      mode: "text/x-java"
+    });
+  </script>
 </body>
 </html>

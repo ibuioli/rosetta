@@ -7,66 +7,38 @@ Code developed by Ignacio Buioli
 ***********/
 
 	include 'conversor.php';
+	include 'reset.php';
+	include 'resaltar.php';
 	include 'sacar.php';
 	
 	$p5 = $_POST['valP5'];
-	$p5 = trim($p5);
-	$p5 = preg_replace("/\r\n+|\r+|\n+|\t+/i", " ", $p5);
-	$p5 = preg_replace('/\s+/', '', $p5);
-	$p5 = str_replace('void', 'void ', $p5);
-	$p5 = str_replace('boolean', 'boolean ', $p5);
-	$p5 = str_replace('int', 'int ', $p5);
-	$p5 = str_replace('float', 'float ', $p5);
-	$p5 = str_replace('byte', 'byte ', $p5);
-	$p5 = str_replace('char', 'char ', $p5);
-	$p5 = str_replace('long', 'long ', $p5);
-	$p5 = str_replace('doble', 'doble ', $p5);
-	$p5 = str_replace('color', 'color ', $p5);
-	$p5 = str_replace('PImage', 'PImage ', $p5);
-	$p5 = str_replace('String', 'String ', $p5);
-	$p5 = str_replace('PFont', 'PFont ', $p5);
-	$p5 = str_replace('PVector', 'PVector ', $p5);
-	$p5 = str_replace('Array', 'Array ', $p5);
-	$p5 = str_replace('ArrayList', 'ArrayList ', $p5);
-	$p5 = str_replace('P2D', 'OF_WINDOW', $p5);
+	$p5 = resete($p5);
 	$p5 = str_replace('P3D', 'OF_WINDOW', $p5);
 	$p5 = str_replace('JAVA2D', 'OF_WINDOW', $p5);
 	$p5 = str_replace('OPENGL', 'OF_WINDOW', $p5);
 
-	if(strpos($p5, "} void draw") == true){
-		$p5 = sacar($p5, "void setup(){", "} void");
-	}else{
-		$p5 = sacar($p5, "void setup(){", "}void");
-	}
+	$p5 = sacar($p5, "void setup(){", "}void");
 
-	if(strpos($p5, "size(") == true){
+	if(strpos($p5, "size(") !== false){
 		$m_size = sacar($p5, "size(", ");");
-		if(strpos($m_size, "OF_WINDOW") == true){
+		if(strpos($m_size, "OF_WINDOW") !== false){
 			$size = "ofSetupOpenGL(".$m_size.");";
 		}else{
 			$size = "ofSetupOpenGL(".$m_size.", OF_WINDOW);";
 		}
-	}else if(strpos($p5, "size (") == true){
-		$size  =sacar($p5, "size (", ");");
-	}else if(strpos($p5, "size (") == false || strpos($p5, "size(") == false){
+	}else{
 		$size = "ofSetupOpenGL(100,100,OF_WINDOW);";
 	}
 
-	echo "#include \"ofMain.h\"\n";
-	echo "#include \"ofApp.h\"\n\n";
-
-	echo "int main( ){\n";
-	echo "\t".$size."\n";
-	if(strpos($p5, "noCursor(") == true){
+	if(strpos($p5, "noCursor(") !== false){
 		$p5 = sacar($p5, "noCursor(", ");");
 		$nocursor = "ofHideCursor();";
-		echo "\t".$nocursor."\n";
-	}else if(strpos($p5, "noCursor (") == true){
-		$p5 = sacar($p5, "noCursor (", ");");
-		$nocursor = "ofHideCursor();";
-		echo "\t".$nocursor."\n";
+	}else{
+		$nocursor = '';
 	}
-	echo "\tofRunApp(new ofApp());\n";
-	echo "}\n"
 
+	$total_p5 = "#include \"ofMain.h\"\n#include \"ofApp.h\"\n\nint main(){\n\t".$size.$nocursor."\n\tofRunApp(new ofApp());\n}\n";
+	$total_p5 = resaltar($total_p5);
+
+	echo $total_p5;
 ?>

@@ -1,0 +1,30 @@
+/*OF*/
+
+#of span, #of2 span, #of3 span{
+	color:#ff0000;
+}
+#of i, #of2 i, #of3 i{
+	color:#f000f0;
+	font-style:normal;
+}
+#of b, #of2 b, #of3 b{
+	font-weight:bold;
+	color:#0000ff;
+}
+#of a, #of2 a, #of3 a{
+	color:#00a000;
+	text-decoration:none;
+}
+#of u, #of2 u, #of3 u{
+	color:#bebee6;
+	text-decoration:none;
+}
+#of s, #of2 s, #of3 s{
+	color:#f0b100;
+	text-decoration:none;
+}
+#of a i, #of2 a i, #of3 a i, #of a span, #of2 a span, #of3 a span,#of a b, #of2 a b, #of3 a b, 
+#of a u, #of2 a u, #of3 a u, #of a s, #of2 a s, #of3 a s{
+	color:#00a000;
+	font-weight:normal;
+}

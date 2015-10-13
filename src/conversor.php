@@ -8,7 +8,7 @@ Code developed by Ignacio Buioli
 
 function conversor($p5){
 	//Reseteadores
-	$p5 = str_replace('boolean (', 'boolean (', $p5);
+	$p5 = str_replace('boolean (', 'boolean(', $p5);
 	$p5 = str_replace('byte (', 'byte(', $p5);
 	$p5 = str_replace('char (', 'char(', $p5);
 	$p5 = str_replace('float (', 'float(', $p5);
@@ -89,15 +89,15 @@ function conversor($p5){
 	$p5 = str_replace('background(', 'ofBackground(', $p5);
 	$p5 = str_replace('fill(', 'fill(', $p5, $contar_fill);
 	for($i = 0; $i < $contar_fill; $i++){
-		$m_fill = sacar($p5, 'fill(', ')');
-		$nuevo_fill = 'ofSetColor('.$m_fill.');ofFill()';
-		$p5 = str_replace('fill('.$m_fill.')', $nuevo_fill, $p5);
+		$m_fill = sacar($p5, 'fill(', ');');
+		$nuevo_fill = 'ofSetColor('.$m_fill.');ofFill();';
+		$p5 = str_replace('fill('.$m_fill.');', $nuevo_fill, $p5);
 	}
 	$p5 = str_replace('stroke(', 'stroke(', $p5, $contar_stroke);
 	for($i = 0; $i < $contar_stroke; $i++){
-		$m_stroke = sacar($p5, 'stroke(', ')');
-		$nuevo_stroke = 'ofSetColor('.$m_stroke.');ofNoFill()';
-		$p5 = str_replace('stroke('.$m_stroke.')', $nuevo_stroke, $p5);
+		$m_stroke = sacar($p5, 'stroke(', ');');
+		$nuevo_stroke = 'ofSetColor('.$m_stroke.');ofNoFill();';
+		$p5 = str_replace('stroke('.$m_stroke.');', $nuevo_stroke, $p5);
 	}
 	$p5 = str_replace('noFill(', 'ofNoFill(', $p5);
 	$p5 = str_replace('noStroke(', 'ofFill(', $p5);
@@ -127,8 +127,8 @@ function conversor($p5){
 	$p5 = str_replace('vertex(', 'ofVertex(', $p5);
 	$p5 = str_replace('bezierVertex(', 'ofBezierVertex(', $p5);
 	$p5 = str_replace('curveVertex(', 'ofCurveVertex(', $p5);
-	$p5 = str_replace('beginShape(', 'ofBeginVertex(', $p5);
-	$p5 = str_replace('endShape(', 'ofEndVertex(', $p5);
+	$p5 = str_replace('beginShape(', 'ofBeginShape(', $p5);
+	$p5 = str_replace('endShape(', 'ofEndShape(', $p5);
 	//Imagen
 	$p5 = str_replace('tint(', 'ofSetColor(', $p5);
 	$p5 = str_replace('noTint(', 'ofSetColor(255', $p5);
@@ -142,19 +142,20 @@ function conversor($p5){
 	$p5 = str_replace('saveFrame(', 'ofSaveFrame(', $p5);
 	$p5 = str_replace('profToInt(', 'print(', $p5, $contar_print);
 	for($i = 0; $i < $contar_print; $i++){
-		$m_print = sacar($p5, 'print(', ')');
-		$nuevo_print = 'cout >> '.$m_print.'';
-		$p5 = str_replace('print('.$m_print.')', $nuevo_print, $p5);
+		$m_print = sacar($p5, 'print(', ');');
+		$nuevo_print = 'cout << '.$m_print.';';
+		$p5 = str_replace('print('.$m_print.');', $nuevo_print, $p5);
 	}
 	$p5 = str_replace('print ln(', 'println(', $p5, $contar_println);
 	for($i = 0; $i < $contar_println; $i++){
-		$m_println = sacar($p5, 'println(', ')');
-		$nuevo_println = 'cout >> '.$m_println.' >> endl';
-		$p5 = str_replace('println('.$m_println.')', $nuevo_println, $p5);
+		$m_println = sacar($p5, 'println(', ');');
+		$nuevo_println = 'cout << '.$m_println.' << endl;';
+		$p5 = str_replace('println('.$m_println.');', $nuevo_println, $p5);
 	}
 
 	//Conf Final
 	$p5 = str_replace(';', ";\n\t", $p5);
+	$p5 = str_replace('//°°°//', "\n\t", $p5);
 	$p5 = str_replace('{', "{\n\t\t", $p5);
 	$p5 = str_replace('}', "}\n\t", $p5);
 

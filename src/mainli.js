@@ -1,14 +1,10 @@
 $(document).ready(function(){
-    $("#p5").keyup(function(){
-        realizaProcesoAppCpp($('#p5').val());
-        return false;
-    });
-    $("#p5").keyup(function(){
-        realizaProcesoMain($('#p5').val());
-        return false;
-    });
-    $("#p5").keyup(function(){
-        realizaProcesoAppH($('#p5').val());
+
+    $(".CodeMirror").keyup(function(){
+        realizaProcesoAppCpp($('.CodeMirror').text());
+        realizaProcesoMain($('.CodeMirror').text());
+        realizaProcesoAppH($('.CodeMirror').text());
+
         return false;
     });
 
@@ -62,4 +58,5 @@ $(document).ready(function(){
             }
         });
     }
+
 });
