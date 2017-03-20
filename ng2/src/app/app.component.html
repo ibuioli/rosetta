@@ -1,0 +1,41 @@
+<header>
+	<h1>
+		<img src="assets/img/logo.png"><img src="assets/img/rosetta.png" id="rosetta" alt="rosetta"><span>{{ver}}</span>
+	</h1>
+	<p id="git">
+		<a href="https://github.com/ibuioli/rosetta" target="blank">GitHub</a>
+	<p>
+</header>
+
+<div id="con">
+	<div id="p5txt" class="txt">p5</div>
+	<div id="oftxt" class="txt" [hidden]="!displayB1">of | ofApp.cpp</div>
+	<div id="oftxt2" class="txt" [hidden]="!displayB2">of | main.cpp</div>
+	<div id="oftxt3" class="txt" [hidden]="!displayB3">of | ofApp.h</div>
+	<div id="cp5">
+		<div id="fp5"></div>
+		<textarea id="p5" spellcheck="false" autofocus></textarea>
+	</div>
+	<div id="tras"></div>
+	<pre id="of" [hidden]="!displayB1" ondblclick="this.focus();this.select()" spellcheck="false"></pre>
+	<pre id="of2" [hidden]="!displayB2" ondblclick="this.focus();this.select()" spellcheck="false"></pre>
+	<pre id="of3" [hidden]="!displayB3" ondblclick="this.focus();this.select()" spellcheck="false"></pre>
+
+	<div id="boton1" class="botones" [class.bactive]="displayB1">
+		.CPP
+	</div>
+	<div id="boton2" class="botones" [class.bactive]="displayB2">
+		.CPP
+	</div>
+	<div id="boton3" class="botones" [class.bactive]="displayB3">
+		.H
+	</div>
+</div>
+
+<div id="refp5">
+	<img src="assets/img/p5-logo.png" alt="processing" id="img-r-p5">
+</div>
+<div id="refof">
+	<img src="assets/img/of-logo.png" alt="openframeworks" id="img-r-of">
+	<p id="copy">&copy; Ignacio Buioli</p>
+</div>
