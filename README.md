@@ -13,17 +13,18 @@ In order to use or edit the software you need install npm and node packages.
 
 First clone this repository:
 
-```git clone
-```
+```git clone```
 
 Install the packages with (don't use ```npm install```):
 
-```npm run install_all
+```
+npm run install_all
 ```
 
 Then you can run the App with:
 
-```npm start
+```
+npm start
 ```
 
 ---
@@ -32,17 +33,20 @@ Then you can run the App with:
 
 For run in a localhost use it:
 
-```npm run serve
+```
+npm run serve
 ```
 
 For build a dist use it:
 
-```npm run build
+```
+npm run build
 ```
 
 For run only Electron-app without build (faster for testing):
 
-```npm run electron
+```
+npm run electron
 ```
 
 ---
