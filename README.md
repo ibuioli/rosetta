@@ -13,7 +13,9 @@ In order to use or edit the software you need install npm and node packages.
 
 First clone this repository:
 
-```git clone```
+```
+git clone https://github.com/ibuioli/rosetta
+```
 
 Install the packages with (don't use ```npm install```):
 
