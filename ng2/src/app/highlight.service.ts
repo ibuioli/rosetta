@@ -17,10 +17,11 @@ export class HighlightService {
     ///////////////
     //BRKs
     var brk = [/{/g, /}/g, /\[/g, /\]/g, /\(/g, /\)/g, /\./g, /\+/g, /-/g, /\*/g, /%/g, /,/g, /;/g, /:/g, /=/g,
-    /!/g, /\|/g, /(\/)(?![^<]*>|[^<>]*<\/)/g];
+    /!/g, /\|/g, /(\/)(?![^<]*>|[^<>]*<\/)/g, /&/g];
     var cbrk = ['<brk>{</brk>','<brk>}</brk>','<brk>[</brk>','<brk>]</brk>','<brk>(</brk>','<brk>)</brk>',
     '<brk>.</brk>','<brk>+</brk>','<brk>-</brk>','<brk>*</brk>','<brk>%</brk>',
-    '<brk>,</brk>','<brk>;</brk>','<brk>:</brk>','<brk>=</brk>','<brk>!</brk>','<brk>|</brk>','<brk>/</brk>'];
+    '<brk>,</brk>','<brk>;</brk>','<brk>:</brk>','<brk>=</brk>','<brk>!</brk>','<brk>|</brk>','<brk>/</brk>',
+    '<brk>&</brk>'];
     for (let i = 0; i < brk.length; i++) {
         r_code = r_code.replace(brk[i], cbrk[i]);
     }
@@ -37,11 +38,7 @@ export class HighlightService {
     }
 
     //NUMs
-    var nums = [/0/g,/1/g,/2/g,/3/g,/4/g,/5/g,/6/g,/7/g,/8/g,/9/g,];
-    var cnums = ['<num>0</num>','<num>1</num>','<num>2</num>','<num>3</num>','<num>4</num>','<num>5</num>','<num>6</num>','<num>7</num>','<num>8</num>','<num>9</num>'];
-    for (let i = 0; i < nums.length; i++) {
-        r_code = r_code.replace(nums[i], cnums[i]);
-    }
+    r_code = r_code.replace(/\b(\d+)\b/g, '<num>$1</num>')
 
     //COMs
     var com = [/cout/g,/endl/g];
@@ -49,24 +46,11 @@ export class HighlightService {
     for (let i = 0; i < com.length; i++) {
         r_code = r_code.replace(com[i], ccom[i]);
     }
+    r_code = r_code.replace(/\#(.+)*$/gm, '<com>#$1</com>');
 
     //STRs & CHARs
-    var c_quotes = this.t.repeted(r_code, '\"', false);
-    console.log(Math.floor(c_quotes/2));
-    for(let i = 0; i < Math.floor(c_quotes/2); i++){
-      var m = this.t.extract(r_code, '\"', '\"');
-      var value = '<str>\"'+m+'\"</str>';
-      r_code = r_code.replace('\"'+m+'\"', value);
-  	}
-    var c_char = this.t.repeted(r_code, '\'', false);
-    console.log(Math.floor(c_char/2));
-    for(let i = 0; i < Math.floor(c_char/2); i++){
-      var m = this.t.extract(r_code, '\'', '\'');
-      var value = '<chr>\''+m+'\'</chr>';
-      r_code = r_code.replace('\''+m+'\'', value);
-  	}
-
-    r_code = r_code.replace(/\#(.+)*$/gm, '<com>#$1</com>');
+    r_code = r_code.replace(/"([^"]+)"/g, '<str>"$1"</str>');
+    r_code = r_code.replace(/\'([^']+)\'/g, "<chr>'$1'</chr>");
 
     ///////////////
     return r_code;
@@ -103,9 +87,15 @@ export class HighlightService {
 
     //FUNs
     var fun = [/\bsetup\b/g,/\bdraw\b/g,/\bsettings\b/g,
-    /\bprint\b/g,/\bprintln\b/g];
+    /\bprint\b/g,/\bprintln\b/g,/\bsize\b/g,/\bfullScreen\b/g,
+    /\brect\b/g,/\bellipse\b/g,/\btriangle\b/g,/\bline\b/g,
+    /\bbackground\b/g,/\bfill\b/g,/\bnoFill\b/g,/\bstroke\b/g,/\bnoStroke\b/g,
+    /\bcursor\b/g,/\bnoCursor\b/g];
     var cfun = ['<p5fun>setup</p5fun>','<p5fun>draw</p5fun>','<p5fun>settings</p5fun>',
-    '<p5fun>print</p5fun>','<p5fun>println</p5fun>'];
+    '<p5fun>print</p5fun>','<p5fun>println</p5fun>','<p5fun>size</p5fun>','<p5fun>fullScreen</p5fun>',
+    '<p5fun>rect</p5fun>','<p5fun>ellipse</p5fun>','<p5fun>triangle</p5fun>','<p5fun>line</p5fun>',
+    '<p5fun>background</p5fun>','<p5fun>fill</p5fun>','<p5fun>noFill</p5fun>','<p5fun>stroke</p5fun>','<p5fun>noStroke</p5fun>',
+    '<p5fun>cursor</p5fun>','<p5fun>noCursor</p5fun>'];
     for (let i = 0; i < fun.length; i++) {
         r_code = r_code.replace(fun[i], cfun[i]);
     }
@@ -130,20 +120,8 @@ export class HighlightService {
     }
 
     //STRs & CHARs
-    var c_quotes = this.t.repeted(r_code, '\"', false);
-    console.log(Math.floor(c_quotes/2));
-    for(let i = 0; i < Math.floor(c_quotes/2); i++){
-      var m = this.t.extract(r_code, '\"', '\"');
-      var value = '<p5str>\"'+m+'\"</p5str>';
-      r_code = r_code.replace('\"'+m+'\"', value);
-  	}
-    var c_char = this.t.repeted(r_code, '\'', false);
-    console.log(Math.floor(c_char/2));
-    for(let i = 0; i < Math.floor(c_char/2); i++){
-      var m = this.t.extract(r_code, '\'', '\'');
-      var value = '<p5str>\''+m+'\'</p5str>';
-      r_code = r_code.replace('\''+m+'\'', value);
-  	}
+    r_code = r_code.replace(/"([^"]+)"/g, '<p5str>"$1"</p5str>');
+    r_code = r_code.replace(/\'([^']+)\'/g, "<p5str>'$1'</p5str>");
 
     //For Comments
     var c_mc = this.t.repeted(r_code, '/*', false);

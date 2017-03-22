@@ -104,8 +104,6 @@ h1 span{
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
-	word-break: normal;
-	word-wrap: normal;
 	line-height: 1.5;
 
 	tab-size: 4;
@@ -114,7 +112,10 @@ h1 span{
 	-webkit-text-fill-color:transparent;
 	overflow:hidden;
 	overflow-y:scroll;
-	overflow-x:visible;
+	overflow-x:hidden;
+	word-wrap: break-word;
+	text-wrap:unrestricted;
+
 	border:1px solid #999;
 }
 #cp5 #fp5{
@@ -132,8 +133,6 @@ h1 span{
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
-	word-break: normal;
-	word-wrap: normal;
 	line-height: 1.5;
 
 	tab-size: 4;
@@ -142,6 +141,8 @@ h1 span{
 	overflow:hidden;
 	overflow-y:visible;
 	overflow-x:hidden;
+	word-wrap: break-word;
+	text-wrap:unrestricted;
 }
 #of, #of2, #of3 {
 	width:350px;
@@ -159,8 +160,6 @@ h1 span{
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
-	word-break: normal;
-	word-wrap: normal;
 	line-height: 1.5;
 
 	tab-size: 4;
@@ -169,7 +168,9 @@ h1 span{
 
 	overflow:hidden;
 	overflow-y:scroll;
-	overflow-x:visible;
+	overflow-x:hidden;
+	word-wrap: break-word;
+	text-wrap:unrestricted;
 }
 #tras{
 	width:10px;

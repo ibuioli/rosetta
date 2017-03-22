@@ -1,7 +1,7 @@
 # Rosetta
 Traductor App from Processing to OpenFrameworks
 
-This is an App for transtale Processing code into OpenFrameworks code, with syntaxis highlight in real-time. Only support Processing static mode (active mode's support will be added in the future). The use of vars isn't full support yet (better don't use it, will be added soon).
+This is an App for transtale Processing code into OpenFrameworks code, with syntaxis highlight in real-time. Good support for Processing static mode (active mode is not full support yet), and the use of vars isn't full support (better don't use it, will be added soon).
 
 This software is not intended for the translation of large Processing projects to OpenFrameworks. It is recommended to use it like a support tool, and not like a precise traductor.
 
@@ -9,7 +9,7 @@ This software is not intended for the translation of large Processing projects t
 
 ## How use it
 
-In order to use or edit the software you need install npm and node packages. 
+In order to use or edit the software you need install npm and node packages.
 
 First clone this repository:
 
@@ -38,6 +38,7 @@ For run in a localhost use it:
 ```
 npm run serve
 ```
+Note: Please use Chrome o Firefox for Serve.
 
 For build a dist use it:
 

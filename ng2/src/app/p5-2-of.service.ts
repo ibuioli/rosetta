@@ -21,8 +21,9 @@ export class P52OfService {
     r_p5 = r_p5.replace( /\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm , '');
     //Other Sets
     r_p5 = r_p5.replace(/ \(/g, '(');
-    //r_p5 = r_p5.replace(/</g, ' < ');
-		//r_p5 = r_p5.replace(/>/g, ' > ');
+    r_p5 = r_p5.replace(/\( /g, '(');
+    r_p5 = r_p5.replace(/ \)/g, ')');
+    r_p5 = r_p5.replace(/\) /g, ')');
 
     ////////////////////
     return r_p5;
@@ -34,139 +35,148 @@ export class P52OfService {
   	r_p5 = r_p5.replace(/boolean /g, 'bool ');
   	r_p5 = r_p5.replace(/color /g, 'ofColor ');
   	r_p5 = r_p5.replace(/byte /g, 'unsigned char ');
+    r_p5 = r_p5.replace(/String /g, 'string ');
   	//OPENGL
-  	r_p5 = r_p5.replace(/P2D/g, 'OF_WINDOW');
-  	r_p5 = r_p5.replace(/P3D/g, 'OF_WINDOW');
-  	r_p5 = r_p5.replace(/JAVA2D/g, 'OF_WINDOW');
-  	r_p5 = r_p5.replace(/OPENGL/g, 'OF_WINDOW');
+  	r_p5 = r_p5.replace(/\bP2D\b/g, 'OF_WINDOW');
+  	r_p5 = r_p5.replace(/\bP3D\b/g, 'OF_WINDOW');
+  	r_p5 = r_p5.replace(/\bJAVA2D\b/g, 'OF_WINDOW');
+  	r_p5 = r_p5.replace(/\bOPENGL\b/g, 'OF_WINDOW');
   	//Calc
-  	r_p5 = r_p5.replace(/constrain\(/g, 'ofClamp(');
-  	r_p5 = r_p5.replace(/dist\(/g, 'ofDist(');
-  	r_p5 = r_p5.replace(/lerp\(/g, 'ofLerp(');
-  	r_p5 = r_p5.replace(/map\(/g, 'ofMap(');
-  	r_p5 = r_p5.replace(/max\(/g, 'MAX(');
-  	r_p5 = r_p5.replace(/min\(/g, 'MIN(');
-  	r_p5 = r_p5.replace(/norm\(/g, 'ofNormalize(');
+  	r_p5 = r_p5.replace(/\bconstrain\b\(/g, 'ofClamp(');
+  	r_p5 = r_p5.replace(/\bdist\b\(/g, 'ofDist(');
+  	r_p5 = r_p5.replace(/\blerp\b\(/g, 'ofLerp(');
+  	r_p5 = r_p5.replace(/\bmap\b\(/g, 'ofMap(');
+  	r_p5 = r_p5.replace(/\bmax\b\(/g, 'MAX(');
+  	r_p5 = r_p5.replace(/\bmin\b\(/g, 'MIN(');
+  	r_p5 = r_p5.replace(/\bnorm\b\(/g, 'ofNormalize(');
     var c_sq = this.t.repeted(r_p5, 'sq(', false);
     for(let i = 0; i < c_sq; i++){
-      var m = this.t.extract(r_p5, 'sq(', ')');
+      var m = this.t.extract(r_p5, 'sq(', ');');
       var value = 'pow('+m+', 2.0)';
-      r_p5 = r_p5.replace('sq('+m+')', value);
+      r_p5 = r_p5.replace('sq('+m+');', value);
   	}
     //Env
-  	r_p5 = r_p5.replace(/frameCount/g, 'ofGetFrameNum()');
-  	r_p5 = r_p5.replace(/frameRate/g, 'ofGetFrameRate()');
-  	r_p5 = r_p5.replace(/width/g, 'ofGetWidth()');
-  	r_p5 = r_p5.replace(/height/g, 'ofGetHeight()');
-  	r_p5 = r_p5.replace(/displayWidth/g, 'ofGetScreenWidth()');
-  	r_p5 = r_p5.replace(/displayHeight/g, 'ofGetScreenHeight()');
-  	r_p5 = r_p5.replace(/frameRate\(/g, 'ofSetFrameRate(');
+    r_p5 = r_p5.replace(/\bsize\b\(/g, 'ofSetupOpenGL(');
+  	r_p5 = r_p5.replace(/\bframeCount\b/g, 'ofGetFrameNum()');
+  	r_p5 = r_p5.replace(/\bframeRate\b/g, 'ofGetFrameRate()');
+  	r_p5 = r_p5.replace(/\bwidth\b/g, 'ofGetWidth()');
+  	r_p5 = r_p5.replace(/\bheight\b/g, 'ofGetHeight()');
+  	r_p5 = r_p5.replace(/\bdisplayWidth\b/g, 'ofGetScreenWidth()');
+  	r_p5 = r_p5.replace(/\bdisplayHeight\b/g, 'ofGetScreenHeight()');
+  	r_p5 = r_p5.replace(/\bframeRate\b\(/g, 'ofSetFrameRate(');
+    r_p5 = r_p5.replace(/\bnoCursor\b\(/g, 'ofHideCursor(');
+    var c_cur = this.t.repeted(r_p5, 'cursor(', false);
+    for(let i = 0; i < c_cur; i++){
+      var m = this.t.extract(r_p5, 'cursor(', ');');
+      var value = 'ofShowCursor();';
+      r_p5 = r_p5.replace('cursor('+m+');', value);
+  	}
     //Convertion
-  	r_p5 = r_p5.replace(/boolean\(/g, 'ofToBool(');
-  	r_p5 = r_p5.replace(/binary\(/g, 'ofToBinary(');
-  	r_p5 = r_p5.replace(/byte\(/g, 'ofToChar(');
-  	r_p5 = r_p5.replace(/float\(/g, 'ofToFloat(');
-    r_p5 = r_p5.replace(/char\(/g, 'ofToChar(');
-  	r_p5 = r_p5.replace(/hex\(/g, 'ofToHex(');
-  	r_p5 = r_p5.replace(/int\(/g, 'ofToInt(');
-  	r_p5 = r_p5.replace(/str\(/g, 'ofToString(');
+  	r_p5 = r_p5.replace(/\bboolean\b\(/g, 'ofToBool(');
+  	r_p5 = r_p5.replace(/\bbinary\b\(/g, 'ofToBinary(');
+  	r_p5 = r_p5.replace(/\bbyte\b\(/g, 'ofToChar(');
+  	r_p5 = r_p5.replace(/\bfloat\b\(/g, 'ofToFloat(');
+    r_p5 = r_p5.replace(/\bchar\b\(/g, 'ofToChar(');
+  	r_p5 = r_p5.replace(/\bhex\b\(/g, 'ofToHex(');
+  	r_p5 = r_p5.replace(/\bint\b\(/g, 'ofToInt(');
+  	r_p5 = r_p5.replace(/\bstr\b\(/g, 'ofToString(');
     //String Functions
-  	r_p5 = r_p5.replace(/join\(/g, 'ofJoinString(');
-  	r_p5 = r_p5.replace(/nf\(/g, 'ofToString(');
-  	r_p5 = r_p5.replace(/split\(/g, 'ofSplitString(');
-  	r_p5 = r_p5.replace(/splitTokens\(/g, 'ofSplitString(');
+  	r_p5 = r_p5.replace(/\bjoin\b\(/g, 'ofJoinString(');
+  	r_p5 = r_p5.replace(/\bnf\b\(/g, 'ofToString(');
+  	r_p5 = r_p5.replace(/\bsplit\b\(/g, 'ofSplitString(');
+  	r_p5 = r_p5.replace(/\bsplitTokens\b\(/g, 'ofSplitString(');
     //Random
-  	r_p5 = r_p5.replace(/noise\(/g, 'ofNoise(');
-  	r_p5 = r_p5.replace(/random\(/g, 'ofRandom(');
-  	r_p5 = r_p5.replace(/randomSeed\(/g, 'ofSeedRandom(');
+  	r_p5 = r_p5.replace(/\bnoise\b\(/g, 'ofNoise(');
+  	r_p5 = r_p5.replace(/\brandom\b\(/g, 'ofRandom(');
+  	r_p5 = r_p5.replace(/\brandomSeed\b\(/g, 'ofSeedRandom(');
     //Cons
-  	r_p5 = r_p5.replace(/QUARTER_PI/g, 'HALF_PI/2');
-  	r_p5 = r_p5.replace(/TAU/g, 'TWO_PI');
+  	r_p5 = r_p5.replace(/\bQUARTER_PI\b/g, 'HALF_PI/2');
+  	r_p5 = r_p5.replace(/\bTAU\b/g, 'TWO_PI');
     //Date & Hour
-  	r_p5 = r_p5.replace(/day\(/g, 'ofGetDay(');
-  	r_p5 = r_p5.replace(/hour\(/g, 'ofGetHours(');
-  	r_p5 = r_p5.replace(/millis\(/g, 'ofGetElapsedTimeMillis(');
-  	r_p5 = r_p5.replace(/minute\(/g, 'ofGetMinutes(');
-  	r_p5 = r_p5.replace(/month\(/g, 'ofGetMonth(');
-  	r_p5 = r_p5.replace(/second\(/g, 'ofGetSeconds(');
-  	r_p5 = r_p5.replace(/year\(/g, 'ofGetYear(');
+  	r_p5 = r_p5.replace(/\bday\b\(/g, 'ofGetDay(');
+  	r_p5 = r_p5.replace(/\bhour\b\(/g, 'ofGetHours(');
+  	r_p5 = r_p5.replace(/\bmillis\b\(/g, 'ofGetElapsedTimeMillis(');
+  	r_p5 = r_p5.replace(/\bminute\b\(/g, 'ofGetMinutes(');
+  	r_p5 = r_p5.replace(/\bmonth\b\(/g, 'ofGetMonth(');
+  	r_p5 = r_p5.replace(/\bsecond\b\(/g, 'ofGetSeconds(');
+  	r_p5 = r_p5.replace(/\byear\b\(/g, 'ofGetYear(');
     //Transforms
-  	r_p5 = r_p5.replace(/popMatrix\(/g, 'ofPopMatrix(');
-  	r_p5 = r_p5.replace(/popStyle\(/g, 'ofPopStyle(');
-    r_p5 = r_p5.replace(/pushMatrix\(/g, 'ofPushMatrix(');
-  	r_p5 = r_p5.replace(/pushStyle\(/g, 'ofPushStyle(');
-  	r_p5 = r_p5.replace(/rotate\(/g, 'ofRotate(');
-  	r_p5 = r_p5.replace(/rotateX\(/g, 'ofRotateX(');
-  	r_p5 = r_p5.replace(/rotateY\(/g, 'ofRotateY(');
-  	r_p5 = r_p5.replace(/rotateZ\(/g, 'ofRotateZ(');
-  	r_p5 = r_p5.replace(/translate\(/g, 'ofTranslate(');
-  	r_p5 = r_p5.replace(/scale\(/g, 'ofScale(');
+  	r_p5 = r_p5.replace(/\bpopMatrix\b\(/g, 'ofPopMatrix(');
+  	r_p5 = r_p5.replace(/\bpopStyle\b\(/g, 'ofPopStyle(');
+    r_p5 = r_p5.replace(/\bpushMatrix\b\(/g, 'ofPushMatrix(');
+  	r_p5 = r_p5.replace(/\bpushStyle\b\(/g, 'ofPushStyle(');
+  	r_p5 = r_p5.replace(/\brotate\b\(/g, 'ofRotate(');
+  	r_p5 = r_p5.replace(/\brotateX\b\(/g, 'ofRotateX(');
+  	r_p5 = r_p5.replace(/\brotateY\b\(/g, 'ofRotateY(');
+  	r_p5 = r_p5.replace(/\brotateZ\b\(/g, 'ofRotateZ(');
+  	r_p5 = r_p5.replace(/\btranslate\b\(/g, 'ofTranslate(');
+  	r_p5 = r_p5.replace(/\bscale\b\(/g, 'ofScale(');
     //Color
-    r_p5 = r_p5.replace(/background\(/g, 'ofBackground(');
-    r_p5 = r_p5.replace(/noFill\(/g, 'ofNoFill(');
-  	r_p5 = r_p5.replace(/noStroke\(/g, 'ofFill(');
-  	r_p5 = r_p5.replace(/color\(/g, 'ofColor(');
+    r_p5 = r_p5.replace(/\bbackground\b\(/g, 'ofBackground(');
+    r_p5 = r_p5.replace(/\bnoFill\b\(/g, 'ofNoFill(');
+  	r_p5 = r_p5.replace(/\bnoStroke\b\(/g, 'ofFill(');
+  	r_p5 = r_p5.replace(/\bcolor\b\(/g, 'ofColor(');
     var c_fill = this.t.repeted(r_p5, 'fill(', false);
     for(let i = 0; i < c_fill; i++){
-      var m = this.t.extract(r_p5, 'fill(', ')');
+      var m = this.t.extract(r_p5, 'fill(', ');');
       var value = 'ofSetColor('+m+');\nofFill();';
-      r_p5 = r_p5.replace('fill('+m+')', value);
+      r_p5 = r_p5.replace('fill('+m+');', value);
   	}
     var c_stroke = this.t.repeted(r_p5, 'stroke(', false);
     for(let i = 0; i < c_stroke; i++){
-      var m = this.t.extract(r_p5, 'stroke(', ')');
+      var m = this.t.extract(r_p5, 'stroke(', ');');
       var value = 'ofSetColor('+m+');\nofNoFill();';
-      r_p5 = r_p5.replace('stroke('+m+')', value);
+      r_p5 = r_p5.replace('stroke('+m+');', value);
   	}
     //Prims 2D
-  	r_p5 = r_p5.replace(/ellipse\(/g, 'ofEllipse(');
-  	r_p5 = r_p5.replace(/rect\(/g, 'ofRect(');
-  	r_p5 = r_p5.replace(/line\(/g, 'ofLine(');
-  	r_p5 = r_p5.replace(/triangle\(/g, 'ofTriangle(');
+  	r_p5 = r_p5.replace(/\bellipse\b\(/g, 'ofEllipse(');
+  	r_p5 = r_p5.replace(/\brect\b\(/g, 'ofRect(');
+  	r_p5 = r_p5.replace(/\bline\b\(/g, 'ofLine(');
+  	r_p5 = r_p5.replace(/\btriangle\b\(/g, 'ofTriangle(');
     //Curves
-  	r_p5 = r_p5.replace(/curve\(/g, 'ofCurve(');
-  	r_p5 = r_p5.replace(/curveTangent\(/g, 'ofCurveTangent(');
-  	r_p5 = r_p5.replace(/curvePoint\(/g, 'ofCurveVertex(');
-  	r_p5 = r_p5.replace(/curveDetail\(/g, 'ofSetCurveResolution(');
-  	r_p5 = r_p5.replace(/bezier\(/g, 'ofBezier(');
-  	r_p5 = r_p5.replace(/bezierDetail\(/g, 'ofSetCurveResolution(');
-  	r_p5 = r_p5.replace(/bezierPoint\(/g, 'ofBezierPoint(');
+  	r_p5 = r_p5.replace(/\bcurve\b\(/g, 'ofCurve(');
+  	r_p5 = r_p5.replace(/\bcurveTangent\b\(/g, 'ofCurveTangent(');
+  	r_p5 = r_p5.replace(/\bcurvePoint\b\(/g, 'ofCurveVertex(');
+  	r_p5 = r_p5.replace(/\bcurveDetail\b\(/g, 'ofSetCurveResolution(');
+  	r_p5 = r_p5.replace(/\bbezier\b\(/g, 'ofBezier(');
+  	r_p5 = r_p5.replace(/\bbezierDetail\b\(/g, 'ofSetCurveResolution(');
+  	r_p5 = r_p5.replace(/\bbezierPoint\b\(/g, 'ofBezierPoint(');
   	//Atts
-  	r_p5 = r_p5.replace(/rectMode\(/g, 'ofSetRectMode(');
-  	r_p5 = r_p5.replace(/CORNER/g, 'OF_RECTMODE_CORNER');
-  	r_p5 = r_p5.replace(/CORNERS/g, 'OF_RECTMODE_CORNER');
-  	r_p5 = r_p5.replace(/CENTER/g, 'OF_RECTMODE_CENTER');
-  	r_p5 = r_p5.replace(/smooth\(/g, 'ofEnableSmoothing(');
-  	r_p5 = r_p5.replace(/noSmooth\(/g, 'ofDisableSmoothing(');
-  	r_p5 = r_p5.replace(/strokeWeight\(/g, 'ofSetLineWidth(');
+  	r_p5 = r_p5.replace(/\brectMode\b\(/g, 'ofSetRectMode(');
+  	r_p5 = r_p5.replace(/\bCORNER\b/g, 'OF_RECTMODE_CORNER');
+  	r_p5 = r_p5.replace(/\bCORNERS\b/g, 'OF_RECTMODE_CORNER');
+  	r_p5 = r_p5.replace(/\bCENTER\b/g, 'OF_RECTMODE_CENTER');
+  	r_p5 = r_p5.replace(/\bsmooth\b\(/g, 'ofEnableSmoothing(');
+  	r_p5 = r_p5.replace(/\bnoSmooth\b\(/g, 'ofDisableSmoothing(');
+  	r_p5 = r_p5.replace(/\bstrokeWeight\b\(/g, 'ofSetLineWidth(');
   	//Vertex
-  	r_p5 = r_p5.replace(/vertex\(/g, 'ofVertex(');
-  	r_p5 = r_p5.replace(/bezierVertex\(/g, 'ofBezierVertex(');
-  	r_p5 = r_p5.replace(/curveVertex\(/g, 'ofCurveVertex(');
-  	r_p5 = r_p5.replace(/beginShape\(/g, 'ofBeginShape(');
-  	r_p5 = r_p5.replace(/endShape\(/g, 'ofEndShape(');
+  	r_p5 = r_p5.replace(/\bvertex\b\(/g, 'ofVertex(');
+  	r_p5 = r_p5.replace(/\bbezierVertex\b\(/g, 'ofBezierVertex(');
+  	r_p5 = r_p5.replace(/\bcurveVertex\b\(/g, 'ofCurveVertex(');
+  	r_p5 = r_p5.replace(/\bbeginShape\b\(/g, 'ofBeginShape(');
+  	r_p5 = r_p5.replace(/\bendShape\b\(/g, 'ofEndShape(');
   	//Image
-  	r_p5 = r_p5.replace(/tint\(/g, 'ofSetColor(');
-  	r_p5 = r_p5.replace(/noTint\(/g, 'ofSetColor(255');
+  	r_p5 = r_p5.replace(/\btint\b\(/g, 'ofSetColor(');
+  	r_p5 = r_p5.replace(/\bnoTint\b\(/g, 'ofSetColor(255');
   	//In
-  	r_p5 = r_p5.replace(/mouseX/g, 'ofGetMouseX()');
-  	r_p5 = r_p5.replace(/mouseY/g, 'ofGetMouseY()');
-  	r_p5 = r_p5.replace(/pmouseX/g, 'ofGetPreviousMouseX()');
-  	r_p5 = r_p5.replace(/pmouseY/g, 'ofGetPreviousMouseY()');
+  	r_p5 = r_p5.replace(/\bmouseX\b/g, 'ofGetMouseX()');
+  	r_p5 = r_p5.replace(/\bmouseY\b/g, 'ofGetMouseY()');
+  	r_p5 = r_p5.replace(/\bpmouseX\b/g, 'ofGetPreviousMouseX()');
+  	r_p5 = r_p5.replace(/\bpmouseY\b/g, 'ofGetPreviousMouseY()');
     //Out
-  	r_p5 = r_p5.replace(/save\(/g, 'ofSaveScreen(');
-  	r_p5 = r_p5.replace(/saveFrame\(/g, 'ofSaveFrame(');
+  	r_p5 = r_p5.replace(/\bsave\b\(/g, 'ofSaveScreen(');
+  	r_p5 = r_p5.replace(/\bsaveFrame\b\(/g, 'ofSaveFrame(');
     var c_print = this.t.repeted(r_p5, 'profToInt(', false);
     for(let i = 0; i < c_print; i++){
-      var m = this.t.extract(r_p5, 'profToInt(', ')');
+      var m = this.t.extract(r_p5, 'print(', ');');
       var value = 'cout << '+m+'';
-      r_p5 = r_p5.replace('profToInt('+m+')', value);
+      r_p5 = r_p5.replace('print('+m+');', value);
   	}
     var c_println = this.t.repeted(r_p5, 'println(', false);
     for(let i = 0; i < c_println; i++){
-      var m = this.t.extract(r_p5, 'println(', ')');
+      var m = this.t.extract(r_p5, 'println(', ');');
       var value = 'cout << '+m+' << endl';
-      r_p5 = r_p5.replace('println('+m+')', value);
+      r_p5 = r_p5.replace('println('+m+');', value);
   	}
 
     ///////////////////
@@ -192,8 +202,58 @@ export class P52OfService {
   ofAppcpp(p5:string){
     var r_p5 = p5;
 
-    r_p5 = "#include \"ofApp.h\"\n\nvoid ofApp::setup(){\n\t"+""+"\n}\n\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw(){\n\t"+r_p5+"\n}";
+    //var setup = r_p5.replace(/void setup\(\){([^]*)}/, "$1");
+    //var draw = r_p5.replace(/void draw\(\){([^]*)}/, "$1");
+    var csetup = r_p5.search("void setup()");
+    var cdraw = r_p5.search("void draw()");
+
+    var csize = this.t.repeted(r_p5, 'ofSetupOpenGL(', false);
+    for(let i = 0; i < csize; i++){
+      var m = this.t.extract(r_p5, 'ofSetupOpenGL(', ');');
+      var value = '';
+      r_p5 = r_p5.replace('ofSetupOpenGL('+m+');', value);
+  	}
+    r_p5 = r_p5.replace(/fullScreen\(\);/g, '');
+
+    if(csetup === -1 || cdraw === -1){
+      r_p5 = r_p5.replace(/(\n)/g, '\n\t');
+      r_p5 = "#include \"ofApp.h\"\n\nvoid ofApp::setup(){\n\t"+""+"\n}\n\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw(){\n\t"+r_p5+"\n}";
+    }
+    else{
+      r_p5 = r_p5.replace(/\n\s*\n/g, '\n');
+      r_p5 = r_p5.replace(/void draw\(\)/g, "\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw()");
+      r_p5 = r_p5.replace(/void setup\(\)/g, "void ofApp::setup()");
+      r_p5 = "#include \"ofApp.h\"\n\n"+r_p5;
+    }
+
     /////////////////
     return r_p5
+  }
+
+  maincpp(p5:string){
+    var r_p5 = p5;
+    var opengl = "";
+
+    var csize = this.t.repeted(r_p5, 'ofSetupOpenGL(', false);
+    var cfull = this.t.repeted(r_p5, 'fullScreen(', false);
+    if(csize === 1){
+      var m = this.t.extract(r_p5, 'ofSetupOpenGL(', ')');
+      var ms = m.split(',');
+      if(ms.length === 3){
+        opengl = "ofSetupOpenGL("+m+");";
+      }else if(ms.length === 2){
+        opengl = "ofSetupOpenGL("+m+", OF_WINDOW);";
+      }else{
+        opengl = "ofSetupOpenGL(100, 100, OF_WINDOW);";
+      }
+    }else if(cfull === 1){
+      opengl = "ofSetupOpenGL(ofGetScreenWidth(), ofGetScreenHeight(), OF_WINDOW);";
+    }else{
+      opengl = "ofSetupOpenGL(100, 100, OF_WINDOW);";
+    }
+
+    var f_p5 = "#include \"ofMain.h\"\n#include \"ofApp.h\"\n\nint main( ){\n\n\t"+opengl+"\n\n\tofRunApp(new ofApp());\n}";
+    /////////////////
+    return f_p5
   }
 }
