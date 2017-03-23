@@ -47,7 +47,7 @@ For run in a localhost use it:
 ```
 npm run serve
 ```
-Note: Please use Chrome o Firefox for Serve.
+Note: Please use Chrome or Firefox for Serve.
 
 For build a dist use it:
 
