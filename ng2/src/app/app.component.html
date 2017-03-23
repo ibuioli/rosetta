@@ -17,9 +17,9 @@
 		<textarea id="p5" spellcheck="false" autofocus></textarea>
 	</div>
 	<div id="tras"></div>
-	<pre id="of" [hidden]="!displayB1" ondblclick="this.focus();this.select()" spellcheck="false"></pre>
-	<pre id="of2" [hidden]="!displayB2" ondblclick="this.focus();this.select()" spellcheck="false"></pre>
-	<pre id="of3" [hidden]="!displayB3" ondblclick="this.focus();this.select()" spellcheck="false"></pre>
+	<pre id="of" [hidden]="!displayB1" spellcheck="false"></pre>
+	<pre id="of2" [hidden]="!displayB2" spellcheck="false"></pre>
+	<pre id="of3" [hidden]="!displayB3" spellcheck="false"></pre>
 
 	<div id="boton1" class="botones" [class.bactive]="displayB1">
 		.CPP
@@ -34,8 +34,22 @@
 
 <div id="refp5">
 	<img src="assets/img/p5-logo.png" alt="processing" id="img-r-p5">
+	<p id="p5v">v {{p5v}}</p>
+
+	<p id="p5tit">P5 version:</p>
+	<select id="p5vers" #t (change)="onChange($event, t.value)">
+		<option value="auto">auto</option>
+	</select>
 </div>
 <div id="refof">
 	<img src="assets/img/of-logo.png" alt="openframeworks" id="img-r-of">
+	<p id="ofv">v {{ofv}}</p>
+
+	<p id="oftit">OF version:</p>
+	<select id="ofvers" #t (change)="onChange($event, t.value)">
+		<option value="0.8.x">0.8.x</option>
+		<option value="0.9.x">0.9.x</option>
+	</select>
+
 	<p id="copy">&copy; Ignacio Buioli</p>
 </div>

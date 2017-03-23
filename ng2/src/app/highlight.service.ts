@@ -28,11 +28,11 @@ export class HighlightService {
 
     //VARs
     var vars = [/public /g, /private /g, /bool /g,/int /g,/float /g,/char /g,/unsigned /g,/double /g,/long /g,
-    /void /g,/new /g,/class /g,/if /g,/else /g,/for /g,/while /g];
+    /void /g,/new /g,/class /g,/if /g,/else /g,/for /g,/while /g,/true/g,/false/g];
     var cvars = ['<vars>public </vars>','<vars>private </vars>','<vars>bool </vars>','<vars>int </vars>',
     '<vars>float </vars>','<vars>char </vars>','<vars>unsigned </vars>','<vars>double </vars>','<vars>long </vars>',
     '<vars>void </vars>','<vars>new </vars>','<vars>class </vars>','<vars>if </vars>','<vars>else </vars>'
-    ,'<vars>for </vars>','<vars>while </vars>'];
+    ,'<vars>for </vars>','<vars>while </vars>','<vars>true</vars>','<vars>false</vars>'];
     for (let i = 0; i < vars.length; i++) {
         r_code = r_code.replace(vars[i], cvars[i]);
     }
@@ -77,10 +77,10 @@ export class HighlightService {
 
     //SYSs
     var sys = [/\bmouseX\b/g,/\bmouseY\b/g,/\bpmouseX\b/g,/\bpmouseY\b/g,/\bkey\b/g,/\bframeCount\b/g,/\bwidth\b/g,/\bheight\b/g,
-    /\bdisplayWidth\b/g,/\bdisplayHeight\b/g];
+    /\bdisplayWidth\b/g,/\bdisplayHeight\b/g,/\bscreen\b/g];
     var csys = ['<p5sys>mouseX</p5sys>','<p5sys>mouseY</p5sys>','<p5sys>pmouseX</p5sys>','<p5sys>pmouseY</p5sys>',
     '<p5sys>key</p5sys>','<p5sys>frameCount</p5sys>','<p5sys>width</p5sys>','<p5sys>height</p5sys>'
-    ,'<p5sys>displayWidth</p5sys>','<p5sys>displayHeight</p5sys>'];
+    ,'<p5sys>displayWidth</p5sys>','<p5sys>displayHeight</p5sys>',,'<p5sys>screen</p5sys>'];
     for (let i = 0; i < sys.length; i++) {
         r_code = r_code.replace(sys[i], csys[i]);
     }
@@ -88,21 +88,24 @@ export class HighlightService {
     //FUNs
     var fun = [/\bsetup\b/g,/\bdraw\b/g,/\bsettings\b/g,
     /\bprint\b/g,/\bprintln\b/g,/\bsize\b/g,/\bfullScreen\b/g,
-    /\brect\b/g,/\bellipse\b/g,/\btriangle\b/g,/\bline\b/g,
+    /\brect\b/g,/\bellipse\b/g,/\btriangle\b/g,/\bline\b/g,/\bpoint\b/g,/\barc\b/g,/\bquad\b/g,
     /\bbackground\b/g,/\bfill\b/g,/\bnoFill\b/g,/\bstroke\b/g,/\bnoStroke\b/g,
-    /\bcursor\b/g,/\bnoCursor\b/g];
+    /\bcursor\b/g,/\bnoCursor\b/g,
+    /\bpushMatrix\b/g,/\bpopMatrix\b/g,/\btranslate\b/g,/\brotate\b/g,/\bscale\b/g];
     var cfun = ['<p5fun>setup</p5fun>','<p5fun>draw</p5fun>','<p5fun>settings</p5fun>',
     '<p5fun>print</p5fun>','<p5fun>println</p5fun>','<p5fun>size</p5fun>','<p5fun>fullScreen</p5fun>',
-    '<p5fun>rect</p5fun>','<p5fun>ellipse</p5fun>','<p5fun>triangle</p5fun>','<p5fun>line</p5fun>',
+    '<p5fun>rect</p5fun>','<p5fun>ellipse</p5fun>','<p5fun>triangle</p5fun>','<p5fun>line</p5fun>','<p5fun>point</p5fun>','<p5fun>arc</p5fun>','<p5fun>quad</p5fun>',
     '<p5fun>background</p5fun>','<p5fun>fill</p5fun>','<p5fun>noFill</p5fun>','<p5fun>stroke</p5fun>','<p5fun>noStroke</p5fun>',
-    '<p5fun>cursor</p5fun>','<p5fun>noCursor</p5fun>'];
+    '<p5fun>cursor</p5fun>','<p5fun>noCursor</p5fun>',
+    '<p5fun>pushMatrix</p5fun>','<p5fun>popMatrix</p5fun>','<p5fun>translate</p5fun>','<p5fun>rotate</p5fun>','<p5fun>scale</p5fun>'];
     for (let i = 0; i < fun.length; i++) {
         r_code = r_code.replace(fun[i], cfun[i]);
     }
 
     //TYPs
-    var typ = [/\bvoid\b/g, /\bpublic\b/g, /\bprivate\b/g, /\breturn\b/g];
-    var ctyp = ['<p5typ>void</p5typ>','<p5typ>public</p5typ>','<p5typ>private</p5typ>','<p5typ>return</p5typ>'];
+    var typ = [/\bvoid\b/g, /\bpublic\b/g, /\bprivate\b/g, /\breturn\b/g, /\btrue\b/g, /\bfalse\b/g];
+    var ctyp = ['<p5typ>void</p5typ>','<p5typ>public</p5typ>','<p5typ>private</p5typ>','<p5typ>return</p5typ>',
+    '<p5typ>true</p5typ>','<p5typ>false</p5typ>'];
     for (let i = 0; i < typ.length; i++) {
         r_code = r_code.replace(typ[i], ctyp[i]);
     }

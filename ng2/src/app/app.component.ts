@@ -8,7 +8,9 @@ import { HighlightService } from './highlight.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  ver = 'alpha 0.2';
+  ver:string = 'alpha 0.2';
+  p5v:string = 'x.x.x';
+  ofv:string = '0.8.x';
   displayB1:boolean = true;
   displayB2:boolean = false;
   displayB3:boolean = false;
@@ -42,6 +44,7 @@ export class AppComponent {
 
       var reset = _this.conversor.reset(txt);
       var convers = _this.conversor.conversor(reset);
+      _this.p5v = _this.conversor.p5ver(reset);
 
       var apph = _this.conversor.ofApph(convers);
       document.getElementById('of3').innerHTML = _this.hl.highlightC(apph);
@@ -77,6 +80,10 @@ export class AppComponent {
 
       document.getElementById("fp5").scrollTop = (window.pageYOffset || scrTop)  - (clTop || 0);
     });
+  }
+
+  onChange($event, v){
+    this.ofv = v;
   }
 
 }

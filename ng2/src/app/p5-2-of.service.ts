@@ -63,6 +63,8 @@ export class P52OfService {
   	r_p5 = r_p5.replace(/\bheight\b/g, 'ofGetHeight()');
   	r_p5 = r_p5.replace(/\bdisplayWidth\b/g, 'ofGetScreenWidth()');
   	r_p5 = r_p5.replace(/\bdisplayHeight\b/g, 'ofGetScreenHeight()');
+    r_p5 = r_p5.replace(/\bscreen.ofGetWidth\b/g, 'ofGetScreenWidth');
+    r_p5 = r_p5.replace(/\bscreen.ofGetHeight\b/g, 'ofGetScreenWidth');
   	r_p5 = r_p5.replace(/\bframeRate\b\(/g, 'ofSetFrameRate(');
     r_p5 = r_p5.replace(/\bnoCursor\b\(/g, 'ofHideCursor(');
     var c_cur = this.t.repeted(r_p5, 'cursor(', false);
@@ -214,15 +216,16 @@ export class P52OfService {
       r_p5 = r_p5.replace('ofSetupOpenGL('+m+');', value);
   	}
     r_p5 = r_p5.replace(/fullScreen\(\);/g, '');
+    r_p5 = r_p5.replace(/fullScreen\(\w\);/g, '');
 
     if(csetup === -1 || cdraw === -1){
       r_p5 = r_p5.replace(/(\n)/g, '\n\t');
-      r_p5 = "#include \"ofApp.h\"\n\nvoid ofApp::setup(){\n\t"+""+"\n}\n\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw(){\n\t"+r_p5+"\n}";
+      r_p5 = "#include \"ofApp.h\"\n\nvoid ofApp::setup(){\n\t"+"ofBackground(204);\n\tofSetColor(255);\n\tofFill();"+"\n}\n\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw(){\n\t"+r_p5+"\n}";
     }
     else{
       r_p5 = r_p5.replace(/\n\s*\n/g, '\n');
       r_p5 = r_p5.replace(/void draw\(\)/g, "\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw()");
-      r_p5 = r_p5.replace(/void setup\(\)/g, "void ofApp::setup()");
+      r_p5 = r_p5.replace(/void setup\(\)\{/g, "void ofApp::setup(){\n\tofBackground(204);\n\tofSetColor(255);\n\tofFill();");
       r_p5 = "#include \"ofApp.h\"\n\n"+r_p5;
     }
 
@@ -255,5 +258,32 @@ export class P52OfService {
     var f_p5 = "#include \"ofMain.h\"\n#include \"ofApp.h\"\n\nint main( ){\n\n\t"+opengl+"\n\n\tofRunApp(new ofApp());\n}";
     /////////////////
     return f_p5
+  }
+  ////////////////////////////////////////////////
+  p5ver(p5:string){
+    var ver:string = '1.0.0+';
+
+    var c_rect = this.t.repeted(p5, 'rect(', false);
+    var f_rect:any = [];
+    var rectR:boolean = false;
+    for(let i = 0; i < c_rect; i++){
+      var m = this.t.extract(p5, 'rect(', ');');
+      var n = m.split(',');
+      f_rect[i] = n.length;
+  	}
+    for(let i = 0; i < f_rect; i++){
+      if(f_rect[i] > 4){
+        rectR = true;
+      }
+  	}
+
+    if(p5.search(/\bdisplayWidth\b/) !== -1 || p5.search(/\bdisplayHeight\b/) !== -1 || p5.search(/\bOPENGL\b/) !== -1
+      || rectR){
+      ver = '2.0.0+';
+    }else if(p5.search(/\bfullScreen\b\(/) !== -1 || p5.search(/\bFX2D\b/) !== -1){
+      ver = '3.0.0+';
+    }
+    ///////////////
+    return ver;
   }
 }
