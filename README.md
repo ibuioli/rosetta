@@ -1,7 +1,16 @@
 # Rosetta
 Traductor App from Processing to OpenFrameworks
 
-This is an App for transtale Processing code into OpenFrameworks code, with syntaxis highlight in real-time. Good support for Processing static mode (active mode is not full support yet), and the use of vars isn't full support (better don't use it, will be added soon).
+This is an App for transtale Processing code into OpenFrameworks code, with syntaxis highlight in real-time. Good support for Processing static and active mode, however the use of vars isn't full support (better don't use it, will be added soon).
+
+P5 Version Supported:
+  * Any stable version (no alpha or beta) can be used
+  * Autodetect of Versions
+
+OF Version Supported:
+  * 0.8.x
+
+(0.9.x will be added soon)
 
 This software is not intended for the translation of large Processing projects to OpenFrameworks. It is recommended to use it like a support tool, and not like a precise traductor.
 
