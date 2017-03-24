@@ -4,7 +4,7 @@
   "description": "A traductor-tool from Processing to OpenFrameworks",
   "main": "main.js",
   "scripts": {
-    "install_all":"npm install && cd ng2 && npm install && cd ..",
+    "install_all": "npm install && cd ng2 && npm install && cd ..",
     "start": "cd ng2 && ng build -prod -bh ./ && cd .. && electron .",
     "electron": "electron .",
     "serve": "cd ng2 && ng serve && cd ..",
@@ -21,5 +21,8 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^1.4.1"
+  },
+  "dependencies": {
+    "node-zip": "^1.1.1"
   }
 }

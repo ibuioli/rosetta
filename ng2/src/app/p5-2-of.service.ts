@@ -6,6 +6,8 @@ Code developed by Ignacio Buioli
 ***********/
 import { Injectable } from '@angular/core';
 import { Tools } from './tools';
+export const fs : any = window["fs"]; //FileSystem
+export const zip : any = window["zip"]; //Zip
 
 @Injectable()
 export class P52OfService {
@@ -132,9 +134,15 @@ export class P52OfService {
   	}
     //Prims 2D
   	r_p5 = r_p5.replace(/\bellipse\b\(/g, 'ofEllipse(');
-  	r_p5 = r_p5.replace(/\brect\b\(/g, 'ofRect(');
+    r_p5 = r_p5.replace(/\brect\b\(/g, 'ofRect(');
   	r_p5 = r_p5.replace(/\bline\b\(/g, 'ofLine(');
   	r_p5 = r_p5.replace(/\btriangle\b\(/g, 'ofTriangle(');
+    var c_point = this.t.repeted(r_p5, 'point(', false);
+    for(let i = 0; i < c_point; i++){
+      var m = this.t.extract(r_p5, 'point(', ');');
+      var value = 'ofRect('+m+', 1, 1);';
+      r_p5 = r_p5.replace('point('+m+');', value);
+  	}
     //Curves
   	r_p5 = r_p5.replace(/\bcurve\b\(/g, 'ofCurve(');
   	r_p5 = r_p5.replace(/\bcurveTangent\b\(/g, 'ofCurveTangent(');
@@ -194,11 +202,12 @@ export class P52OfService {
   }
 
   ofApph(p5:string){
-    var r_p5 = p5;
+    var ofapph = p5;
 
-    r_p5 = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public :\n\t\t void setup();\n\t\t void update();\n\t\t void draw();\n}\n\n";
+    ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public :\n\t\t void setup();\n\t\t void update();\n\t\t void draw();\n}\n\n";
+
     /////////////////
-    return r_p5;
+    return ofapph;
   }
 
   ofAppcpp(p5:string){
@@ -243,21 +252,22 @@ export class P52OfService {
       var m = this.t.extract(r_p5, 'ofSetupOpenGL(', ')');
       var ms = m.split(',');
       if(ms.length === 3){
-        opengl = "ofSetupOpenGL("+m+");";
+          opengl = "ofSetupOpenGL("+m+");";
       }else if(ms.length === 2){
-        opengl = "ofSetupOpenGL("+m+", OF_WINDOW);";
+          opengl = "ofSetupOpenGL("+m+", OF_WINDOW);";
       }else{
-        opengl = "ofSetupOpenGL(100, 100, OF_WINDOW);";
+          opengl = "ofSetupOpenGL(100, 100, OF_WINDOW);";
       }
     }else if(cfull === 1){
-      opengl = "ofSetupOpenGL(ofGetScreenWidth(), ofGetScreenHeight(), OF_WINDOW);";
+        opengl = "ofSetupOpenGL(ofGetScreenWidth(), ofGetScreenHeight(), OF_FULLSCREEN);";
     }else{
-      opengl = "ofSetupOpenGL(100, 100, OF_WINDOW);";
+        opengl = "ofSetupOpenGL(100, 100, OF_WINDOW);";
     }
 
-    var f_p5 = "#include \"ofMain.h\"\n#include \"ofApp.h\"\n\nint main( ){\n\n\t"+opengl+"\n\n\tofRunApp(new ofApp());\n}";
+    var maincpp = "#include \"ofMain.h\"\n#include \"ofApp.h\"\n\nint main( ){\n\n\t"+opengl+"\n\n\tofRunApp(new ofApp());\n}";
+
     /////////////////
-    return f_p5
+    return maincpp;
   }
   ////////////////////////////////////////////////
   p5ver(p5:string){
@@ -270,10 +280,14 @@ export class P52OfService {
       var m = this.t.extract(p5, 'rect(', ');');
       var n = m.split(',');
       f_rect[i] = n.length;
+      p5 = p5.replace('rect('+m+');', '');
   	}
-    for(let i = 0; i < f_rect; i++){
+    for(let i = 0; i < f_rect.length; i++){
       if(f_rect[i] > 4){
         rectR = true;
+      }
+      if(rectR === true){
+        break;
       }
   	}
 
@@ -285,5 +299,25 @@ export class P52OfService {
     }
     ///////////////
     return ver;
+  }
+
+  download(main:string, app:string, apph:string){
+    if(fs !== undefined){
+      zip.file('src/main.cpp', main);
+      zip.file('src/ofApp.cpp', app);
+      zip.file('src/ofApp.h', apph);
+      var data = zip.generate({base64:false,compression:'DEFLATE'});
+      fs.writeFileSync('rosetta-of.zip', data, 'binary');
+      document.getElementById("debug").innerHTML = "*rosetta-of.zip saved in the root directory*";
+      setTimeout(function(){
+        document.getElementById("debug").innerHTML = "";
+      }, 3000);
+    }else{
+      console.log("Download only avaliable in Electron mode");
+      document.getElementById("debug").innerHTML = '<p style="color:red;">*Download only avaliable in Electron mode*</p>';
+      setTimeout(function(){
+        document.getElementById("debug").innerHTML = "";
+      }, 3000);
+    }
   }
 }

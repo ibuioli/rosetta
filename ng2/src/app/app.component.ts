@@ -14,6 +14,9 @@ export class AppComponent {
   displayB1:boolean = true;
   displayB2:boolean = false;
   displayB3:boolean = false;
+  main:string = "";
+  app:string = "";
+  apph:string = "";
 
   constructor(public conversor: P52OfService, public hl: HighlightService){}
 
@@ -47,12 +50,15 @@ export class AppComponent {
       _this.p5v = _this.conversor.p5ver(reset);
 
       var apph = _this.conversor.ofApph(convers);
+      _this.apph = apph;
       document.getElementById('of3').innerHTML = _this.hl.highlightC(apph);
 
       var maincpp = _this.conversor.maincpp(convers);
+      _this.main = maincpp;
       document.getElementById('of2').innerHTML = _this.hl.highlightC(maincpp);
 
       var appcpp = _this.conversor.ofAppcpp(convers);
+      _this.app = appcpp;
       document.getElementById('of').innerHTML = _this.hl.highlightC(appcpp);
     });
     //Get Tab Event

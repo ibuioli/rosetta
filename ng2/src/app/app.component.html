@@ -40,7 +40,10 @@
 	<select id="p5vers" #t (change)="onChange($event, t.value)">
 		<option value="auto">auto</option>
 	</select>
+
+	<p id="ref"><a href="https://processing.org/reference/" target="blank">P5 Reference</a></p>
 </div>
+
 <div id="refof">
 	<img src="assets/img/of-logo.png" alt="openframeworks" id="img-r-of">
 	<p id="ofv">v {{ofv}}</p>
@@ -51,5 +54,9 @@
 		<option value="0.9.x">0.9.x</option>
 	</select>
 
-	<p id="copy">&copy; Ignacio Buioli</p>
+	<button id="download" (click)="conversor.download(main, app, apph)">Download ▾</button>
+
+	<p id="debug"></p>
+
+	<p id="ref"><a href="http://openframeworks.cc/documentation/" target="blank">OF Reference</a></p>
 </div>

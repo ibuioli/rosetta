@@ -9,6 +9,15 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root>Cargando...</app-root>
+  <script type="text/javascript">
+    var fs = undefined;
+    var zip = undefined;
+    var electron;
+    if (window["require"]) {
+       fs = require("fs");
+       zip = require("node-zip")();
+    }
+  </script>
+  <app-root>Loading...</app-root>
 </body>
 </html>

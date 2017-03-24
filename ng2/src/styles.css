@@ -272,7 +272,6 @@ h1 span{
 	position:absolute;
 	bottom:40px;
 	right:30px;
-	font-size:11px;
 }
 #ofv{
 	margin:10px 0 0 75px;
@@ -290,6 +289,29 @@ h1 span{
 	outline:none;
 	border:1px solid #888;
 }
+#download{
+	margin:25px 0 0 38px;
+	background:#fff;
+	color:#ee3987;
+	outline:none;
+	border:1px solid #888;
+	cursor:pointer;
+}
+#download:active{
+	background:#ee3987;
+	color:#fff;
+}
+#refof #ref{
+	position:absolute;
+	bottom:65px;
+	right:25px;
+}
+#refof #ref a{
+	color:#ee3987;
+}
+#refof #ref a:hover{
+	text-decoration:underline;
+}
 #p5v{
 	margin:10px 0 0 25px;
 	font-size:16px;
@@ -305,6 +327,21 @@ h1 span{
 	color:#0f4676;
 	outline:none;
 	border:1px solid #888;
+}
+#refp5 #ref{
+	position:absolute;
+	bottom:65px;
+	left:25px;
+}
+#refp5 #ref a{
+	color:#0f4676;
+}
+#refp5 #ref a:hover{
+	text-decoration:underline;
+}
+#debug{
+	margin:25px 0 0 35px;
+	width:90px;
 }
 /*HIGHLIGHT*/
 /*C++*/
