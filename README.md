@@ -9,8 +9,7 @@ P5 Version Supported:
 
 OF Version Supported:
   * 0.8.x
-
-(0.9.x will be added soon)
+  * 0.9.x
 
 This software is not intended for the translation of large Processing projects to OpenFrameworks. It is recommended to use it like a support tool, and not like a precise traductor.
 
