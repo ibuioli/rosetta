@@ -88,6 +88,7 @@ h1 span{
   box-shadow: inset 0px 0px 8px 1px rgba(220,220,220,1);
 }
 #cp5 #p5{
+
 	position:absolute;
 	top:0;left:0;
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
@@ -101,21 +102,22 @@ h1 span{
 	box-shadow: inset 0px 0px 8px 1px rgba(220,220,220,1);
 	resize:none;
 	outline:none;
-	direction: ltr;
 	text-align: left;
-	white-space: pre;
+	direction: ltr;
 	word-spacing: normal;
 	line-height: 1.5;
 
+	white-space: pre-wrap;
+
 	tab-size: 4;
 
-	hyphens: none;
 	-webkit-text-fill-color:transparent;
 	overflow:hidden;
 	overflow-y:scroll;
 	overflow-x:hidden;
+	overflow-wrap: break-word;
 	word-wrap: break-word;
-	text-wrap:unrestricted;
+	word-break: normal;
 
 	border:1px solid #999;
 }
@@ -130,20 +132,20 @@ h1 span{
 	color: black;
 	resize:none;
 	outline:none;
-	direction: ltr;
 	text-align: left;
-	white-space: pre;
+	direction: ltr;
 	word-spacing: normal;
 	line-height: 1.5;
+	white-space: pre-wrap;
 
 	tab-size: 4;
 
-	hyphens: none;
 	overflow:hidden;
-	overflow-y:visible;
+	overflow-y:scroll;
 	overflow-x:hidden;
+	overflow-wrap: break-word;
 	word-wrap: break-word;
-	text-wrap:unrestricted;
+	word-break: normal;
 }
 #of, #of2, #of3 {
 	width:350px;
@@ -157,21 +159,20 @@ h1 span{
 	color: black;
 	text-shadow: 0 1px white;
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	direction: ltr;
 	text-align: left;
-	white-space: pre;
+	direction: ltr;
 	word-spacing: normal;
 	line-height: 1.5;
+	white-space: pre-wrap;
 
 	tab-size: 4;
-
-	hyphens: none;
 
 	overflow:hidden;
 	overflow-y:scroll;
 	overflow-x:hidden;
+	overflow-wrap: break-word;
 	word-wrap: break-word;
-	text-wrap:unrestricted;
+	word-break: normal;
 }
 #tras{
 	width:10px;

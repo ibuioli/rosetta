@@ -38,6 +38,12 @@ export class P52OfService {
   	r_p5 = r_p5.replace(/color /g, 'ofColor ');
   	r_p5 = r_p5.replace(/byte /g, 'unsigned char ');
     r_p5 = r_p5.replace(/String /g, 'string ');
+    r_p5 = r_p5.replace(/Array /g, 'vector ');
+    r_p5 = r_p5.replace(/ArrayList /g, 'list ');
+    r_p5 = r_p5.replace(/HashMap /g, 'map ');
+    r_p5 = r_p5.replace(/PImage /g, 'ofImage ');
+    r_p5 = r_p5.replace(/PFont /g, 'ofTrueTypeFont');
+    r_p5 = r_p5.replace(/final /g, 'const ');
   	//OPENGL
   	r_p5 = r_p5.replace(/\bP2D\b/g, 'OF_WINDOW');
   	r_p5 = r_p5.replace(/\bP3D\b/g, 'OF_WINDOW');
@@ -57,6 +63,8 @@ export class P52OfService {
       var value = 'pow('+m+', 2.0)';
       r_p5 = r_p5.replace('sq('+m+');', value);
   	}
+    r_p5 = r_p5.replace(/\bdegrees\b\(/g, 'ofRagToDeg(');
+    r_p5 = r_p5.replace(/\bradians\b\(/g, 'ofDegToRag(');
     //Env
     r_p5 = r_p5.replace(/\bsize\b\(/g, 'ofSetupOpenGL(');
   	r_p5 = r_p5.replace(/\bframeCount\b/g, 'ofGetFrameNum()');
@@ -75,6 +83,7 @@ export class P52OfService {
       var value = 'ofShowCursor();';
       r_p5 = r_p5.replace('cursor('+m+');', value);
   	}
+    r_p5 = r_p5.replace(/\bdelay\b\(/g, 'ofSleepMillis(');
     //Convertion
   	r_p5 = r_p5.replace(/\bboolean\b\(/g, 'ofToBool(');
   	r_p5 = r_p5.replace(/\bbinary\b\(/g, 'ofToBinary(');
@@ -143,6 +152,12 @@ export class P52OfService {
       var value = 'ofRect('+m+', 1, 1);';
       r_p5 = r_p5.replace('point('+m+');', value);
   	}
+    //3D
+    r_p5 = r_p5.replace(/\bbox\b\(/g, 'ofBox(');
+    r_p5 = r_p5.replace(/\bsphere\b\(/g, 'ofSphere(');
+    r_p5 = r_p5.replace(/\bsphereDetail\b\(/g, 'ofSetSphereResolution(');
+    r_p5 = r_p5.replace(/\blights\b\(/g, 'ofEnableLighting(');
+    r_p5 = r_p5.replace(/\bnoLights\b\(/g, 'ofDisableLighting(');
     //Curves
   	r_p5 = r_p5.replace(/\bcurve\b\(/g, 'ofCurve(');
   	r_p5 = r_p5.replace(/\bcurveTangent\b\(/g, 'ofCurveTangent(');
@@ -166,8 +181,12 @@ export class P52OfService {
   	r_p5 = r_p5.replace(/\bbeginShape\b\(/g, 'ofBeginShape(');
   	r_p5 = r_p5.replace(/\bendShape\b\(/g, 'ofEndShape(');
   	//Image
+    r_p5 = r_p5.replace(/\bimage\b\(/g, 'ofImage::draw(');
+    r_p5 = r_p5.replace(/\bloadImage\b\(/g, 'ofImage::loadImage(');
   	r_p5 = r_p5.replace(/\btint\b\(/g, 'ofSetColor(');
   	r_p5 = r_p5.replace(/\bnoTint\b\(/g, 'ofSetColor(255');
+    //Font
+    r_p5 = r_p5.replace(/\btext\b\(/g, 'ofTrueTypeFont::drawString(');
   	//In
   	r_p5 = r_p5.replace(/\bmouseX\b/g, 'ofGetMouseX()');
   	r_p5 = r_p5.replace(/\bmouseY\b/g, 'ofGetMouseY()');
@@ -202,9 +221,15 @@ export class P52OfService {
   }
 
   ofApph(p5:string){
-    var ofapph = p5;
+    var ofapph;
 
-    ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public :\n\t\t void setup();\n\t\t void update();\n\t\t void draw();\n}\n\n";
+    p5 = p5.replace(/void setup\(\){([^]*)}/, "");
+    p5 = p5.replace(/void draw\(\){([^]*)}/, "");
+    p5 = p5.replace(/\n\s*\n/g, '\n');
+    p5 = p5.trim();
+    p5 = p5.replace(/(\n)/g, '\n\t\t');
+
+    ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public:\n\t\tvoid setup();\n\t\tvoid update();\n\t\tvoid draw();\n\n\t\t"+p5+"\n}\n\n";
 
     /////////////////
     return ofapph;
@@ -212,9 +237,8 @@ export class P52OfService {
 
   ofAppcpp(p5:string){
     var r_p5 = p5;
+    var p_p5 = p5;
 
-    //var setup = r_p5.replace(/void setup\(\){([^]*)}/, "$1");
-    //var draw = r_p5.replace(/void draw\(\){([^]*)}/, "$1");
     var csetup = r_p5.search("void setup()");
     var cdraw = r_p5.search("void draw()");
 
@@ -232,10 +256,16 @@ export class P52OfService {
       r_p5 = "#include \"ofApp.h\"\n\nvoid ofApp::setup(){\n\t"+"ofBackground(204);\n\tofSetColor(255);\n\tofFill();"+"\n}\n\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw(){\n\t"+r_p5+"\n}";
     }
     else{
+      p_p5 = p_p5.replace(/void setup\(\){([^]*)}/, "");
+      p_p5 = p_p5.replace(/void draw\(\){([^]*)}/, "");
+      p_p5 = p_p5.trim();
+
       r_p5 = r_p5.replace(/\n\s*\n/g, '\n');
       r_p5 = r_p5.replace(/void draw\(\)/g, "\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw()");
       r_p5 = r_p5.replace(/void setup\(\)\{/g, "void ofApp::setup(){\n\tofBackground(204);\n\tofSetColor(255);\n\tofFill();");
       r_p5 = "#include \"ofApp.h\"\n\n"+r_p5;
+
+      r_p5 = r_p5.replace(p_p5, "");
     }
 
     /////////////////
