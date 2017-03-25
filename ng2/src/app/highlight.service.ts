@@ -27,7 +27,7 @@ export class HighlightService {
     }
 
     //VARs
-    var vars = [/public /g, /private /g, /bool /g,/int /g,/float /g,/char /g,/unsigned /g,/double /g,/long /g,
+    var vars = [/public/g, /private/g, /bool /g,/int /g,/float /g,/char /g,/unsigned /g,/double /g,/long /g,
     /void /g,/new /g,/class /g,/if /g,/else /g,/for /g,/while /g,/true/g,/false/g];
     var cvars = ['<vars>public </vars>','<vars>private </vars>','<vars>bool </vars>','<vars>int </vars>',
     '<vars>float </vars>','<vars>char </vars>','<vars>unsigned </vars>','<vars>double </vars>','<vars>long </vars>',
@@ -86,18 +86,26 @@ export class HighlightService {
     }
 
     //FUNs
-    var fun = [/\bsetup\b/g,/\bdraw\b/g,/\bsettings\b/g,
+    var fun = [
+    /\bsetup\b/g,/\bdraw\b/g,/\bsettings\b/g,
     /\bprint\b/g,/\bprintln\b/g,/\bsize\b/g,/\bfullScreen\b/g,
     /\brect\b/g,/\bellipse\b/g,/\btriangle\b/g,/\bline\b/g,/\bpoint\b/g,/\barc\b/g,/\bquad\b/g,
     /\bbackground\b/g,/\bfill\b/g,/\bnoFill\b/g,/\bstroke\b/g,/\bnoStroke\b/g,
     /\bcursor\b/g,/\bnoCursor\b/g,
-    /\bpushMatrix\b/g,/\bpopMatrix\b/g,/\btranslate\b/g,/\brotate\b/g,/\bscale\b/g];
-    var cfun = ['<p5fun>setup</p5fun>','<p5fun>draw</p5fun>','<p5fun>settings</p5fun>',
+    /\bpushMatrix\b/g,/\bpopMatrix\b/g,/\btranslate\b/g,/\brotate\b/g,/\bscale\b/g,
+    /\bvoid keyPressed\b/g,/\bvoid keyReleased\b/g,/\bvoid mouseMoved\b/g,/\bvoid mouseDragged\b/g,
+    /\bvoid mousePressed\b/g,/\bvoid mouseReleased\b/g
+    ];
+    var cfun =[
+    '<p5fun>setup</p5fun>','<p5fun>draw</p5fun>','<p5fun>settings</p5fun>',
     '<p5fun>print</p5fun>','<p5fun>println</p5fun>','<p5fun>size</p5fun>','<p5fun>fullScreen</p5fun>',
     '<p5fun>rect</p5fun>','<p5fun>ellipse</p5fun>','<p5fun>triangle</p5fun>','<p5fun>line</p5fun>','<p5fun>point</p5fun>','<p5fun>arc</p5fun>','<p5fun>quad</p5fun>',
     '<p5fun>background</p5fun>','<p5fun>fill</p5fun>','<p5fun>noFill</p5fun>','<p5fun>stroke</p5fun>','<p5fun>noStroke</p5fun>',
     '<p5fun>cursor</p5fun>','<p5fun>noCursor</p5fun>',
-    '<p5fun>pushMatrix</p5fun>','<p5fun>popMatrix</p5fun>','<p5fun>translate</p5fun>','<p5fun>rotate</p5fun>','<p5fun>scale</p5fun>'];
+    '<p5fun>pushMatrix</p5fun>','<p5fun>popMatrix</p5fun>','<p5fun>translate</p5fun>','<p5fun>rotate</p5fun>','<p5fun>scale</p5fun>',
+    'void <p5fun>keyPressed</p5fun>','void <p5fun>keyReleased</p5fun>','void <p5fun>mouseMoved</p5fun>','void <p5fun>mouseDragged</p5fun>',
+    'void <p5fun>mousePressed</p5fun>','void <p5fun>mouseReleased</p5fun>'
+    ];
     for (let i = 0; i < fun.length; i++) {
         r_code = r_code.replace(fun[i], cfun[i]);
     }

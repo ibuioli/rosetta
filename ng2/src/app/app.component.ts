@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { P52OfService } from './p5-2-of.service';
 import { HighlightService } from './highlight.service';
+import { DownloadService } from './download.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent {
   app:string = "";
   apph:string = "";
 
-  constructor(public conversor: P52OfService, public hl: HighlightService){}
+  constructor(public conversor: P52OfService, public hl: HighlightService, public d: DownloadService){}
 
   ngAfterViewInit(){
     var _this = this;

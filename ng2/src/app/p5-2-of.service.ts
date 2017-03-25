@@ -6,8 +6,6 @@ Code developed by Ignacio Buioli
 ***********/
 import { Injectable } from '@angular/core';
 import { Tools } from './tools';
-export const fs : any = window["fs"]; //FileSystem
-export const zip : any = window["zip"]; //Zip
 
 @Injectable()
 export class P52OfService {
@@ -223,13 +221,47 @@ export class P52OfService {
   ofApph(p5:string){
     var ofapph;
 
+    var keyPressed = p5.search(/void keyPressed\(\)/);
+    var keyReleased = p5.search(/void keyReleased\(\)/);
+    var mousePressed = p5.search(/void mousePressed\(\)/);
+    var mouseReleased = p5.search(/void mouseReleased\(\)/);
+    var mouseMoved = p5.search(/void mouseMoved\(\)/);
+    var mouseDragged = p5.search(/void mouseDragged\(\)/);
+
     p5 = p5.replace(/void setup\(\){([^]*)}/, "");
     p5 = p5.replace(/void draw\(\){([^]*)}/, "");
+    p5 = p5.replace(/void keyPressed\(\){([^]*)}/, "");
+    p5 = p5.replace(/void keyReleased\(\){([^]*)}/, "");
+    p5 = p5.replace(/void mouseMoved\(\){([^]*)}/, "");
+    p5 = p5.replace(/void mouseDragged\(\){([^]*)}/, "");
+    p5 = p5.replace(/void mousePressed\(\){([^]*)}/, "");
+    p5 = p5.replace(/void mouseReleased\(\){([^]*)}/, "");
     p5 = p5.replace(/\n\s*\n/g, '\n');
     p5 = p5.trim();
     p5 = p5.replace(/(\n)/g, '\n\t\t');
 
-    ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public:\n\t\tvoid setup();\n\t\tvoid update();\n\t\tvoid draw();\n\n\t\t"+p5+"\n}\n\n";
+    var interactive = "";
+
+    if(keyPressed !== -1){
+      interactive = interactive + "\n\t\tvoid keyPressed(int key);";
+    }
+    if(keyReleased !== -1){
+      interactive = interactive + "\n\t\tvoid keyReleased(int key);";
+    }
+    if(mouseMoved !== -1){
+      interactive = interactive + "\n\t\tvoid mouseMoved(int x, int y);";
+    }
+    if(mouseDragged !== -1){
+      interactive = interactive + "\n\t\tvoid mouseDragged(int x, int y, int button);";
+    }
+    if(mousePressed !== -1){
+      interactive = interactive + "\n\t\tvoid mousePressed(int x, int y, int button);";
+    }
+    if(mouseReleased !== -1){
+      interactive = interactive + "\n\t\tvoid mouseReleased(int x, int y, int button);";
+    }
+
+    ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public:\n\t\tvoid setup();\n\t\tvoid update();\n\t\tvoid draw();"+interactive+"\n\n\t\t"+p5+"\n}\n\n";
 
     /////////////////
     return ofapph;
@@ -251,18 +283,30 @@ export class P52OfService {
     r_p5 = r_p5.replace(/fullScreen\(\);/g, '');
     r_p5 = r_p5.replace(/fullScreen\(\w\);/g, '');
 
-    if(csetup === -1 || cdraw === -1){
+    if(csetup === -1 && cdraw === -1){
       r_p5 = r_p5.replace(/(\n)/g, '\n\t');
       r_p5 = "#include \"ofApp.h\"\n\nvoid ofApp::setup(){\n\t"+"ofBackground(204);\n\tofSetColor(255);\n\tofFill();"+"\n}\n\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw(){\n\t"+r_p5+"\n}";
     }
     else{
       p_p5 = p_p5.replace(/void setup\(\){([^]*)}/, "");
       p_p5 = p_p5.replace(/void draw\(\){([^]*)}/, "");
+      p_p5 = p_p5.replace(/void keyPressed\(\){([^]*)}/, "");
+      p_p5 = p_p5.replace(/void keyReleased\(\){([^]*)}/, "");
+      p_p5 = p_p5.replace(/void mouseMoved\(\){([^]*)}/, "");
+      p_p5 = p_p5.replace(/void mouseDragged\(\){([^]*)}/, "");
+      p_p5 = p_p5.replace(/void mousePressed\(\){([^]*)}/, "");
+      p_p5 = p_p5.replace(/void mouseReleased\(\){([^]*)}/, "");
       p_p5 = p_p5.trim();
 
       r_p5 = r_p5.replace(/\n\s*\n/g, '\n');
-      r_p5 = r_p5.replace(/void draw\(\)/g, "\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw()");
       r_p5 = r_p5.replace(/void setup\(\)\{/g, "void ofApp::setup(){\n\tofBackground(204);\n\tofSetColor(255);\n\tofFill();");
+      r_p5 = r_p5.replace(/void draw\(\)/g, "\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw()");
+      r_p5 = r_p5.replace(/void keyPressed\(\)/g, "\n\nvoid ofApp::keyPressed(int key)");
+      r_p5 = r_p5.replace(/void keyReleased\(\)/g, "\n\nvoid ofApp::keyReleased(int key)");
+      r_p5 = r_p5.replace(/void mouseMoved\(\)/g, "\n\nvoid ofApp::mouseMoved(int x, int y)");
+      r_p5 = r_p5.replace(/void mouseDragged\(\)/g, "\n\nvoid ofApp::mouseDragged(int x, int y, int button)");
+      r_p5 = r_p5.replace(/void mousePressed\(\)/g, "\n\nvoid ofApp::mousePressed(int x, int y, int button)");
+      r_p5 = r_p5.replace(/void mouseReleased\(\)/g, "\n\nvoid ofApp::mouseReleased(int x, int y, int button)");
       r_p5 = "#include \"ofApp.h\"\n\n"+r_p5;
 
       r_p5 = r_p5.replace(p_p5, "");
@@ -329,25 +373,5 @@ export class P52OfService {
     }
     ///////////////
     return ver;
-  }
-
-  download(main:string, app:string, apph:string){
-    if(fs !== undefined){
-      zip.file('src/main.cpp', main);
-      zip.file('src/ofApp.cpp', app);
-      zip.file('src/ofApp.h', apph);
-      var data = zip.generate({base64:false,compression:'DEFLATE'});
-      fs.writeFileSync('rosetta-of.zip', data, 'binary');
-      document.getElementById("debug").innerHTML = "*rosetta-of.zip saved in the root directory*";
-      setTimeout(function(){
-        document.getElementById("debug").innerHTML = "";
-      }, 3000);
-    }else{
-      console.log("Download only avaliable in Electron mode");
-      document.getElementById("debug").innerHTML = '<p style="color:red;">*Download only avaliable in Electron mode*</p>';
-      setTimeout(function(){
-        document.getElementById("debug").innerHTML = "";
-      }, 3000);
-    }
   }
 }
