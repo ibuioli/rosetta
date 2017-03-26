@@ -10,6 +10,7 @@ import { DownloadService } from './download.service';
 })
 export class AppComponent {
   ver:string = 'alpha 0.2';
+  /////////////////////////////
   p5v:string = 'x.x.x';
   ofv:string = '0.8.x';
   displayB1:boolean = true;
@@ -47,7 +48,7 @@ export class AppComponent {
       document.getElementById('fp5').innerHTML = hlP5 + "&#13;&#10;&#13;&#10;";
 
       var reset = _this.conversor.reset(txt);
-      var convers = _this.conversor.conversor(reset);
+      var convers = _this.conversor.conversor(reset, _this.ofv);
       _this.p5v = _this.conversor.p5ver(reset);
 
       var apph = _this.conversor.ofApph(convers);
@@ -91,6 +92,28 @@ export class AppComponent {
 
   onChange($event, v){
     this.ofv = v;
+
+    ////////////////////////////
+
+    var txt = (<HTMLInputElement>document.getElementById("p5")).value;
+    var hlP5 = this.hl.highlightP5(txt);
+    document.getElementById('fp5').innerHTML = hlP5 + "&#13;&#10;&#13;&#10;";
+
+    var reset = this.conversor.reset(txt);
+    var convers = this.conversor.conversor(reset, this.ofv);
+    this.p5v = this.conversor.p5ver(reset);
+
+    var apph = this.conversor.ofApph(convers);
+    this.apph = apph;
+    document.getElementById('of3').innerHTML = this.hl.highlightC(apph);
+
+    var maincpp = this.conversor.maincpp(convers);
+    this.main = maincpp;
+    document.getElementById('of2').innerHTML = this.hl.highlightC(maincpp);
+
+    var appcpp = this.conversor.ofAppcpp(convers);
+    this.app = appcpp;
+    document.getElementById('of').innerHTML = this.hl.highlightC(appcpp);
   }
 
 }

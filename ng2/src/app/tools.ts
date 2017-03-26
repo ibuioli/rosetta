@@ -23,6 +23,7 @@ export class Tools {
     }
     return n;
   }
+
   extract(string:string, left:string, right:string){
     var pleft:any = this.strpos(string, left, 0);
     if (pleft !== false){
@@ -33,8 +34,70 @@ export class Tools {
     }
     return '';
   }
+
   strpos(haystack:string, needle:string, offset:number) {
     var i = (haystack+'').indexOf(needle, (offset || 0));
     return i === -1 ? false : i;
+  }
+
+  countpar(s:string, needle:string){
+    var brk = 0;
+    var par = 0;
+
+    for (let i = 0; i < s.length; i++) {
+      if(s[i] === '('){
+        brk++;
+      }else if(s[i] === ')'){
+        brk--;
+      }
+
+      if(brk === 0){
+        if(s[i] === needle){
+          par++;
+        }
+      }
+    }
+
+    return par;
+  }
+
+  params(s:string, needle:string, c:number){
+    var ipar = [];
+    var par = [];
+    var brk = 0;
+    ipar[0] = 0;
+    var u = 1;
+
+    for (let i = 0; i < s.length; i++) {
+      if(s[i] === '('){
+        brk++;
+      }else if(s[i] === ')'){
+        brk--;
+      }
+
+      if(brk === 0){
+        if(s[i] === needle){
+          if(u < c+1){
+            ipar[u] = i;
+            u++;
+          }
+        }
+      }
+    }
+
+    if(ipar.length === c){
+      ipar[c] = s.length;
+    }
+
+    for (let i = 0; i < c; i++) {
+      par[i] = s.slice(ipar[i], ipar[i+1]);
+
+      if(i !== 0){
+        par[i] = par[i].substr(1);
+      }
+    }
+
+    return par;
+
   }
 }

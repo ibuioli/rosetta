@@ -29,7 +29,7 @@ export class P52OfService {
     return r_p5;
   }
 
-  conversor(p5:string){
+  conversor(p5:string, of:string){
     var r_p5 = p5;
     //Data
   	r_p5 = r_p5.replace(/boolean /g, 'bool ');
@@ -50,6 +50,15 @@ export class P52OfService {
   	//Calc
   	r_p5 = r_p5.replace(/\bconstrain\b\(/g, 'ofClamp(');
   	r_p5 = r_p5.replace(/\bdist\b\(/g, 'ofDist(');
+    var c_mag = this.t.repeted(r_p5, 'mag(', false);
+    for(let i = 0; i < c_mag; i++){
+      var m = this.t.extract(r_p5, 'mag(', ');');
+      if(this.t.countpar(m, ',') <= 1){
+        r_p5 = r_p5.replace('mag('+m+');', 'ofDist(0, 0, '+m+');');
+      }else if(this.t.countpar(m, ',') > 1){
+        r_p5 = r_p5.replace('mag('+m+');', 'ofDist(0, 0, 0, '+m+');');
+      }
+  	}
   	r_p5 = r_p5.replace(/\blerp\b\(/g, 'ofLerp(');
   	r_p5 = r_p5.replace(/\bmap\b\(/g, 'ofMap(');
   	r_p5 = r_p5.replace(/\bmax\b\(/g, 'MAX(');
@@ -140,16 +149,52 @@ export class P52OfService {
       r_p5 = r_p5.replace('stroke('+m+');', value);
   	}
     //Prims 2D
-  	r_p5 = r_p5.replace(/\bellipse\b\(/g, 'ofEllipse(');
-    r_p5 = r_p5.replace(/\brect\b\(/g, 'ofRect(');
-  	r_p5 = r_p5.replace(/\bline\b\(/g, 'ofLine(');
-  	r_p5 = r_p5.replace(/\btriangle\b\(/g, 'ofTriangle(');
-    var c_point = this.t.repeted(r_p5, 'point(', false);
-    for(let i = 0; i < c_point; i++){
-      var m = this.t.extract(r_p5, 'point(', ');');
-      var value = 'ofRect('+m+', 1, 1);';
-      r_p5 = r_p5.replace('point('+m+');', value);
-  	}
+    if(of === '0.9.x'){
+      r_p5 = r_p5.replace(/\bellipse\b\(/g, 'ofDrawEllipse(');
+      var c_rect = this.t.repeted(r_p5, 'rect(', false);
+      for(let i = 0; i < c_rect; i++){
+        var m = this.t.extract(r_p5, 'rect(', ');');
+        if(this.t.countpar(m, ',') <= 3){
+          r_p5 = r_p5.replace('rect('+m+');', 'ofDrawRectangle('+m+');');
+        }else if(this.t.countpar(m, ',') > 3){
+          r_p5 = r_p5.replace('rect('+m+');', 'ofDrawRectRounded('+m+');');
+        }
+    	}
+    	r_p5 = r_p5.replace(/\bline\b\(/g, 'ofDrawLine(');
+    	r_p5 = r_p5.replace(/\btriangle\b\(/g, 'ofDrawTriangle(');
+      var c_point = this.t.repeted(r_p5, 'point(', false);
+      for(let i = 0; i < c_point; i++){
+        var m = this.t.extract(r_p5, 'point(', ');');
+        var value = 'ofDrawRectangle('+m+', 1, 1);';
+        r_p5 = r_p5.replace('point('+m+');', value);
+    	}
+    }else if(of === '0.8.x'){
+      r_p5 = r_p5.replace(/\bellipse\b\(/g, 'ofEllipse(');
+      var c_rect = this.t.repeted(r_p5, 'rect(', false);
+      for(let i = 0; i < c_rect; i++){
+        var m = this.t.extract(r_p5, 'rect(', ');');
+        if(m.indexOf("(") === -1){
+          var n = m.split(',');
+          if(n.length <= 4){
+            r_p5 = r_p5.replace('rect(', 'ofRect(');
+          }else{
+            r_p5 = r_p5.replace('rect('+m+');', 'ofRect('+n[0]+','+n[1]+','+n[2]+','+n[3]+');');
+          }
+        }else{
+          var sn = [];
+          sn = this.t.params(m, ',', 4);
+          r_p5 = r_p5.replace('rect('+m+');', 'ofRect('+sn[0]+','+sn[1]+','+sn[2]+','+sn[3]+');');
+        }
+    	}
+    	r_p5 = r_p5.replace(/\bline\b\(/g, 'ofLine(');
+    	r_p5 = r_p5.replace(/\btriangle\b\(/g, 'ofTriangle(');
+      var c_point = this.t.repeted(r_p5, 'point(', false);
+      for(let i = 0; i < c_point; i++){
+        var m = this.t.extract(r_p5, 'point(', ');');
+        var value = 'ofRect('+m+', 1, 1);';
+        r_p5 = r_p5.replace('point('+m+');', value);
+    	}
+    }
     //3D
     r_p5 = r_p5.replace(/\bbox\b\(/g, 'ofBox(');
     r_p5 = r_p5.replace(/\bsphere\b\(/g, 'ofSphere(');
@@ -157,11 +202,16 @@ export class P52OfService {
     r_p5 = r_p5.replace(/\blights\b\(/g, 'ofEnableLighting(');
     r_p5 = r_p5.replace(/\bnoLights\b\(/g, 'ofDisableLighting(');
     //Curves
-  	r_p5 = r_p5.replace(/\bcurve\b\(/g, 'ofCurve(');
+    if(of === '0.9.x'){
+      r_p5 = r_p5.replace(/\bbezier\b\(/g, 'ofDrawBezier(');
+      r_p5 = r_p5.replace(/\bcurve\b\(/g, 'ofDrawCurve(');
+    }else if(of === '0.8.x'){
+      r_p5 = r_p5.replace(/\bbezier\b\(/g, 'ofBezier(');
+      r_p5 = r_p5.replace(/\bcurve\b\(/g, 'ofCurve(');
+    }
   	r_p5 = r_p5.replace(/\bcurveTangent\b\(/g, 'ofCurveTangent(');
   	r_p5 = r_p5.replace(/\bcurvePoint\b\(/g, 'ofCurveVertex(');
   	r_p5 = r_p5.replace(/\bcurveDetail\b\(/g, 'ofSetCurveResolution(');
-  	r_p5 = r_p5.replace(/\bbezier\b\(/g, 'ofBezier(');
   	r_p5 = r_p5.replace(/\bbezierDetail\b\(/g, 'ofSetCurveResolution(');
   	r_p5 = r_p5.replace(/\bbezierPoint\b\(/g, 'ofBezierPoint(');
   	//Atts

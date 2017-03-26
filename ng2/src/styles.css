@@ -249,7 +249,7 @@ h1 span{
 	text-align:center;
 	color:#222;
 	background:#fff;
-	bottom:45px;
+	top:90%;
 }
 .botones:hover{
 	cursor:pointer;
