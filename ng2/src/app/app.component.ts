@@ -12,7 +12,7 @@ export class AppComponent {
   ver:string = 'alpha 0.2';
   /////////////////////////////
   p5v:string = 'x.x.x';
-  ofv:string = '0.8.x';
+  ofv:string = '0.9.x';
   displayB1:boolean = true;
   displayB2:boolean = false;
   displayB3:boolean = false;

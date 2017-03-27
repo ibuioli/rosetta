@@ -24,6 +24,9 @@ export class P52OfService {
     r_p5 = r_p5.replace(/\( /g, '(');
     r_p5 = r_p5.replace(/ \)/g, ')');
     r_p5 = r_p5.replace(/\) /g, ')');
+    r_p5 = r_p5.replace(/\= /g, '=');
+    r_p5 = r_p5.replace(/ \=/g, '=');
+    r_p5 = r_p5.replace(/ \= /g, '=');
 
     ////////////////////
     return r_p5;
@@ -35,13 +38,15 @@ export class P52OfService {
   	r_p5 = r_p5.replace(/boolean /g, 'bool ');
   	r_p5 = r_p5.replace(/color /g, 'ofColor ');
   	r_p5 = r_p5.replace(/byte /g, 'unsigned char ');
+    r_p5 = r_p5.replace(/final /g, 'const ');
     r_p5 = r_p5.replace(/String /g, 'string ');
     r_p5 = r_p5.replace(/Array /g, 'vector ');
     r_p5 = r_p5.replace(/ArrayList /g, 'list ');
     r_p5 = r_p5.replace(/HashMap /g, 'map ');
     r_p5 = r_p5.replace(/PImage /g, 'ofImage ');
-    r_p5 = r_p5.replace(/PFont /g, 'ofTrueTypeFont');
-    r_p5 = r_p5.replace(/final /g, 'const ');
+    r_p5 = r_p5.replace(/PFont /g, 'ofTrueTypeFont ');
+    r_p5 = r_p5.replace(/PVector /g, 'ofVec2f ');
+    r_p5 = r_p5.replace(/\b=new ofVec2f\b\(/g, '.set(');
   	//OPENGL
   	r_p5 = r_p5.replace(/\bP2D\b/g, 'OF_WINDOW');
   	r_p5 = r_p5.replace(/\bP3D\b/g, 'OF_WINDOW');
@@ -195,6 +200,19 @@ export class P52OfService {
         r_p5 = r_p5.replace('point('+m+');', value);
     	}
     }
+    var c_quad = this.t.repeted(r_p5, 'quad(', false);
+    for(let i = 0; i < c_quad; i++){
+      var m = this.t.extract(r_p5, 'quad(', ');');
+      var p = this.t.params(m, ',', 8);
+      r_p5 = r_p5.replace('quad('+m+');', "ofBeginShape();\nofVertex("+p[0]+","+p[1]+");\nofVertex("+p[2]+","+p[3]+");\nofVertex("+p[4]+","+p[5]+");\nofVertex("+p[6]+","+p[7]+");\nofEndShape();");
+    }
+    var c_arc = this.t.repeted(r_p5, 'arc(', false);
+    for(let i = 0; i < c_arc; i++){
+      var m = this.t.extract(r_p5, 'arc(', ');');
+      var v = "of_"+Math.random().toString(36).substr(2, 5);
+      var p = this.t.params(m, ',', 6);
+      r_p5 = r_p5.replace('arc('+m+');', "ofPolyline "+v+";\n"+v+".arc("+p[0]+","+p[1]+","+p[2]+","+p[3]+","+p[4]+","+p[5]+");\n"+v+".draw();");
+    }
     //3D
     r_p5 = r_p5.replace(/\bbox\b\(/g, 'ofBox(');
     r_p5 = r_p5.replace(/\bsphere\b\(/g, 'ofSphere(');
@@ -229,8 +247,21 @@ export class P52OfService {
   	r_p5 = r_p5.replace(/\bbeginShape\b\(/g, 'ofBeginShape(');
   	r_p5 = r_p5.replace(/\bendShape\b\(/g, 'ofEndShape(');
   	//Image
-    r_p5 = r_p5.replace(/\bimage\b\(/g, 'ofImage::draw(');
-    r_p5 = r_p5.replace(/\bloadImage\b\(/g, 'ofImage::loadImage(');
+    //r_p5 = r_p5.replace(/\bimage\b\(/g, 'ofImage::draw(');
+    var c_image = this.t.repeted(r_p5, 'image(', false);
+    for(let i = 0; i < c_image; i++){
+      var m = this.t.extract(r_p5, 'image(', ');');
+      var mc = this.t.countpar(m, ',');
+      var p = this.t.params(m, ',', mc+1);
+      if(mc === 2){
+        r_p5 = r_p5.replace('image('+m+');', p[0]+"."+"draw("+p[1]+","+p[2]+");");
+      }else if(mc === 4){
+        r_p5 = r_p5.replace('image('+m+');', p[0]+"."+"draw("+p[1]+","+p[2]+","+p[3]+","+p[4]+");");
+      }else{
+        r_p5 = r_p5.replace('image('+m+');', ".draw("+m+");");
+      }
+  	}
+    r_p5 = r_p5.replace(/\b=loadImage\b\(/g, '.load(');
   	r_p5 = r_p5.replace(/\btint\b\(/g, 'ofSetColor(');
   	r_p5 = r_p5.replace(/\bnoTint\b\(/g, 'ofSetColor(255');
     //Font
@@ -260,6 +291,7 @@ export class P52OfService {
     //Final Sets
     r_p5 = r_p5.replace(/; ;/g, ';');
     r_p5 = r_p5.replace(/;;/g, ';');
+    r_p5 = r_p5.replace(/ \./g, '.');
     r_p5 = r_p5.replace(/\bif\b/g, 'if ');
     r_p5 = r_p5.replace(/\belse\b/g, 'else ');
     r_p5 = r_p5.replace(/\bfor\b/g, 'for ');
@@ -271,47 +303,54 @@ export class P52OfService {
   ofApph(p5:string){
     var ofapph;
 
-    var keyPressed = p5.search(/void keyPressed\(\)/);
-    var keyReleased = p5.search(/void keyReleased\(\)/);
-    var mousePressed = p5.search(/void mousePressed\(\)/);
-    var mouseReleased = p5.search(/void mouseReleased\(\)/);
-    var mouseMoved = p5.search(/void mouseMoved\(\)/);
-    var mouseDragged = p5.search(/void mouseDragged\(\)/);
+    var csetup = p5.search("void setup()");
+    var cdraw = p5.search("void draw()");
 
-    p5 = p5.replace(/void setup\(\){([^]*)}/, "");
-    p5 = p5.replace(/void draw\(\){([^]*)}/, "");
-    p5 = p5.replace(/void keyPressed\(\){([^]*)}/, "");
-    p5 = p5.replace(/void keyReleased\(\){([^]*)}/, "");
-    p5 = p5.replace(/void mouseMoved\(\){([^]*)}/, "");
-    p5 = p5.replace(/void mouseDragged\(\){([^]*)}/, "");
-    p5 = p5.replace(/void mousePressed\(\){([^]*)}/, "");
-    p5 = p5.replace(/void mouseReleased\(\){([^]*)}/, "");
-    p5 = p5.replace(/\n\s*\n/g, '\n');
-    p5 = p5.trim();
-    p5 = p5.replace(/(\n)/g, '\n\t\t');
+    if(csetup !== -1 || cdraw !== -1){
+      var keyPressed = p5.search(/void keyPressed\(\)/);
+      var keyReleased = p5.search(/void keyReleased\(\)/);
+      var mousePressed = p5.search(/void mousePressed\(\)/);
+      var mouseReleased = p5.search(/void mouseReleased\(\)/);
+      var mouseMoved = p5.search(/void mouseMoved\(\)/);
+      var mouseDragged = p5.search(/void mouseDragged\(\)/);
 
-    var interactive = "";
+      p5 = p5.replace(/void setup\(\){([^]*)}/, "");
+      p5 = p5.replace(/void draw\(\){([^]*)}/, "");
+      p5 = p5.replace(/void keyPressed\(\){([^]*)}/, "");
+      p5 = p5.replace(/void keyReleased\(\){([^]*)}/, "");
+      p5 = p5.replace(/void mouseMoved\(\){([^]*)}/, "");
+      p5 = p5.replace(/void mouseDragged\(\){([^]*)}/, "");
+      p5 = p5.replace(/void mousePressed\(\){([^]*)}/, "");
+      p5 = p5.replace(/void mouseReleased\(\){([^]*)}/, "");
+      p5 = p5.replace(/\n\s*\n/g, '\n');
+      p5 = p5.trim();
+      p5 = p5.replace(/(\n)/g, '\n\t\t');
 
-    if(keyPressed !== -1){
-      interactive = interactive + "\n\t\tvoid keyPressed(int key);";
-    }
-    if(keyReleased !== -1){
-      interactive = interactive + "\n\t\tvoid keyReleased(int key);";
-    }
-    if(mouseMoved !== -1){
-      interactive = interactive + "\n\t\tvoid mouseMoved(int x, int y);";
-    }
-    if(mouseDragged !== -1){
-      interactive = interactive + "\n\t\tvoid mouseDragged(int x, int y, int button);";
-    }
-    if(mousePressed !== -1){
-      interactive = interactive + "\n\t\tvoid mousePressed(int x, int y, int button);";
-    }
-    if(mouseReleased !== -1){
-      interactive = interactive + "\n\t\tvoid mouseReleased(int x, int y, int button);";
-    }
+      var interactive = "";
 
-    ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public:\n\t\tvoid setup();\n\t\tvoid update();\n\t\tvoid draw();"+interactive+"\n\n\t\t"+p5+"\n}\n\n";
+      if(keyPressed !== -1){
+        interactive = interactive + "\n\t\tvoid keyPressed(int key);";
+      }
+      if(keyReleased !== -1){
+        interactive = interactive + "\n\t\tvoid keyReleased(int key);";
+      }
+      if(mouseMoved !== -1){
+        interactive = interactive + "\n\t\tvoid mouseMoved(int x, int y);";
+      }
+      if(mouseDragged !== -1){
+        interactive = interactive + "\n\t\tvoid mouseDragged(int x, int y, int button);";
+      }
+      if(mousePressed !== -1){
+        interactive = interactive + "\n\t\tvoid mousePressed(int x, int y, int button);";
+      }
+      if(mouseReleased !== -1){
+        interactive = interactive + "\n\t\tvoid mouseReleased(int x, int y, int button);";
+      }
+
+      ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public:\n\t\tvoid setup();\n\t\tvoid update();\n\t\tvoid draw();"+interactive+"\n\n\t\t"+p5+"\n};\n";
+    }else{
+      ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public:\n\t\tvoid setup();\n\t\tvoid update();\n\t\tvoid draw();\n};\n";
+    }
 
     /////////////////
     return ofapph;
@@ -359,7 +398,8 @@ export class P52OfService {
       r_p5 = r_p5.replace(/void mouseReleased\(\)/g, "\n\nvoid ofApp::mouseReleased(int x, int y, int button)");
       r_p5 = "#include \"ofApp.h\"\n\n"+r_p5;
 
-      r_p5 = r_p5.replace(p_p5, "");
+      r_p5 = r_p5.replace(p_p5, '');
+      r_p5 = r_p5.replace(/(\n\n\n)/g, '\n\n');
     }
 
     /////////////////

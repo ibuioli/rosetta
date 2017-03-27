@@ -219,6 +219,7 @@ h1 span{
 	background:#e9e9e9;
 	opacity:0.9;
 	box-shadow: inset 0px 0px 8px 1px rgba(100,100,100,1);
+	user-select: none;
 }
 #refof{
 	top:40px;
@@ -229,6 +230,7 @@ h1 span{
 	background:#e9e9e9;
 	opacity:0.9;
 	box-shadow: inset 0px 0px 8px 1px rgba(100,100,100,1);
+	user-select: none;
 }
 #refp5 img, #refof img{
 	opacity:.7;
@@ -250,6 +252,7 @@ h1 span{
 	color:#222;
 	background:#fff;
 	top:90%;
+	user-select: none;
 }
 .botones:hover{
 	cursor:pointer;
@@ -277,7 +280,6 @@ h1 span{
 #ofv{
 	margin:10px 0 0 75px;
 	font-size:16px;
-	user-select: none;
 }
 #oftit{
 	margin:25px 0 0 55px;
