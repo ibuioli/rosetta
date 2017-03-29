@@ -95,7 +95,8 @@ export class HighlightService {
     /\bpushMatrix\b/g,/\bpopMatrix\b/g,/\btranslate\b/g,/\brotate\b/g,/\bscale\b/g,
     /\bvoid keyPressed\b/g,/\bvoid keyReleased\b/g,/\bvoid mouseMoved\b/g,/\bvoid mouseDragged\b/g,
     /\bvoid mousePressed\b/g,/\bvoid mouseReleased\b/g,
-    /\bimage\b/g,/\bloadImage\b/g,/\brandom\b/g
+    /\bimage\b/g,/\bloadImage\b/g,/\brandom\b/g,/\btext\b/g,/\bloadFont\b/g,/\bcreateFont\b/g,
+    /\btextFont\b/g
     ];
     var cfun =[
     '<p5fun>setup</p5fun>','<p5fun>draw</p5fun>','<p5fun>settings</p5fun>',
@@ -106,7 +107,8 @@ export class HighlightService {
     '<p5fun>pushMatrix</p5fun>','<p5fun>popMatrix</p5fun>','<p5fun>translate</p5fun>','<p5fun>rotate</p5fun>','<p5fun>scale</p5fun>',
     'void <p5fun>keyPressed</p5fun>','void <p5fun>keyReleased</p5fun>','void <p5fun>mouseMoved</p5fun>','void <p5fun>mouseDragged</p5fun>',
     'void <p5fun>mousePressed</p5fun>','void <p5fun>mouseReleased</p5fun>',
-    '<p5fun>image</p5fun>','<p5fun>loadImage</p5fun>','<p5fun>random</p5fun>'
+    '<p5fun>image</p5fun>','<p5fun>loadImage</p5fun>','<p5fun>random</p5fun>','<p5fun>text</p5fun>','<p5fun>loadFont</p5fun>','<p5fun>createFont</p5fun>',
+    '<p5fun>textFont</p5fun>'
     ];
     for (let i = 0; i < fun.length; i++) {
         r_code = r_code.replace(fun[i], cfun[i]);
