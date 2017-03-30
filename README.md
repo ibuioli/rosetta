@@ -1,7 +1,7 @@
 # Rosetta
 Traductor App from Processing to OpenFrameworks
 
-This is an App for transtale Processing code into OpenFrameworks code, with syntaxis highlight in real-time. Good support for Processing static and active mode.
+This is an App for transtale Processing code into OpenFrameworks code, with syntaxis highlight in real-time. Good support for Processing static and active mode. Made it in TypeScript, with Angular 2 and Electron.
 
 P5 Version Supported:
   * Any stable version (no alpha or beta) can be used
