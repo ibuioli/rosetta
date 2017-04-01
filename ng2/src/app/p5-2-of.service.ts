@@ -48,7 +48,9 @@ export class P52OfService {
     r_p5 = r_p5.replace(/PFont /g, 'ofTrueTypeFont ');
     r_p5 = r_p5.replace(/PVector /g, 'ofVec2f ');
     r_p5 = r_p5.replace(/PGraphics /g, 'ofFbo ');
-  	/////// OPENGL ///////
+    /////// CONS ///////
+  	r_p5 = r_p5.replace(/\bQUARTER_PI\b/g, 'HALF_PI/2');
+  	r_p5 = r_p5.replace(/\bTAU\b/g, 'TWO_PI');
   	r_p5 = r_p5.replace(/\bP2D\b/g, 'OF_WINDOW');
   	r_p5 = r_p5.replace(/\bP3D\b/g, 'OF_WINDOW');
   	r_p5 = r_p5.replace(/\bJAVA2D\b/g, 'OF_WINDOW');
@@ -101,7 +103,7 @@ export class P52OfService {
       r_p5 = r_p5.replace('cursor('+m+');', value);
   	}
     r_p5 = r_p5.replace(/\bdelay\b\(/g, 'ofSleepMillis(');
-    /////// CCONVERTION ///////
+    /////// CONVERTION ///////
   	r_p5 = r_p5.replace(/\bboolean\b\(/g, 'ofToBool(');
   	r_p5 = r_p5.replace(/\bbinary\b\(/g, 'ofToBinary(');
   	r_p5 = r_p5.replace(/\bbyte\b\(/g, 'ofToChar(');
@@ -119,9 +121,6 @@ export class P52OfService {
   	r_p5 = r_p5.replace(/\bnoise\b\(/g, 'ofNoise(');
   	r_p5 = r_p5.replace(/\brandom\b\(/g, 'ofRandom(');
   	r_p5 = r_p5.replace(/\brandomSeed\b\(/g, 'ofSeedRandom(');
-    /////// CONS ///////
-  	r_p5 = r_p5.replace(/\bQUARTER_PI\b/g, 'HALF_PI/2');
-  	r_p5 = r_p5.replace(/\bTAU\b/g, 'TWO_PI');
     /////// DATE & HOUR ///////
   	r_p5 = r_p5.replace(/\bday\b\(/g, 'ofGetDay(');
   	r_p5 = r_p5.replace(/\bhour\b\(/g, 'ofGetHours(');
@@ -142,6 +141,7 @@ export class P52OfService {
   	r_p5 = r_p5.replace(/\btranslate\b\(/g, 'ofTranslate(');
   	r_p5 = r_p5.replace(/\bscale\b\(/g, 'ofScale(');
     /////// COLOR ///////
+    r_p5 = r_p5.replace(/\bcolorMode\(\w*\)\;/g, '');
     r_p5 = r_p5.replace(/\bbackground\b\(/g, 'ofBackground(');
     r_p5 = r_p5.replace(/\bnoFill\b\(/g, 'ofNoFill(');
   	r_p5 = r_p5.replace(/\bnoStroke\b\(/g, 'ofFill(');
@@ -216,11 +216,16 @@ export class P52OfService {
       var m = this.t.extract(r_p5, 'arc(', ');');
       var v = "of_"+Math.random().toString(36).substr(2, 5);
       var p = this.t.params(m, ',', 6);
-      r_p5 = r_p5.replace('arc('+m+');', "ofPolyline "+v+";\n"+v+".arc("+p[0]+","+p[1]+","+p[2]+","+p[3]+","+p[4]+","+p[5]+");\n"+v+".draw();");
+      r_p5 = r_p5.replace("arc("+m+");", "ofPolyline "+v+";\n"+v+".a°rc("+p[0]+","+p[1]+","+p[2]+","+p[3]+","+p[4]+","+p[5]+");\n"+v+".draw();");
     }
     /////// PRIMS 3D ///////
-    r_p5 = r_p5.replace(/\bbox\b\(/g, 'ofBox(');
-    r_p5 = r_p5.replace(/\bsphere\b\(/g, 'ofSphere(');
+    if(of === '0.9.x'){
+      r_p5 = r_p5.replace(/\bbox\b\(/g, 'ofDrawBox(');
+      r_p5 = r_p5.replace(/\bsphere\b\(/g, 'ofDrawSphere(');
+    }else if(of === '0.8.x'){
+      r_p5 = r_p5.replace(/\bbox\b\(/g, 'ofBox(');
+      r_p5 = r_p5.replace(/\bsphere\b\(/g, 'ofSphere(');
+    }
     r_p5 = r_p5.replace(/\bsphereDetail\b\(/g, 'ofSetSphereResolution(');
     r_p5 = r_p5.replace(/\blights\b\(/g, 'ofEnableLighting(');
     r_p5 = r_p5.replace(/\bnoLights\b\(/g, 'ofDisableLighting(');
@@ -309,6 +314,13 @@ export class P52OfService {
       r_p5 = r_p5.replace(/\b.*\.ofDrawBitmapString\b\(/g, 'ofDrawBitmapString(');
       r_p5 = r_p5.replace(/\b.*\.ofSetRectMode\b\(/g, 'ofSetRectMode(');
       r_p5 = r_p5.replace(/\b.*\.ofSetLineWidth\b\(/g, 'ofSetLineWidth(');
+      r_p5 = r_p5.replace(/\b.*\.ofBox\b\(/g, 'ofBox(');
+      r_p5 = r_p5.replace(/\b.*\.ofSphere\b\(/g, 'ofSphere(');
+      r_p5 = r_p5.replace(/\b.*\.ofPolyline\b/g, 'ofPolyline');
+      r_p5 = r_p5.replace(/\b.*\.ofEnableLighting\b\(/g, 'ofEnableLighting(');
+      r_p5 = r_p5.replace(/\b.*\.ofDisableLighting\b\(/g, 'ofDisableLighting(');
+      r_p5 = r_p5.replace(/\b.*\.(.*)\.draw\b\(/g, '$1.draw(');
+      r_p5 = r_p5.replace(/\b.*\.(.*)\.drawString\b\(/g, '$1.drawString(');
       if(of === '0.9.x'){
         r_p5 = r_p5.replace(/\b.*\.ofDrawLine\b\(/g, 'ofDrawLine(');
         r_p5 = r_p5.replace(/\b.*\.ofDrawRectangle\b\(/g, 'ofDrawRectangle(');
@@ -323,6 +335,7 @@ export class P52OfService {
         r_p5 = r_p5.replace(/\b.*\.ofBezier\b\(/g, 'ofBezier(');
         r_p5 = r_p5.replace(/\b.*\.ofCurve\b\(/g, 'ofCurve(');
       }
+      r_p5 = r_p5.replace(/\b.*\. /g, '');
     }
   	/////// IN ///////
   	r_p5 = r_p5.replace(/\bmouseX\b/g, 'ofGetMouseX()');
@@ -351,6 +364,7 @@ export class P52OfService {
     r_p5 = r_p5.replace(/;;/g, ';');
     r_p5 = r_p5.replace(/ \./g, '.');
     r_p5 = r_p5.replace(/\.\./g, '.');
+    r_p5 = r_p5.replace(/a°rc/g, 'arc');
     r_p5 = r_p5.replace(/\bif\b/g, 'if ');
     r_p5 = r_p5.replace(/\belse\b/g, 'else ');
     r_p5 = r_p5.replace(/\bfor\b/g, 'for ');

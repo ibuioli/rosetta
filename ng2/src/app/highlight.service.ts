@@ -125,11 +125,13 @@ export class HighlightService {
     //CONs
     var con = [/\bP2D\b/g,/\bP3D\b/g,/\bFX2D\b/g,/\bPDF\b/g,/\bJAVA2D\b/g,/\bOPENGL\b/g,
     /\bHALF_PI\b/g,/\bPI\b/g,/\bQUARTER_PI\b/g,/\bTAU\b/g,/\bTWO_PI\b/g,
-    /\bif\b/g,/\belse\b/g,/\bfor\b/g,/\bwhile\b/g,/\bswitch\b/g];
+    /\bif\b/g,/\belse\b/g,/\bfor\b/g,/\bwhile\b/g,/\bswitch\b/g,
+    /\bRGB\b/g,/\bARGB\b/g,/\bALPHA\b/g];
     var ccon = ['<p5con>P2D</p5con>','<p5con>P3D</p5con>','<p5con>FX2D</p5con>','<p5con>PDF</p5con>',
     '<p5con>JAVA2D</p5con>','<p5con>OPENGL</p5con>','<p5con>HALF_PI</p5con>','<p5con>PI</p5con>',
     '<p5con>QUARTER_PI</p5con>','<p5con>TAU</p5con>','<p5con>TWO_PI</p5con>',
-    '<p5con>if</p5con>','<p5con>else</p5con>','<p5con>for</p5con>','<p5con>while</p5con>','<p5con>switch</p5con>'];
+    '<p5con>if</p5con>','<p5con>else</p5con>','<p5con>for</p5con>','<p5con>while</p5con>','<p5con>switch</p5con>',
+    '<p5con>RGB</p5con>','<p5con>ARGB</p5con>','<p5con>ALPHA</p5con>'];
     for (let i = 0; i < con.length; i++) {
         r_code = r_code.replace(con[i], ccon[i]);
     }
