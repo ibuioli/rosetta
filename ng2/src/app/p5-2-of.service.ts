@@ -412,22 +412,20 @@ export class P52OfService {
       let mouseMoved = p5.search(/void mouseMoved\(\)/);
       let mouseDragged = p5.search(/void mouseDragged\(\)/);
 
-      let types = ['void', 'int', 'float'];
-      let datas:any = [types.length+1];
+      let types = p5.match(/.* .*\(.*\)/g);
       for (let i = 0; i < types.length; i++) {
-          datas[i] = this.t.repeted(p5, types[i]+' ', false);
-      }
-
-      for(let i = 0; i < datas[0]; i++){
-        let m = this.t.extract(p5, types[0]+' ', '){');
-        forfun = forfun + '\t\t'+types[0]+' '+m+');\n';
-        p5 = p5.replace(types[0]+' ', types[0]+'° ');
+          forfun = forfun + types[i]+";\n\t\t";
       }
 
       forfun = forfun.replace("void setup();", "");
       forfun = forfun.replace("void draw();", "");
+      forfun = forfun.replace("void keyPressed();", "");
+      forfun = forfun.replace("void keyReleased();", "");
+      forfun = forfun.replace("void mouseMoved();", "");
+      forfun = forfun.replace("void mouseDragged();", "");
+      forfun = forfun.replace("void mousePressed();", "");
+      forfun = forfun.replace("void mouseReleased();", "");
 
-      p5 = p5.replace(/void° /, "void ");
       p5 = p5.replace(/void setup\(\){([^]*)}/, "");
       p5 = p5.replace(/void draw\(\){([^]*)}/, "");
       p5 = p5.replace(/void keyPressed\(\){([^]*)}/, "");
@@ -461,7 +459,7 @@ export class P52OfService {
         interactive = interactive + "\n\t\tvoid mouseReleased(int x, int y, int button);";
       }
 
-      ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public:\n\t\tvoid setup();\n\t\tvoid update();\n\t\tvoid draw();"+interactive+"\n\t\t"+p5+forfun+"};\n";
+      ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public:\n\t\tvoid setup();\n\t\tvoid update();\n\t\tvoid draw();"+interactive+"\n\t\t"+p5+forfun+"\n};\n";
     }else{
       ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public:\n\t\tvoid setup();\n\t\tvoid update();\n\t\tvoid draw();\n};\n";
     }
