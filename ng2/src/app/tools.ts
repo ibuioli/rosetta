@@ -10,7 +10,7 @@ export class Tools {
     subString += "";
     if (subString.length <= 0) return (string.length + 1);
 
-    var n = 0,
+    let n = 0,
         pos = 0,
         step = allowOverlapping ? 1 : subString.length;
 
@@ -25,9 +25,9 @@ export class Tools {
   }
 
   extract(string:string, left:string, right:string){
-    var pleft:any = this.strpos(string, left, 0);
+    let pleft:any = this.strpos(string, left, 0);
     if (pleft !== false){
-      var pright:any = this.strpos(string, right, pleft + left.length);
+      let pright:any = this.strpos(string, right, pleft + left.length);
       if (pright !== false) {
               return (string.substr(pleft + left.length, (pright - (pleft + left.length ) ) ) );
       }
@@ -36,13 +36,13 @@ export class Tools {
   }
 
   strpos(haystack:string, needle:string, offset:number) {
-    var i = (haystack+'').indexOf(needle, (offset || 0));
+    let i = (haystack+'').indexOf(needle, (offset || 0));
     return i === -1 ? false : i;
   }
 
   countpar(s:string, needle:string){
-    var brk = 0;
-    var par = 0;
+    let brk = 0;
+    let par = 0;
 
     for (let i = 0; i < s.length; i++) {
       if(s[i] === '('){
@@ -62,11 +62,11 @@ export class Tools {
   }
 
   params(s:string, needle:string, c:number){
-    var ipar = [];
-    var par = [];
-    var brk = 0;
+    let ipar = [];
+    let par = [];
+    let brk = 0;
     ipar[0] = 0;
-    var u = 1;
+    let u = 1;
 
     for (let i = 0; i < s.length; i++) {
       if(s[i] === '('){

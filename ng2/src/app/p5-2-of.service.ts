@@ -13,7 +13,7 @@ export class P52OfService {
   constructor(public t: Tools) { }
 
   reset(p5:string) {
-    var r_p5 = p5;
+    let r_p5 = p5;
     r_p5 = r_p5.trim();
     r_p5 = r_p5.replace(/ +(?= )/g,'');
     ////////////////////
@@ -27,13 +27,16 @@ export class P52OfService {
     r_p5 = r_p5.replace(/\= /g, '=');
     r_p5 = r_p5.replace(/ \=/g, '=');
     r_p5 = r_p5.replace(/ \= /g, '=');
+    r_p5 = r_p5.replace(/, /g, ',');
+    r_p5 = r_p5.replace(/ , /g, ',');
+    r_p5 = r_p5.replace(/ ,/g, ',');
 
     ////////////////////
     return r_p5;
   }
 
   conversor(p5:string, of:string){
-    var r_p5 = p5;
+    let r_p5 = p5;
 
     /////// DATA ///////
   	r_p5 = r_p5.replace(/boolean /g, 'bool ');
@@ -61,9 +64,9 @@ export class P52OfService {
   	/////// CALC ///////
   	r_p5 = r_p5.replace(/\bconstrain\b\(/g, 'ofClamp(');
   	r_p5 = r_p5.replace(/\bdist\b\(/g, 'ofDist(');
-    var c_mag = this.t.repeted(r_p5, 'mag(', false);
+    let c_mag = this.t.repeted(r_p5, 'mag(', false);
     for(let i = 0; i < c_mag; i++){
-      var m = this.t.extract(r_p5, 'mag(', ');');
+      let m = this.t.extract(r_p5, 'mag(', ');');
       if(this.t.countpar(m, ',') <= 1){
         r_p5 = r_p5.replace('mag('+m+');', 'ofDist(0, 0, '+m+');');
       }else if(this.t.countpar(m, ',') > 1){
@@ -75,10 +78,10 @@ export class P52OfService {
   	r_p5 = r_p5.replace(/\bmax\b\(/g, 'MAX(');
   	r_p5 = r_p5.replace(/\bmin\b\(/g, 'MIN(');
   	r_p5 = r_p5.replace(/\bnorm\b\(/g, 'ofNormalize(');
-    var c_sq = this.t.repeted(r_p5, 'sq(', false);
+    let c_sq = this.t.repeted(r_p5, 'sq(', false);
     for(let i = 0; i < c_sq; i++){
-      var m = this.t.extract(r_p5, 'sq(', ');');
-      var value = 'pow('+m+', 2.0)';
+      let m = this.t.extract(r_p5, 'sq(', ');');
+      let value = 'pow('+m+', 2.0)';
       r_p5 = r_p5.replace('sq('+m+');', value);
   	}
     r_p5 = r_p5.replace(/\bdegrees\b\(/g, 'ofRagToDeg(');
@@ -96,10 +99,10 @@ export class P52OfService {
     r_p5 = r_p5.replace(/\bscreen.ofGetHeight\b/g, 'ofGetScreenWidth');
   	r_p5 = r_p5.replace(/\bframeRate\b\(/g, 'ofSetFrameRate(');
     r_p5 = r_p5.replace(/\bnoCursor\b\(/g, 'ofHideCursor(');
-    var c_cur = this.t.repeted(r_p5, 'cursor(', false);
+    let c_cur = this.t.repeted(r_p5, 'cursor(', false);
     for(let i = 0; i < c_cur; i++){
-      var m = this.t.extract(r_p5, 'cursor(', ');');
-      var value = 'ofShowCursor();';
+      let m = this.t.extract(r_p5, 'cursor(', ');');
+      let value = 'ofShowCursor();';
       r_p5 = r_p5.replace('cursor('+m+');', value);
   	}
     r_p5 = r_p5.replace(/\bdelay\b\(/g, 'ofSleepMillis(');
@@ -146,24 +149,24 @@ export class P52OfService {
     r_p5 = r_p5.replace(/\bnoFill\b\(/g, 'ofNoFill(');
   	r_p5 = r_p5.replace(/\bnoStroke\b\(/g, 'ofFill(');
   	r_p5 = r_p5.replace(/\bcolor\b\(/g, 'ofColor(');
-    var c_fill = this.t.repeted(r_p5, 'fill(', false);
+    let c_fill = this.t.repeted(r_p5, 'fill(', false);
     for(let i = 0; i < c_fill; i++){
-      var m = this.t.extract(r_p5, 'fill(', ');');
-      var value = 'ofSetColor('+m+');\nofFill();';
+      let m = this.t.extract(r_p5, 'fill(', ');');
+      let value = 'ofSetColor('+m+');\nofFill();';
       r_p5 = r_p5.replace('fill('+m+');', value);
   	}
-    var c_stroke = this.t.repeted(r_p5, 'stroke(', false);
+    let c_stroke = this.t.repeted(r_p5, 'stroke(', false);
     for(let i = 0; i < c_stroke; i++){
-      var m = this.t.extract(r_p5, 'stroke(', ');');
-      var value = 'ofSetColor('+m+');\nofNoFill();';
+      let m = this.t.extract(r_p5, 'stroke(', ');');
+      let value = 'ofSetColor('+m+');\nofNoFill();';
       r_p5 = r_p5.replace('stroke('+m+');', value);
   	}
     /////// PRIMS 2D ///////
     if(of === '0.9.x'){
       r_p5 = r_p5.replace(/\bellipse\b\(/g, 'ofDrawEllipse(');
-      var c_rect = this.t.repeted(r_p5, 'rect(', false);
+      let c_rect = this.t.repeted(r_p5, 'rect(', false);
       for(let i = 0; i < c_rect; i++){
-        var m = this.t.extract(r_p5, 'rect(', ');');
+        let m = this.t.extract(r_p5, 'rect(', ');');
         if(this.t.countpar(m, ',') <= 3){
           r_p5 = r_p5.replace('rect('+m+');', 'ofDrawRectangle('+m+');');
         }else if(this.t.countpar(m, ',') > 3){
@@ -172,51 +175,67 @@ export class P52OfService {
     	}
     	r_p5 = r_p5.replace(/\bline\b\(/g, 'ofDrawLine(');
     	r_p5 = r_p5.replace(/\btriangle\b\(/g, 'ofDrawTriangle(');
-      var c_point = this.t.repeted(r_p5, 'point(', false);
+      let c_point = this.t.repeted(r_p5, 'point(', false);
       for(let i = 0; i < c_point; i++){
-        var m = this.t.extract(r_p5, 'point(', ');');
-        var value = 'ofDrawRectangle('+m+', 1, 1);';
+        let m = this.t.extract(r_p5, 'point(', ');');
+        let value = 'ofDrawRectangle('+m+', 1, 1);';
         r_p5 = r_p5.replace('point('+m+');', value);
     	}
     }else if(of === '0.8.x'){
       r_p5 = r_p5.replace(/\bellipse\b\(/g, 'ofEllipse(');
-      var c_rect = this.t.repeted(r_p5, 'rect(', false);
+      let c_rect = this.t.repeted(r_p5, 'rect(', false);
       for(let i = 0; i < c_rect; i++){
-        var m = this.t.extract(r_p5, 'rect(', ');');
+        let m = this.t.extract(r_p5, 'rect(', ');');
         if(m.indexOf("(") === -1){
-          var n = m.split(',');
+          let n = m.split(',');
           if(n.length <= 4){
             r_p5 = r_p5.replace('rect(', 'ofRect(');
           }else{
             r_p5 = r_p5.replace('rect('+m+');', 'ofRect('+n[0]+','+n[1]+','+n[2]+','+n[3]+');');
           }
         }else{
-          var sn = [];
+          let sn = [];
           sn = this.t.params(m, ',', 4);
           r_p5 = r_p5.replace('rect('+m+');', 'ofRect('+sn[0]+','+sn[1]+','+sn[2]+','+sn[3]+');');
         }
     	}
     	r_p5 = r_p5.replace(/\bline\b\(/g, 'ofLine(');
     	r_p5 = r_p5.replace(/\btriangle\b\(/g, 'ofTriangle(');
-      var c_point = this.t.repeted(r_p5, 'point(', false);
+      let c_point = this.t.repeted(r_p5, 'point(', false);
       for(let i = 0; i < c_point; i++){
-        var m = this.t.extract(r_p5, 'point(', ');');
-        var value = 'ofRect('+m+', 1, 1);';
+        let m = this.t.extract(r_p5, 'point(', ');');
+        let value = 'ofRect('+m+', 1, 1);';
         r_p5 = r_p5.replace('point('+m+');', value);
     	}
     }
-    var c_quad = this.t.repeted(r_p5, 'quad(', false);
+    let c_quad = this.t.repeted(r_p5, 'quad(', false);
     for(let i = 0; i < c_quad; i++){
-      var m = this.t.extract(r_p5, 'quad(', ');');
-      var p = this.t.params(m, ',', 8);
+      let m = this.t.extract(r_p5, 'quad(', ');');
+      let p = this.t.params(m, ',', 8);
       r_p5 = r_p5.replace('quad('+m+');', "ofBeginShape();\nofVertex("+p[0]+","+p[1]+");\nofVertex("+p[2]+","+p[3]+");\nofVertex("+p[4]+","+p[5]+");\nofVertex("+p[6]+","+p[7]+");\nofEndShape();");
     }
-    var c_arc = this.t.repeted(r_p5, 'arc(', false);
+    let c_arc = this.t.repeted(r_p5, 'arc(', false);
     for(let i = 0; i < c_arc; i++){
-      var m = this.t.extract(r_p5, 'arc(', ');');
-      var v = "of_"+Math.random().toString(36).substr(2, 5);
-      var p = this.t.params(m, ',', 6);
-      r_p5 = r_p5.replace("arc("+m+");", "ofPolyline "+v+";\n"+v+".a°rc("+p[0]+","+p[1]+","+p[2]+","+p[3]+","+p[4]+","+p[5]+");\n"+v+".draw();");
+      let m = this.t.extract(r_p5, 'arc(', ');');
+      let v = "of_"+Math.random().toString(36).substr(2, 5);
+      let cp = this.t.countpar(m, ',');
+      let p = this.t.params(m, ',', cp+1);
+      for (let s = 0; s < p.length; s++) {
+        p[s] = p[s].replace(/\bHALF_PI\b/g, "90");
+        p[s] = p[s].replace(/\bPI\b/g, "180");
+        p[s] = p[s].replace(/\bTWO_PI\b/g, "360");
+      }
+      if(p[6] === undefined || p[6] === 'OPEN'){
+        r_p5 = r_p5.replace("arc("+m+");", "ofPolyline "+v+";\n"+v+".°arc°("+p[0]+","+p[1]+","+p[2]+","+p[3]+","+p[4]+","+p[5]+");\n"+v+".draw();");
+      }else if(p[6] === 'CHORD'){
+        r_p5 = r_p5.replace("arc("+m+");", "ofPolyline "+v+";\n"+v+".°arc°("+p[0]+","+p[1]+","+p[2]+","+p[3]+","+p[4]+","+p[5]+");\n"+v+".close();\n"
+        +v+".draw();");
+      }else if(p[6] === 'PIE'){
+        r_p5 = r_p5.replace("arc("+m+");", "ofPolyline "+v+";\n"+v+".°arc°("+p[0]+","+p[1]+","+p[2]+","+p[3]+","+p[4]+","+p[5]+");\n"
+        +v+".lineTo("+p[0]+","+p[1]+");\n"+v+".close();\n"+v+".draw();");
+      }else{
+        r_p5 = r_p5.replace("arc("+m+");", "ofPolyline "+v+";\n"+v+".°arc°("+p[0]+","+p[1]+","+p[2]+","+p[3]+","+p[4]+","+p[5]+");\n"+v+".draw();");
+      }
     }
     /////// PRIMS 3D ///////
     if(of === '0.9.x'){
@@ -257,11 +276,11 @@ export class P52OfService {
   	r_p5 = r_p5.replace(/\bbeginShape\b\(/g, 'ofBeginShape(');
   	r_p5 = r_p5.replace(/\bendShape\b\(/g, 'ofEndShape(');
   	/////// IMAGE ///////
-    var c_image = this.t.repeted(r_p5, 'image(', false);
+    let c_image = this.t.repeted(r_p5, 'image(', false);
     for(let i = 0; i < c_image; i++){
-      var m = this.t.extract(r_p5, 'image(', ');');
-      var mc = this.t.countpar(m, ',');
-      var p = this.t.params(m, ',', mc+1);
+      let m = this.t.extract(r_p5, 'image(', ');');
+      let mc = this.t.countpar(m, ',');
+      let p = this.t.params(m, ',', mc+1);
       if(mc === 2){
         r_p5 = r_p5.replace('image('+m+');', p[0]+"."+"draw("+p[1]+","+p[2]+");");
       }else if(mc === 4){
@@ -284,21 +303,21 @@ export class P52OfService {
     if(r_p5.indexOf("textFont(") === -1){
       r_p5 = r_p5.replace(/\btext\b\(/g, 'ofDrawBitmapString(');
     }else{
-      var pfont = [];
-      var c_tfont = this.t.repeted(r_p5, 'textFont(', false);
+      let pfont = [];
+      let c_tfont = this.t.repeted(r_p5, 'textFont(', false);
       for(let i = 0; i < c_tfont; i++){
-        var m = this.t.extract(r_p5, 'textFont(', ');');
+        let m = this.t.extract(r_p5, 'textFont(', ');');
         pfont[i] = m;
         r_p5 = r_p5.replace("textFont("+m+");", "");
     	}
       r_p5 = r_p5.replace(/\btext\b\(/g, pfont[0]+'.drawString(');
     }
     /////// GRAPHICS ///////
-    var c_cgraphics = this.t.repeted(r_p5, '=createGraphics(', false);
+    let c_cgraphics = this.t.repeted(r_p5, '=createGraphics(', false);
     for(let i = 0; i < c_cgraphics; i++){
-      var m = this.t.extract(r_p5, '=createGraphics(', ');');
-      var mc = this.t.countpar(m, ',');
-      var p = this.t.params(m, ',', mc+1);
+      let m = this.t.extract(r_p5, '=createGraphics(', ');');
+      let mc = this.t.countpar(m, ',');
+      let p = this.t.params(m, ',', mc+1);
       r_p5 = r_p5.replace("=createGraphics("+m+")", '.allocate('+p[0]+','+p[1]+', GL_RGBA)');
   	}
     if(c_cgraphics >= 1){
@@ -345,16 +364,16 @@ export class P52OfService {
     /////// OUT ///////
   	r_p5 = r_p5.replace(/\bsave\b\(/g, 'ofSaveScreen(');
   	r_p5 = r_p5.replace(/\bsaveFrame\b\(/g, 'ofSaveFrame(');
-    var c_print = this.t.repeted(r_p5, 'profToInt(', false);
+    let c_print = this.t.repeted(r_p5, 'profToInt(', false);
     for(let i = 0; i < c_print; i++){
-      var m = this.t.extract(r_p5, 'print(', ');');
-      var value = 'cout << '+m+'';
+      let m = this.t.extract(r_p5, 'print(', ');');
+      let value = 'cout << '+m+'';
       r_p5 = r_p5.replace('print('+m+');', value);
   	}
-    var c_println = this.t.repeted(r_p5, 'println(', false);
+    let c_println = this.t.repeted(r_p5, 'println(', false);
     for(let i = 0; i < c_println; i++){
-      var m = this.t.extract(r_p5, 'println(', ');');
-      var value = 'cout << '+m+' << endl';
+      let m = this.t.extract(r_p5, 'println(', ');');
+      let value = 'cout << '+m+' << endl';
       r_p5 = r_p5.replace('println('+m+');', value);
   	}
 
@@ -364,7 +383,12 @@ export class P52OfService {
     r_p5 = r_p5.replace(/;;/g, ';');
     r_p5 = r_p5.replace(/ \./g, '.');
     r_p5 = r_p5.replace(/\.\./g, '.');
-    r_p5 = r_p5.replace(/a°rc/g, 'arc');
+    r_p5 = r_p5.replace(/,/g, ', ');
+    r_p5 = r_p5.replace(/=/g, ' = ');
+    r_p5 = r_p5.replace(/ =  = /g, ' == ');
+    r_p5 = r_p5.replace(/ ! = /g, ' != ');
+    r_p5 = r_p5.replace(/! = /g, ' != ');
+    r_p5 = r_p5.replace(/°arc°/g, 'arc');
     r_p5 = r_p5.replace(/\bif\b/g, 'if ');
     r_p5 = r_p5.replace(/\belse\b/g, 'else ');
     r_p5 = r_p5.replace(/\bfor\b/g, 'for ');
@@ -374,19 +398,36 @@ export class P52OfService {
   }
 
   ofApph(p5:string){
-    var ofapph;
+    let ofapph:string;
+    let forfun:string = "";
 
-    var csetup = p5.search("void setup()");
-    var cdraw = p5.search("void draw()");
+    let csetup = p5.search("void setup()");
+    let cdraw = p5.search("void draw()");
 
     if(csetup !== -1 || cdraw !== -1){
-      var keyPressed = p5.search(/void keyPressed\(\)/);
-      var keyReleased = p5.search(/void keyReleased\(\)/);
-      var mousePressed = p5.search(/void mousePressed\(\)/);
-      var mouseReleased = p5.search(/void mouseReleased\(\)/);
-      var mouseMoved = p5.search(/void mouseMoved\(\)/);
-      var mouseDragged = p5.search(/void mouseDragged\(\)/);
+      let keyPressed = p5.search(/void keyPressed\(\)/);
+      let keyReleased = p5.search(/void keyReleased\(\)/);
+      let mousePressed = p5.search(/void mousePressed\(\)/);
+      let mouseReleased = p5.search(/void mouseReleased\(\)/);
+      let mouseMoved = p5.search(/void mouseMoved\(\)/);
+      let mouseDragged = p5.search(/void mouseDragged\(\)/);
 
+      let types = ['void', 'int', 'float'];
+      let datas:any = [types.length+1];
+      for (let i = 0; i < types.length; i++) {
+          datas[i] = this.t.repeted(p5, types[i]+' ', false);
+      }
+
+      for(let i = 0; i < datas[0]; i++){
+        let m = this.t.extract(p5, types[0]+' ', '){');
+        forfun = forfun + '\t\t'+types[0]+' '+m+');\n';
+        p5 = p5.replace(types[0]+' ', types[0]+'° ');
+      }
+
+      forfun = forfun.replace("void setup();", "");
+      forfun = forfun.replace("void draw();", "");
+
+      p5 = p5.replace(/void° /, "void ");
       p5 = p5.replace(/void setup\(\){([^]*)}/, "");
       p5 = p5.replace(/void draw\(\){([^]*)}/, "");
       p5 = p5.replace(/void keyPressed\(\){([^]*)}/, "");
@@ -399,7 +440,7 @@ export class P52OfService {
       p5 = p5.trim();
       p5 = p5.replace(/(\n)/g, '\n\t\t');
 
-      var interactive = "";
+      let interactive = "";
 
       if(keyPressed !== -1){
         interactive = interactive + "\n\t\tvoid keyPressed(int key);";
@@ -420,7 +461,7 @@ export class P52OfService {
         interactive = interactive + "\n\t\tvoid mouseReleased(int x, int y, int button);";
       }
 
-      ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public:\n\t\tvoid setup();\n\t\tvoid update();\n\t\tvoid draw();"+interactive+"\n\n\t\t"+p5+"\n};\n";
+      ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public:\n\t\tvoid setup();\n\t\tvoid update();\n\t\tvoid draw();"+interactive+"\n\t\t"+p5+forfun+"};\n";
     }else{
       ofapph = "#pragma once\n\n#include \"ofMain.h\"\n\nclass ofApp : public ofBaseApp{\n\n\t public:\n\t\tvoid setup();\n\t\tvoid update();\n\t\tvoid draw();\n};\n";
     }
@@ -430,16 +471,16 @@ export class P52OfService {
   }
 
   ofAppcpp(p5:string){
-    var r_p5 = p5;
-    var p_p5 = p5;
+    let r_p5 = p5;
+    let p_p5 = p5;
 
-    var csetup = r_p5.search("void setup()");
-    var cdraw = r_p5.search("void draw()");
+    let csetup = r_p5.search("void setup()");
+    let cdraw = r_p5.search("void draw()");
 
-    var csize = this.t.repeted(r_p5, 'ofSetupOpenGL(', false);
+    let csize = this.t.repeted(r_p5, 'ofSetupOpenGL(', false);
     for(let i = 0; i < csize; i++){
-      var m = this.t.extract(r_p5, 'ofSetupOpenGL(', ');');
-      var value = '';
+      let m = this.t.extract(r_p5, 'ofSetupOpenGL(', ');');
+      let value = '';
       r_p5 = r_p5.replace('ofSetupOpenGL('+m+');', value);
   	}
     r_p5 = r_p5.replace(/fullScreen\(\);/g, '');
@@ -461,14 +502,15 @@ export class P52OfService {
       p_p5 = p_p5.trim();
 
       r_p5 = r_p5.replace(/\n\s*\n/g, '\n');
-      r_p5 = r_p5.replace(/void setup\(\)\{/g, "void ofApp::setup(){\n\tofBackground(204);\n\tofSetColor(255);\n\tofFill();");
-      r_p5 = r_p5.replace(/void draw\(\)/g, "\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw()");
-      r_p5 = r_p5.replace(/void keyPressed\(\)/g, "\n\nvoid ofApp::keyPressed(int key)");
-      r_p5 = r_p5.replace(/void keyReleased\(\)/g, "\n\nvoid ofApp::keyReleased(int key)");
-      r_p5 = r_p5.replace(/void mouseMoved\(\)/g, "\n\nvoid ofApp::mouseMoved(int x, int y)");
-      r_p5 = r_p5.replace(/void mouseDragged\(\)/g, "\n\nvoid ofApp::mouseDragged(int x, int y, int button)");
-      r_p5 = r_p5.replace(/void mousePressed\(\)/g, "\n\nvoid ofApp::mousePressed(int x, int y, int button)");
-      r_p5 = r_p5.replace(/void mouseReleased\(\)/g, "\n\nvoid ofApp::mouseReleased(int x, int y, int button)");
+      r_p5 = r_p5.replace(/void /g, "void ofApp::");
+      r_p5 = r_p5.replace(/void ofApp::setup\(\)\{/g, "void ofApp::setup(){\n\tofBackground(204);\n\tofSetColor(255);\n\tofFill();");
+      r_p5 = r_p5.replace(/void ofApp::draw\(\)/g, "\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw()");
+      r_p5 = r_p5.replace(/void ofApp::keyPressed\(\)/g, "\n\nvoid ofApp::keyPressed(int key)");
+      r_p5 = r_p5.replace(/void ofApp::keyReleased\(\)/g, "\n\nvoid ofApp::keyReleased(int key)");
+      r_p5 = r_p5.replace(/void ofApp::mouseMoved\(\)/g, "\n\nvoid ofApp::mouseMoved(int x, int y)");
+      r_p5 = r_p5.replace(/void ofApp::mouseDragged\(\)/g, "\n\nvoid ofApp::mouseDragged(int x, int y, int button)");
+      r_p5 = r_p5.replace(/void ofApp::mousePressed\(\)/g, "\n\nvoid ofApp::mousePressed(int x, int y, int button)");
+      r_p5 = r_p5.replace(/void ofApp::mouseReleased\(\)/g, "\n\nvoid ofApp::mouseReleased(int x, int y, int button)");
       r_p5 = "#include \"ofApp.h\"\n\n"+r_p5;
 
       r_p5 = r_p5.replace(p_p5, '');
@@ -480,14 +522,14 @@ export class P52OfService {
   }
 
   maincpp(p5:string){
-    var r_p5 = p5;
-    var opengl = "";
+    let r_p5 = p5;
+    let opengl = "";
 
-    var csize = this.t.repeted(r_p5, 'ofSetupOpenGL(', false);
-    var cfull = this.t.repeted(r_p5, 'fullScreen(', false);
+    let csize = this.t.repeted(r_p5, 'ofSetupOpenGL(', false);
+    let cfull = this.t.repeted(r_p5, 'fullScreen(', false);
     if(csize === 1){
-      var m = this.t.extract(r_p5, 'ofSetupOpenGL(', ')');
-      var ms = m.split(',');
+      let m = this.t.extract(r_p5, 'ofSetupOpenGL(', ')');
+      let ms = m.split(',');
       if(ms.length === 3){
           opengl = "ofSetupOpenGL("+m+");";
       }else if(ms.length === 2){
@@ -501,35 +543,28 @@ export class P52OfService {
         opengl = "ofSetupOpenGL(100, 100, OF_WINDOW);";
     }
 
-    var maincpp = "#include \"ofMain.h\"\n#include \"ofApp.h\"\n\nint main( ){\n\n\t"+opengl+"\n\n\tofRunApp(new ofApp());\n}";
+    let maincpp = "#include \"ofMain.h\"\n#include \"ofApp.h\"\n\nint main( ){\n\n\t"+opengl+"\n\n\tofRunApp(new ofApp());\n}";
 
     /////////////////
     return maincpp;
   }
   ////////////////////////////////////////////////
   p5ver(p5:string){
-    var ver:string = '1.0.0+';
+    let ver:string = '1.0.0+';
 
-    var c_rect = this.t.repeted(p5, 'rect(', false);
-    var f_rect:any = [];
-    var rectR:boolean = false;
+    let c_rect = this.t.repeted(p5, 'rect(', false);
+    let rect:boolean = false;
     for(let i = 0; i < c_rect; i++){
-      var m = this.t.extract(p5, 'rect(', ');');
-      var n = m.split(',');
-      f_rect[i] = n.length;
-      p5 = p5.replace('rect('+m+');', '');
-  	}
-    for(let i = 0; i < f_rect.length; i++){
-      if(f_rect[i] > 4){
-        rectR = true;
+      let m = this.t.extract(p5, 'rect(', ');');
+      if(this.t.countpar(m, ',') <= 3){
+        rect = false;
+      }else if(this.t.countpar(m, ',') > 3){
+        rect = true;
       }
-      if(rectR === true){
-        break;
-      }
-  	}
+    }
 
     if(p5.search(/\bdisplayWidth\b/) !== -1 || p5.search(/\bdisplayHeight\b/) !== -1 || p5.search(/\bOPENGL\b/) !== -1
-      || rectR){
+    || rect){
       ver = '2.0.0+';
     }else if(p5.search(/\bfullScreen\b\(/) !== -1 || p5.search(/\bFX2D\b/) !== -1){
       ver = '3.0.0+';
