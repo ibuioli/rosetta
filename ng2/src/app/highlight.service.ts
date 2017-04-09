@@ -15,16 +15,21 @@ export class HighlightService {
   highlightC(code:string){
     let r_code = code;
     ///////////////
+    r_code = r_code.replace(/\</g, "°<°");  //For Tags
+    r_code = r_code.replace(/\>/g, "°>°");
+    ///////////////
     //BRKs
     let brk = [/{/g, /}/g, /\[/g, /\]/g, /\(/g, /\)/g, /\./g, /\+/g, /-/g, /\*/g, /%/g, /,/g, /;/g, /:/g, /=/g,
-    /!/g, /\|/g, /(\/)(?![^<]*>|[^<>]*<\/)/g, /&/g];
+    /!/g, /\|/g, /(\/)(?![^<]*>|[^<>]*<\/)/g, /&/g, /°<°/g, /°>°/g];
     let cbrk = ['<brk>{</brk>','<brk>}</brk>','<brk>[</brk>','<brk>]</brk>','<brk>(</brk>','<brk>)</brk>',
     '<brk>.</brk>','<brk>+</brk>','<brk>-</brk>','<brk>*</brk>','<brk>%</brk>',
     '<brk>,</brk>','<brk>;</brk>','<brk>:</brk>','<brk>=</brk>','<brk>!</brk>','<brk>|</brk>','<brk>/</brk>',
-    '<brk>&</brk>'];
+    '<brk>&</brk>','<brk>°<°</brk>','<brk>°>°</brk>'];
     for (let i = 0; i < brk.length; i++) {
         r_code = r_code.replace(brk[i], cbrk[i]);
     }
+    r_code = r_code.replace(/°<°/g, "<");  //For Tags
+    r_code = r_code.replace(/°>°/g, ">");
 
     //VARs
     let vars = [/public/g, /private/g, /bool /g,/int /g,/float /g,/char /g,/unsigned /g,/double /g,/long /g,
@@ -96,7 +101,7 @@ export class HighlightService {
     /\bvoid keyPressed\b/g,/\bvoid keyReleased\b/g,/\bvoid mouseMoved\b/g,/\bvoid mouseDragged\b/g,
     /\bvoid mousePressed\b/g,/\bvoid mouseReleased\b/g,
     /\bimage\b/g,/\bloadImage\b/g,/\brandom\b/g,/\btext\b/g,/\bloadFont\b/g,/\bcreateFont\b/g,
-    /\btextFont\b/g
+    /\btextFont\b/g,/\bpushStyle\b/g,/\bpopStyle\b/g
     ];
     let cfun =[
     '<p5fun>setup</p5fun>','<p5fun>draw</p5fun>','<p5fun>settings</p5fun>',
@@ -108,7 +113,7 @@ export class HighlightService {
     'void <p5fun>keyPressed</p5fun>','void <p5fun>keyReleased</p5fun>','void <p5fun>mouseMoved</p5fun>','void <p5fun>mouseDragged</p5fun>',
     'void <p5fun>mousePressed</p5fun>','void <p5fun>mouseReleased</p5fun>',
     '<p5fun>image</p5fun>','<p5fun>loadImage</p5fun>','<p5fun>random</p5fun>','<p5fun>text</p5fun>','<p5fun>loadFont</p5fun>','<p5fun>createFont</p5fun>',
-    '<p5fun>textFont</p5fun>'
+    '<p5fun>textFont</p5fun>','<p5fun>pushStyle</p5fun>','<p5fun>popStyle</p5fun>'
     ];
     for (let i = 0; i < fun.length; i++) {
         r_code = r_code.replace(fun[i], cfun[i]);

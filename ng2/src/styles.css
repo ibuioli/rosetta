@@ -87,92 +87,48 @@ h1 span{
 	background:#fff;
   box-shadow: inset 0px 0px 8px 1px rgba(220,220,220,1);
 }
+#cp5 #p5, #cp5 #fp5, #of, #of2, #of3{
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size:14px;
+	width:350px;
+	padding:5px;
+	color: black;
+	border:0 solid;
+	resize:none;
+	outline:none;
+	text-align: left;
+	direction: ltr;
+	word-spacing: normal;
+	line-height: 1.5;
+	white-space: pre-wrap;
+	tab-size: 4;
+	overflow:hidden;
+	overflow-y:scroll;
+	overflow-x:hidden;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: normal
+}
 #cp5 #p5{
-
 	position:absolute;
 	top:0;left:0;
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	font-size:14px;
-	width:350px;
-	padding:5px;
 	height:92%;
-	border:0 solid;
-	color: black;
 	background:rgba(0,0,0,0);
 	box-shadow: inset 0px 0px 8px 1px rgba(220,220,220,1);
-	resize:none;
-	outline:none;
-	text-align: left;
-	direction: ltr;
-	word-spacing: normal;
-	line-height: 1.5;
-
-	white-space: pre-wrap;
-
-	tab-size: 4;
-
-	-webkit-text-fill-color:transparent;
-	overflow:hidden;
-	overflow-y:scroll;
-	overflow-x:hidden;
-	overflow-wrap: break-word;
-	word-wrap: break-word;
-	word-break: normal;
-
 	border:1px solid #999;
+	-webkit-text-fill-color:transparent;
 }
 #cp5 #fp5{
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	font-size:14px;
-	width:350px;
 	height:100%;
-	padding:5px;
-	border:0 solid;
 	background:#fff;
-	color: black;
-	resize:none;
-	outline:none;
-	text-align: left;
-	direction: ltr;
-	word-spacing: normal;
-	line-height: 1.5;
-	white-space: pre-wrap;
-
-	tab-size: 4;
-
-	overflow:hidden;
-	overflow-y:scroll;
-	overflow-x:hidden;
-	overflow-wrap: break-word;
-	word-wrap: break-word;
-	word-break: normal;
 }
 #of, #of2, #of3 {
-	width:350px;
 	height:92%;
-	padding:5px;
 	float:left;
 	background:#fff;
 	border:1px solid #999;
 	box-shadow: inset 0px 0px 8px 1px rgba(220,220,220,1);
-	font-size:14px;
-	color: black;
 	text-shadow: 0 1px white;
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	text-align: left;
-	direction: ltr;
-	word-spacing: normal;
-	line-height: 1.5;
-	white-space: pre-wrap;
-
-	tab-size: 4;
-
-	overflow:hidden;
-	overflow-y:scroll;
-	overflow-x:hidden;
-	overflow-wrap: break-word;
-	word-wrap: break-word;
-	word-break: normal;
 }
 #tras{
 	width:10px;
@@ -210,9 +166,8 @@ h1 span{
 	z-index:10;
 	user-select: none;
 }
-#refp5{
+.refdiv{
 	top:40px;
-	left:-20px;
 	width:150px;
 	height:100%;
 	position:fixed;
@@ -220,20 +175,15 @@ h1 span{
 	opacity:0.9;
 	box-shadow: inset 0px 0px 8px 1px rgba(100,100,100,1);
 	user-select: none;
+}
+#refp5{
+	left:-20px;
 }
 #refof{
-	top:40px;
 	right:-20px;
-	width:150px;
-	height:100%;
-	position:fixed;
-	background:#e9e9e9;
-	opacity:0.9;
-	box-shadow: inset 0px 0px 8px 1px rgba(100,100,100,1);
-	user-select: none;
 }
 #refp5 img, #refof img{
-	opacity:.7;
+	opacity:.8;
 }
 #img-r-of{
 	margin:10px 0 0 80px;

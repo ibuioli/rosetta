@@ -388,6 +388,10 @@ export class P52OfService {
     r_p5 = r_p5.replace(/ =  = /g, ' == ');
     r_p5 = r_p5.replace(/ ! = /g, ' != ');
     r_p5 = r_p5.replace(/! = /g, ' != ');
+    r_p5 = r_p5.replace(/ < = /g, ' <= ');
+    r_p5 = r_p5.replace(/< = /g, ' <= ');
+    r_p5 = r_p5.replace(/ > = /g, ' >= ');
+    r_p5 = r_p5.replace(/> = /g, ' >= ');
     r_p5 = r_p5.replace(/°arc°/g, 'arc');
     r_p5 = r_p5.replace(/\bif\b/g, 'if ');
     r_p5 = r_p5.replace(/\belse\b/g, 'else ');
@@ -412,11 +416,12 @@ export class P52OfService {
       let mouseMoved = p5.search(/void mouseMoved\(\)/);
       let mouseDragged = p5.search(/void mouseDragged\(\)/);
 
-      let types = p5.match(/.* .*\(.*\)/g);
+      let types = p5.match(/.+ \w+\(.*\)\{/g);
       for (let i = 0; i < types.length; i++) {
           forfun = forfun + types[i]+";\n\t\t";
       }
 
+      forfun = forfun.replace(/\)\{\;/g, ");");
       forfun = forfun.replace("void setup();", "");
       forfun = forfun.replace("void draw();", "");
       forfun = forfun.replace("void keyPressed();", "");
@@ -426,6 +431,7 @@ export class P52OfService {
       forfun = forfun.replace("void mousePressed();", "");
       forfun = forfun.replace("void mouseReleased();", "");
 
+      p5 = p5.replace(/import .*;/g, "");
       p5 = p5.replace(/void setup\(\){([^]*)}/, "");
       p5 = p5.replace(/void draw\(\){([^]*)}/, "");
       p5 = p5.replace(/void keyPressed\(\){([^]*)}/, "");
