@@ -249,6 +249,9 @@ h1 span{
 	outline:none;
 	border:1px solid #888;
 	cursor:pointer;
+	width:85px;
+	font-size:13px;
+	padding:0;
 }
 #download:active{
 	background:#ee3987;
@@ -280,6 +283,9 @@ h1 span{
 	color:#0f4676;
 	outline:none;
 	border:1px solid #888;
+}
+select{
+	font-size:13px;
 }
 #refp5 #ref{
 	position:absolute;
