@@ -27,6 +27,7 @@ First clone this repository:
 
 ```
 git clone https://github.com/ibuioli/rosetta
+cd rosetta
 ```
 
 Install the packages with (don't use ```npm install```):
