@@ -17,7 +17,11 @@ This software is not intended for the translation of large Processing projects t
 
 ## How use it
 
-In order to use or edit the software you need install npm and node packages.
+In order to use or edit the software you need install npm and node packages and it's necessary install Angular-CLI global:
+
+```
+npm install -g @angular/cli
+```
 
 First clone this repository:
 
