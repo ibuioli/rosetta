@@ -266,6 +266,7 @@ export class P52OfService {
   	r_p5 = r_p5.replace(/\bCORNER\b/g, 'OF_RECTMODE_CORNER');
   	r_p5 = r_p5.replace(/\bCORNERS\b/g, 'OF_RECTMODE_CORNER');
   	r_p5 = r_p5.replace(/\bCENTER\b/g, 'OF_RECTMODE_CENTER');
+    r_p5 = r_p5.replace(/\bRADIUS\b/g, 'OF_RECTMODE_CENTER');
   	r_p5 = r_p5.replace(/\bsmooth\b\(/g, 'ofEnableSmoothing(');
   	r_p5 = r_p5.replace(/\bnoSmooth\b\(/g, 'ofDisableSmoothing(');
   	r_p5 = r_p5.replace(/\bstrokeWeight\b\(/g, 'ofSetLineWidth(');
@@ -357,8 +358,6 @@ export class P52OfService {
       r_p5 = r_p5.replace(/\b.*\. /g, '');
     }
   	/////// IN ///////
-  	r_p5 = r_p5.replace(/\bmouseX\b/g, 'ofGetMouseX()');
-  	r_p5 = r_p5.replace(/\bmouseY\b/g, 'ofGetMouseY()');
   	r_p5 = r_p5.replace(/\bpmouseX\b/g, 'ofGetPreviousMouseX()');
   	r_p5 = r_p5.replace(/\bpmouseY\b/g, 'ofGetPreviousMouseY()');
     /////// OUT ///////
