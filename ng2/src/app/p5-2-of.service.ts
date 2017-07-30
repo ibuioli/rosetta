@@ -360,10 +360,31 @@ export class P52OfService {
   	/////// IN ///////
   	r_p5 = r_p5.replace(/\bpmouseX\b/g, 'ofGetPreviousMouseX()');
   	r_p5 = r_p5.replace(/\bpmouseY\b/g, 'ofGetPreviousMouseY()');
+    r_p5 = r_p5.replace(/\bkeyCode\b/g, 'key');
+    r_p5 = r_p5.replace(/\bUP\b/g, 'OF_KEY_UP');
+    r_p5 = r_p5.replace(/\bDOWN\b/g, 'OF_KEY_DOWN');
+    r_p5 = r_p5.replace(/\bLEFT\b/g, 'OF_KEY_LEFT');
+    r_p5 = r_p5.replace(/\bRIGHT\b/g, 'OF_KEY_RIGHT');
+    r_p5 = r_p5.replace(/\bBACKSPACE\b/g, 'OF_KEY_BACKSPACE');
+    r_p5 = r_p5.replace(/\bRETURN\b/g, 'OF_KEY_RETURN');
+    r_p5 = r_p5.replace(/\bESC\b/g, 'OF_KEY_ESC');
+    r_p5 = r_p5.replace(/\bDELETE\b/g, 'OF_KEY_DEL');
+    r_p5 = r_p5.replace(/\bKeyEvent\.VK_F1\b/g, 'OF_KEY_F1');
+    r_p5 = r_p5.replace(/\bKeyEvent\.VK_F2\b/g, 'OF_KEY_F2');
+    r_p5 = r_p5.replace(/\bKeyEvent\.VK_F3\b/g, 'OF_KEY_F3');
+    r_p5 = r_p5.replace(/\bKeyEvent\.VK_F4\b/g, 'OF_KEY_F4');
+    r_p5 = r_p5.replace(/\bKeyEvent\.VK_F5\b/g, 'OF_KEY_F5');
+    r_p5 = r_p5.replace(/\bKeyEvent\.VK_F6\b/g, 'OF_KEY_F6');
+    r_p5 = r_p5.replace(/\bKeyEvent\.VK_F7\b/g, 'OF_KEY_F7');
+    r_p5 = r_p5.replace(/\bKeyEvent\.VK_F8\b/g, 'OF_KEY_F8');
+    r_p5 = r_p5.replace(/\bKeyEvent\.VK_F9\b/g, 'OF_KEY_F9');
+    r_p5 = r_p5.replace(/\bKeyEvent\.VK_F10\b/g, 'OF_KEY_F10');
+    r_p5 = r_p5.replace(/\bKeyEvent\.VK_F11\b/g, 'OF_KEY_F11');
+    r_p5 = r_p5.replace(/\bKeyEvent\.VK_F12\b/g, 'OF_KEY_F12');
     /////// OUT ///////
   	r_p5 = r_p5.replace(/\bsave\b\(/g, 'ofSaveScreen(');
   	r_p5 = r_p5.replace(/\bsaveFrame\b\(/g, 'ofSaveFrame(');
-    let c_print = this.t.repeted(r_p5, 'profToInt(', false);
+    let c_print = this.t.repeted(r_p5, 'print(', false);
     for(let i = 0; i < c_print; i++){
       let m = this.t.extract(r_p5, 'print(', ');');
       let value = 'cout << '+m+'';
@@ -384,6 +405,7 @@ export class P52OfService {
     r_p5 = r_p5.replace(/\.\./g, '.');
     r_p5 = r_p5.replace(/,/g, ', ');
     r_p5 = r_p5.replace(/=/g, ' = ');
+    r_p5 = r_p5.replace(/==/g, ' == ');
     r_p5 = r_p5.replace(/ =  = /g, ' == ');
     r_p5 = r_p5.replace(/ ! = /g, ' != ');
     r_p5 = r_p5.replace(/! = /g, ' != ');

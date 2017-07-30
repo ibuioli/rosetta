@@ -12,9 +12,9 @@ export class DownloadService {
       zip.file('src/main.cpp', main);
       zip.file('src/ofApp.cpp', app);
       zip.file('src/ofApp.h', apph);
-      var data = zip.generate({base64:false,compression:'DEFLATE'});
+      let data = zip.generate({base64:false,compression:'DEFLATE'});
       fs.writeFileSync('rosetta-of.zip', data, 'binary');
-      document.getElementById("debug").innerHTML = "*rosetta-of.zip saved in the root directory*";
+      document.getElementById("debug").innerHTML = "*rosetta-of.zip saved in root directory*";
       setTimeout(function(){
         document.getElementById("debug").innerHTML = "";
       }, 3000);
