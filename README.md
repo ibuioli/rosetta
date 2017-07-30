@@ -11,13 +11,13 @@ OF Version Supported:
   * 0.8.x
   * 0.9.x
 
-This software is not intended for the translation of large Processing projects to OpenFrameworks. It is recommended to use it like a support tool, and not like a precise traductor.
+**Note:** This software is not intended for the translation of large Processing projects to OpenFrameworks. It is recommended to use it like a support tool, and not like a precise traductor.
 
 ---
 
 ## How use it
 
-In order to use or edit the software you need install npm and node packages and it's necessary install Angular-CLI global:
+In order to use or edit the software you need install [npm](https://www.npmjs.com/) and [nodejs](https://nodejs.org/es/) packages. With that is necessary install Angular-CLI global:
 
 ```
 npm install -g @angular/cli
@@ -30,11 +30,12 @@ git clone https://github.com/ibuioli/rosetta
 cd rosetta
 ```
 
-Install the packages with (don't use ```npm install```):
+Install the packages with this script:
 
 ```
 npm run install_all
 ```
+(don't use ```npm install```)
 
 Then you can run the App with:
 
@@ -51,7 +52,7 @@ For run in a localhost use it:
 ```
 npm run serve
 ```
-Note: Please use Chrome or Firefox for Serve.
+**Note:** Please use Chrome or Firefox for Serve.
 
 For build a dist use it:
 
