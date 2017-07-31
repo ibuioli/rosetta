@@ -457,6 +457,7 @@ export class P52OfService {
       forfun = forfun.replace("void mouseDragged();", "");
       forfun = forfun.replace("void mousePressed();", "");
       forfun = forfun.replace("void mouseReleased();", "");
+      forfun = forfun.replace(/=.*;/g, "");
 
       p5 = p5.replace(/import .*;/g, "");
       p5 = p5.replace(/void setup\(\){([^]*)}/, "");
@@ -470,6 +471,7 @@ export class P52OfService {
       p5 = p5.replace(/\n\s*\n/g, '\n');
       p5 = p5.trim();
       p5 = p5.replace(/(\n)/g, '\n\t\t');
+      p5 = p5.replace(/ =.*;/g, ";");
 
       let interactive = "";
 
@@ -504,6 +506,37 @@ export class P52OfService {
   ofAppcpp(p5:string){
     let r_p5 = p5;
     let p_p5 = p5;
+    let gvar = p5;  //Globals Vars
+
+    //GET GLOBAL VARS//
+    gvar = gvar.replace(/(\n)/g, '\n\t');
+    gvar = gvar.replace(/int /g, "");
+    gvar = gvar.replace(/bool /g, "");
+    gvar = gvar.replace(/char /g, "");
+    gvar = gvar.replace(/float /g, "");
+    gvar = gvar.replace(/unsigned char /g, "");
+    gvar = gvar.replace(/ofColor /g, "");
+    gvar = gvar.replace(/string /g, "");
+    gvar = gvar.replace(/vector /g, "");
+    gvar = gvar.replace(/list /g, "");
+    gvar = gvar.replace(/map /g, "");
+    gvar = gvar.replace(/ofImage /g, "");
+    gvar = gvar.replace(/ofTrueTypeFont /g, "");
+    gvar = gvar.replace(/ofVect2f /g, "");
+    gvar = gvar.replace(/ofFbo /g, "");
+    gvar = gvar.replace(/import .*;/g, "");
+    gvar = gvar.replace(/void setup\(\){([^]*)}/, "");
+    gvar = gvar.replace(/void draw\(\){([^]*)}/, "");
+    gvar = gvar.replace(/void keyPressed\(\){([^]*)}/, "");
+    gvar = gvar.replace(/void keyReleased\(\){([^]*)}/, "");
+    gvar = gvar.replace(/void mouseMoved\(\){([^]*)}/, "");
+    gvar = gvar.replace(/void mouseDragged\(\){([^]*)}/, "");
+    gvar = gvar.replace(/void mousePressed\(\){([^]*)}/, "");
+    gvar = gvar.replace(/void mouseReleased\(\){([^]*)}/, "");
+    gvar = gvar.replace(/[a-zA-Z]+;/g, "");
+    gvar = gvar.replace(/\n\s*\n/g, '\n');
+    gvar = gvar.trim();
+    //END GLOBAL VARS//
 
     let csetup = r_p5.search("void setup()");
     let cdraw = r_p5.search("void draw()");
@@ -534,8 +567,12 @@ export class P52OfService {
 
       r_p5 = r_p5.replace(/\n\s*\n/g, '\n');
       r_p5 = r_p5.replace(/void /g, "void ofApp::");
-      r_p5 = r_p5.replace(/void ofApp::setup\(\)\{/g, "void ofApp::setup(){\n\tofBackground(204);\n\tofSetColor(255);\n\tofFill();");
-      r_p5 = r_p5.replace(/void ofApp::draw\(\)/g, "\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw()");
+      if(csetup === -1){
+        r_p5 = r_p5.replace(/void ofApp::draw\(\)/g, "void ofApp::setup(){\n\tofBackground(204);\n\tofSetColor(255);\n\tofFill();\n\t"+gvar+"\n}\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw()");
+      }else{
+        r_p5 = r_p5.replace(/void ofApp::setup\(\)\{/g, "void ofApp::setup(){\n\tofBackground(204);\n\tofSetColor(255);\n\tofFill();\n\t"+gvar);
+        r_p5 = r_p5.replace(/void ofApp::draw\(\)/g, "\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw()");
+      }
       r_p5 = r_p5.replace(/void ofApp::keyPressed\(\)/g, "\n\nvoid ofApp::keyPressed(int key)");
       r_p5 = r_p5.replace(/void ofApp::keyReleased\(\)/g, "\n\nvoid ofApp::keyReleased(int key)");
       r_p5 = r_p5.replace(/void ofApp::mouseMoved\(\)/g, "\n\nvoid ofApp::mouseMoved(int x, int y)");
