@@ -15,41 +15,34 @@ export class HighlightService {
   highlightC(code:string){
     let r_code = code;
     ///////////////
-    r_code = r_code.replace(/\</g, "°<°");  //For Tags
+    r_code = r_code.replace(/\</g, "°<°");  //For HTML Tags
     r_code = r_code.replace(/\>/g, "°>°");
+    r_code = r_code.replace(/\//g, "°/°");
     ///////////////
     //BRKs
-    let brk = [/{/g, /}/g, /\[/g, /\]/g, /\(/g, /\)/g, /\./g, /\+/g, /-/g, /\*/g, /%/g, /,/g, /;/g, /:/g, /=/g,
-    /!/g, /\|/g, /(\/)(?![^<]*>|[^<>]*<\/)/g, /&/g, /°<°/g, /°>°/g];
-    let cbrk = ['<brk>{</brk>','<brk>}</brk>','<brk>[</brk>','<brk>]</brk>','<brk>(</brk>','<brk>)</brk>',
-    '<brk>.</brk>','<brk>+</brk>','<brk>-</brk>','<brk>*</brk>','<brk>%</brk>',
-    '<brk>,</brk>','<brk>;</brk>','<brk>:</brk>','<brk>=</brk>','<brk>!</brk>','<brk>|</brk>','<brk>/</brk>',
-    '<brk>&</brk>','<brk>°<°</brk>','<brk>°>°</brk>'];
+    let brk = [/({)/g, /(})/g, /(\[)/g, /(\])/g, /(\()/g, /(\))/g, /(\.)/g, /(\+)/g, /(-)/g,
+    /(\*)/g, /(%)/g, /(,)/g, /(;)/g, /(:)/g, /(=)/g, /(!)/g, /(\|)/g, /(°\/°)/g, /(&)/g, /(°<°)/g, /(°>°)/g];
     for (let i = 0; i < brk.length; i++) {
-        r_code = r_code.replace(brk[i], cbrk[i]);
+        r_code = r_code.replace(brk[i], "<brk>$1</brk>");
     }
     r_code = r_code.replace(/°<°/g, "<");  //For Tags
     r_code = r_code.replace(/°>°/g, ">");
+    r_code = r_code.replace(/°\/°/g, "/");
 
     //VARs
-    let vars = [/public/g, /private/g, /bool /g,/int /g,/float /g,/char /g,/unsigned /g,/double /g,/long /g,
-    /void /g,/new /g,/class /g,/if /g,/else /g,/for /g,/while /g,/true/g,/false/g];
-    let cvars = ['<vars>public </vars>','<vars>private </vars>','<vars>bool </vars>','<vars>int </vars>',
-    '<vars>float </vars>','<vars>char </vars>','<vars>unsigned </vars>','<vars>double </vars>','<vars>long </vars>',
-    '<vars>void </vars>','<vars>new </vars>','<vars>class </vars>','<vars>if </vars>','<vars>else </vars>'
-    ,'<vars>for </vars>','<vars>while </vars>','<vars>true</vars>','<vars>false</vars>'];
+    let vars = [/(public )/g, /(private )/g, /(bool )/g,/(int )/g,/(float )/g,/(char )/g,/(unsigned )/g,/(double )/g,/(long )/g,
+    /(void )/g,/(new )/g,/(class )/g,/(if )/g,/(else )/g,/(for )/g,/(while )/g,/\b(true)\b/g,/\b(false)\b/g];
     for (let i = 0; i < vars.length; i++) {
-        r_code = r_code.replace(vars[i], cvars[i]);
+        r_code = r_code.replace(vars[i], "<vars>$1</vars>");
     }
 
     //NUMs
     r_code = r_code.replace(/\b(\d+)\b/g, '<num>$1</num>')
 
     //COMs
-    let com = [/cout/g,/endl/g];
-    let ccom = ['<com>cout</com>','<com>endl</com>'];
+    let com = [/\b(cout)\b/g,/\b(endl)\b/g];
     for (let i = 0; i < com.length; i++) {
-        r_code = r_code.replace(com[i], ccom[i]);
+        r_code = r_code.replace(com[i], "<com>$1</com>");
     }
     r_code = r_code.replace(/\#(.+)*$/gm, '<com>#$1</com>');
 
@@ -65,80 +58,54 @@ export class HighlightService {
     let r_code = code;
 
     //VARs
-    let vars = [/\bboolean\b/g,/\bint\b/g,/\bfloat\b/g,/\bchar\b/g,/\bbyte\b/g,/\bcolor\b/g,/\bdoube\b/g,/\blong\b/g,
-    /\bArray\b/g,/\bArrayList\b/g,/\bFloatDict\b/g,/\bFloatList\b/g,/\bHashMap\b/g,/\bIntDict\b/g,/\bIntList\b/g,
-    /\bJSONArray\b/g,/\bJSONObject\b/g,/\bString\b/g,/\bStringDict\b/g,/\bStringList\b/g,/\bTable\b/g,/\bTableRow\b/g,
-    /\bXML\b/g,/\bPImage\b/g,/\bPFont\b/g,/\bPGraphics\b/g,/\bPVector\b/g];
-    let cvars = ['<p5var>boolean</p5var>','<p5var>int</p5var>','<p5var>float</p5var>','<p5var>char</p5var>',
-    '<p5var>byte</p5var>','<p5var>color</p5var>','<p5var>double</p5var>','<p5var>long</p5var>',
-    '<p5var>Array</p5var>','<p5var>ArrayList</p5var>','<p5var>FloatDict</p5var>','<p5var>FloatList</p5var>',
-    '<p5var>HashMap</p5var>','<p5var>IntDict</p5var>','<p5var>IntList</p5var>','<p5var>JSONArray</p5var>',
-    '<p5var>JSONObject</p5var>','<p5var>String</p5var>','<p5var>StringDict</p5var>','<p5var>StringList</p5var>',
-    '<p5var>Table</p5var>','<p5var>TableRow</p5var>','<p5var>XML</p5var>','<p5var>PImage</p5var>','<p5var>PFont</p5var>'
-    ,'<p5var>PGraphics</p5var>','<p5var>PVector</p5var>'];
+    let vars = [/\b(boolean)\b/g,/\b(int)\b/g,/\b(float)\b/g,/\b(char)\b/g,/\b(byte)\b/g,/\b(color)\b/g,/\b(double)\b/g,/\b(long)\b/g,
+    /\b(Array)\b/g,/\b(ArrayList)\b/g,/\b(FloatDict)\b/g,/\b(FloatList)\b/g,/\b(HashMap)\b/g,/\b(IntDict)\b/g,/\b(IntList)\b/g,
+    /\b(JSONArray)\b/g,/\b(JSONObject)\b/g,/\b(String)\b/g,/\b(StringDict)\b/g,/\b(StringList)\b/g,/\b(Table)\b/g,/\b(TableRow)\b/g,
+    /\b(XML)\b/g,/\b(PImage)\b/g,/\b(PFont)\b/g,/\b(PGraphics)\b/g,/\b(PVector)\b/g];
     for (let i = 0; i < vars.length; i++) {
-        r_code = r_code.replace(vars[i], cvars[i]);
+        r_code = r_code.replace(vars[i], "<p5var>$1</p5var>");
     }
 
     //SYSs
-    let sys = [/\bmouseX\b/g,/\bmouseY\b/g,/\bpmouseX\b/g,/\bpmouseY\b/g,/\bkey\b/g,/\bframeCount\b/g,/\bwidth\b/g,/\bheight\b/g,
-    /\bdisplayWidth\b/g,/\bdisplayHeight\b/g,/\bscreen\b/g];
-    let csys = ['<p5sys>mouseX</p5sys>','<p5sys>mouseY</p5sys>','<p5sys>pmouseX</p5sys>','<p5sys>pmouseY</p5sys>',
-    '<p5sys>key</p5sys>','<p5sys>frameCount</p5sys>','<p5sys>width</p5sys>','<p5sys>height</p5sys>'
-    ,'<p5sys>displayWidth</p5sys>','<p5sys>displayHeight</p5sys>',,'<p5sys>screen</p5sys>'];
+    let sys = [/\b(mouseX)\b/g,/\b(mouseY)\b/g,/\b(pmouseX)\b/g,/\b(pmouseY)\b/g,
+    /\b(key)\b/g,/\b(keyCode)\b/g,/\b(frameCount)\b/g,/\b(width)\b/g,/\b(height)\b/g,
+    /\b(displayWidth)\b/g,/\b(displayHeight)\b/g,/\b(screen)\b/g];
     for (let i = 0; i < sys.length; i++) {
-        r_code = r_code.replace(sys[i], csys[i]);
+        r_code = r_code.replace(sys[i], "<p5sys>$1</p5sys>");
     }
 
     //FUNs
     let fun = [
-    /\bsetup\b/g,/\bdraw\b/g,/\bsettings\b/g,
-    /\bprint\b/g,/\bprintln\b/g,/\bsize\b/g,/\bfullScreen\b/g,
-    /\brect\b/g,/\bellipse\b/g,/\btriangle\b/g,/\bline\b/g,/\bpoint\b/g,/\barc\b/g,/\bquad\b/g,
-    /\bbackground\b/g,/\bfill\b/g,/\bnoFill\b/g,/\bstroke\b/g,/\bnoStroke\b/g,
-    /\bcursor\b/g,/\bnoCursor\b/g,
-    /\bpushMatrix\b/g,/\bpopMatrix\b/g,/\btranslate\b/g,/\brotate\b/g,/\bscale\b/g,
-    /\bvoid keyPressed\b/g,/\bvoid keyReleased\b/g,/\bvoid mouseMoved\b/g,/\bvoid mouseDragged\b/g,
-    /\bvoid mousePressed\b/g,/\bvoid mouseReleased\b/g,
-    /\bimage\b/g,/\bloadImage\b/g,/\brandom\b/g,/\btext\b/g,/\bloadFont\b/g,/\bcreateFont\b/g,
-    /\btextFont\b/g,/\bpushStyle\b/g,/\bpopStyle\b/g
-    ];
-    let cfun =[
-    '<p5fun>setup</p5fun>','<p5fun>draw</p5fun>','<p5fun>settings</p5fun>',
-    '<p5fun>print</p5fun>','<p5fun>println</p5fun>','<p5fun>size</p5fun>','<p5fun>fullScreen</p5fun>',
-    '<p5fun>rect</p5fun>','<p5fun>ellipse</p5fun>','<p5fun>triangle</p5fun>','<p5fun>line</p5fun>','<p5fun>point</p5fun>','<p5fun>arc</p5fun>','<p5fun>quad</p5fun>',
-    '<p5fun>background</p5fun>','<p5fun>fill</p5fun>','<p5fun>noFill</p5fun>','<p5fun>stroke</p5fun>','<p5fun>noStroke</p5fun>',
-    '<p5fun>cursor</p5fun>','<p5fun>noCursor</p5fun>',
-    '<p5fun>pushMatrix</p5fun>','<p5fun>popMatrix</p5fun>','<p5fun>translate</p5fun>','<p5fun>rotate</p5fun>','<p5fun>scale</p5fun>',
-    'void <p5fun>keyPressed</p5fun>','void <p5fun>keyReleased</p5fun>','void <p5fun>mouseMoved</p5fun>','void <p5fun>mouseDragged</p5fun>',
-    'void <p5fun>mousePressed</p5fun>','void <p5fun>mouseReleased</p5fun>',
-    '<p5fun>image</p5fun>','<p5fun>loadImage</p5fun>','<p5fun>random</p5fun>','<p5fun>text</p5fun>','<p5fun>loadFont</p5fun>','<p5fun>createFont</p5fun>',
-    '<p5fun>textFont</p5fun>','<p5fun>pushStyle</p5fun>','<p5fun>popStyle</p5fun>'
+    /\b(setup)\b/g,/\b(draw)\b/g,/\b(settings)\b/g,
+    /\b(print)\b/g,/\b(println)\b/g,/\b(size)\b/g,/\b(fullScreen)\b/g,
+    /\b(rect)\b/g,/\b(ellipse)\b/g,/\b(triangle)\b/g,/\b(line)\b/g,/\b(point)\b/g,/\b(arc)\b/g,/\b(quad)\b/g,
+    /\b(background)\b/g,/\b(fill)\b/g,/\b(noFill)\b/g,/\b(stroke)\b/g,/\b(noStroke)\b/g,
+    /\b(cursor)\b/g,/\b(noCursor)\b/g,
+    /\b(pushMatrix)\b/g,/\b(popMatrix)\b/g,/\b(translate)\b/g,/\b(rotate)\b/g,/\b(scale)\b/g,
+    /\b(void keyPressed)\b/g,/\b(void keyReleased)\b/g,/\b(void mouseMoved)\b/g,/\b(void mouseDragged)\b/g,
+    /\b(void mousePressed)\b/g,/\b(void mouseReleased)\b/g,
+    /\b(image)\b/g,/\b(loadImage)\b/g,/\b(random)\b/g,/\b(text)\b/g,/\b(loadFont)\b/g,/\b(createFont)\b/g,
+    /\b(textFont)\b/g,/\b(pushStyle)\b/g,/\b(popStyle)\b/g
     ];
     for (let i = 0; i < fun.length; i++) {
-        r_code = r_code.replace(fun[i], cfun[i]);
+        r_code = r_code.replace(fun[i], "<p5fun>$1</p5fun>");
     }
 
     //TYPs
-    let typ = [/\bvoid\b/g, /\bpublic\b/g, /\bprivate\b/g, /\breturn\b/g, /\btrue\b/g, /\bfalse\b/g];
-    let ctyp = ['<p5typ>void</p5typ>','<p5typ>public</p5typ>','<p5typ>private</p5typ>','<p5typ>return</p5typ>',
-    '<p5typ>true</p5typ>','<p5typ>false</p5typ>'];
+    let typ = [/\b(void)\b/g, /\b(public)\b/g, /\b(private)\b/g, /\b(return)\b/g, /\b(true)\b/g, /\b(false)\b/g];
     for (let i = 0; i < typ.length; i++) {
-        r_code = r_code.replace(typ[i], ctyp[i]);
+        r_code = r_code.replace(typ[i], "<p5typ>$1</p5typ>");
     }
 
     //CONs
-    let con = [/\bP2D\b/g,/\bP3D\b/g,/\bFX2D\b/g,/\bPDF\b/g,/\bJAVA2D\b/g,/\bOPENGL\b/g,
-    /\bHALF_PI\b/g,/\bPI\b/g,/\bQUARTER_PI\b/g,/\bTAU\b/g,/\bTWO_PI\b/g,
-    /\bif\b/g,/\belse\b/g,/\bfor\b/g,/\bwhile\b/g,/\bswitch\b/g,
-    /\bRGB\b/g,/\bARGB\b/g,/\bALPHA\b/g,/\bOPEN\b/g,/\bCHORD\b/g,/\bPIE\b/g];
-    let ccon = ['<p5con>P2D</p5con>','<p5con>P3D</p5con>','<p5con>FX2D</p5con>','<p5con>PDF</p5con>',
-    '<p5con>JAVA2D</p5con>','<p5con>OPENGL</p5con>','<p5con>HALF_PI</p5con>','<p5con>PI</p5con>',
-    '<p5con>QUARTER_PI</p5con>','<p5con>TAU</p5con>','<p5con>TWO_PI</p5con>',
-    '<p5con>if</p5con>','<p5con>else</p5con>','<p5con>for</p5con>','<p5con>while</p5con>','<p5con>switch</p5con>',
-    '<p5con>RGB</p5con>','<p5con>ARGB</p5con>','<p5con>ALPHA</p5con>','<p5con>OPEN</p5con>','<p5con>CHORD</p5con>','<p5con>PIE</p5con>'];
+    let con = [/\b(P2D)\b/g,/\b(P3D)\b/g,/\b(FX2D)\b/g,/\b(PDF)\b/g,/\b(JAVA2D)\b/g,/\b(OPENGL)\b/g,
+    /\b(HALF_PI)\b/g,/\b(PI)\b/g,/\b(QUARTER_PI)\b/g,/\b(TAU)\b/g,/\b(TWO_PI)\b/g,
+    /\b(if)\b/g,/\b(else)\b/g,/\b(for)\b/g,/\b(while)\b/g,/\b(switch)\b/g,
+    /\b(RGB)\b/g,/\b(ARGB)\b/g,/\b(ALPHA)\b/g,/\b(OPEN)\b/g,/\b(CHORD)\b/g,/\b(PIE)\b/g,
+    /\b(UP)\b/g,/\b(DOWN)\b/g,/\b(LEFT)\b/g,/\b(RIGHT)\b/g,/\b(ALT)\b/g,/\b(CONTROL)\b/g,/\b(SHIFT)\b/g,
+    /\b(TAB)\b/g,/\b(ENTER)\b/g,/\b(RETURN)\b/g,/\b(BACKSPACE)\b/g,/\b(DELETE)\b/g];
     for (let i = 0; i < con.length; i++) {
-        r_code = r_code.replace(con[i], ccon[i]);
+        r_code = r_code.replace(con[i], "<p5con>$1</p5con>");
     }
 
     //STRs & CHARs
