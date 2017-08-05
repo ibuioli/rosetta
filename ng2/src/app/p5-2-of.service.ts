@@ -152,13 +152,13 @@ export class P52OfService {
     let c_fill = this.t.repeted(r_p5, 'fill(', false);
     for(let i = 0; i < c_fill; i++){
       let m = this.t.extract(r_p5, 'fill(', ');');
-      let value = 'ofSetColor('+m+');\nofFill();';
+      let value = 'ofSetColor('+m+');ofFill();';
       r_p5 = r_p5.replace('fill('+m+');', value);
   	}
     let c_stroke = this.t.repeted(r_p5, 'stroke(', false);
     for(let i = 0; i < c_stroke; i++){
       let m = this.t.extract(r_p5, 'stroke(', ');');
-      let value = 'ofSetColor('+m+');\nofNoFill();';
+      let value = 'ofSetColor('+m+');ofNoFill();';
       r_p5 = r_p5.replace('stroke('+m+');', value);
   	}
     /////// PRIMS 2D ///////
@@ -539,6 +539,10 @@ export class P52OfService {
     gvar = gvar.trim();
     //END GLOBAL VARS//
 
+    //Setup Content//
+    let fillSetup:string = "\n\tofSetBackgroundAuto(false);\n\tofBackground(204);\n\tofSetColor(255);\n\tofFill();";
+    //END Setup Content//
+
     let csetup = r_p5.search("void setup()");
     let cdraw = r_p5.search("void draw()");
 
@@ -553,7 +557,7 @@ export class P52OfService {
 
     if(csetup === -1 && cdraw === -1){
       r_p5 = r_p5.replace(/(\n)/g, '\n\t');
-      r_p5 = "#include \"ofApp.h\"\n\nvoid ofApp::setup(){\n\t"+"ofBackground(204);\n\tofSetColor(255);\n\tofFill();"+"\n}\n\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw(){\n\t"+r_p5+"\n}";
+      r_p5 = "#include \"ofApp.h\"\n\nvoid ofApp::setup(){"+fillSetup+"\n}\n\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw(){\n\t"+r_p5+"\n}";
     }
     else{
       p_p5 = p_p5.replace(/void setup\(\){([^]*)}/, "");
@@ -569,9 +573,9 @@ export class P52OfService {
       r_p5 = r_p5.replace(/\n\s*\n/g, '\n');
       r_p5 = r_p5.replace(/void /g, "void ofApp::");
       if(csetup === -1){
-        r_p5 = r_p5.replace(/void ofApp::draw\(\)/g, "void ofApp::setup(){\n\tofBackground(204);\n\tofSetColor(255);\n\tofFill();\n\t"+gvar+"\n}\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw()");
+        r_p5 = r_p5.replace(/void ofApp::draw\(\)/g, "void ofApp::setup(){"+fillSetup+"\n\t"+gvar+"\n}\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw()");
       }else{
-        r_p5 = r_p5.replace(/void ofApp::setup\(\)\{/g, "void ofApp::setup(){\n\tofBackground(204);\n\tofSetColor(255);\n\tofFill();\n\t"+gvar);
+        r_p5 = r_p5.replace(/void ofApp::setup\(\)\{/g, "void ofApp::setup(){"+fillSetup+"\n\t"+gvar);
         r_p5 = r_p5.replace(/void ofApp::draw\(\)/g, "\nvoid ofApp::update(){\n}\n\nvoid ofApp::draw()");
       }
       r_p5 = r_p5.replace(/void ofApp::keyPressed\(\)/g, "\n\nvoid ofApp::keyPressed(int key)");
