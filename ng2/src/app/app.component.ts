@@ -9,7 +9,7 @@ import { DownloadService } from './download.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  ver:string = 'alpha 0.2';
+  ver:string = '1.0';
   /////////////////////////////
   p5v:string = 'x.x.x';
   ofv:string = '0.9.x';

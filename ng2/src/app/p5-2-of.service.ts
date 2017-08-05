@@ -533,7 +533,8 @@ export class P52OfService {
     gvar = gvar.replace(/void mouseDragged\(\){([^]*)}/, "");
     gvar = gvar.replace(/void mousePressed\(\){([^]*)}/, "");
     gvar = gvar.replace(/void mouseReleased\(\){([^]*)}/, "");
-    gvar = gvar.replace(/[a-zA-Z]+;/g, "");
+    gvar = gvar.replace(/;/g, ";\n");
+    gvar = gvar.replace(/(\D|\W)[a-zA-Z0-9]+;/g, "");
     gvar = gvar.replace(/\n\s*\n/g, '\n');
     gvar = gvar.trim();
     //END GLOBAL VARS//
