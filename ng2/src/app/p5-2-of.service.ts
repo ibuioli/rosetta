@@ -360,6 +360,10 @@ export class P52OfService {
   	/////// IN ///////
   	r_p5 = r_p5.replace(/\bpmouseX\b/g, 'ofGetPreviousMouseX()');
   	r_p5 = r_p5.replace(/\bpmouseY\b/g, 'ofGetPreviousMouseY()');
+    r_p5 = r_p5.replace(/\bmouseButton\b/g, 'button');
+    r_p5 = r_p5.replace(/\bbutton==LEFT\b/g, 'button==0');
+    r_p5 = r_p5.replace(/\bbutton==CENTER\b/g, 'button==1');
+    r_p5 = r_p5.replace(/\bbutton==RIGHT\b/g, 'button==2');
     r_p5 = r_p5.replace(/\bkeyCode\b/g, 'key');
     r_p5 = r_p5.replace(/\bkey==CODED\b/g, 'true');
     r_p5 = r_p5.replace(/\bUP\b/g, 'OF_KEY_UP');
@@ -420,6 +424,8 @@ export class P52OfService {
     r_p5 = r_p5.replace(/ > = /g, ' >= ');
     r_p5 = r_p5.replace(/> = /g, ' >= ');
     r_p5 = r_p5.replace(/°arc°/g, 'arc');
+
+    //For the Structure
     r_p5 = r_p5.replace(/\bif\b/g, 'if ');
     r_p5 = r_p5.replace(/\belse\b/g, 'else ');
     r_p5 = r_p5.replace(/\bfor\b/g, 'for ');
@@ -540,7 +546,7 @@ export class P52OfService {
     //END GLOBAL VARS//
 
     //Setup Content//
-    let fillSetup:string = "\n\tofSetBackgroundAuto(false);\n\tofBackground(204);\n\tofSetColor(255);\n\tofFill();";
+    let fillSetup:string = "\n\tofSetBackgroundAuto(false);\n\tofEnableAlphaBlending();\n\tofBackground(204);\n\tofSetColor(255);\n\tofFill();";
     //END Setup Content//
 
     let csetup = r_p5.search("void setup()");

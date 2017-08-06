@@ -6,7 +6,8 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { P52OfService } from './p5-2-of.service';
 import { HighlightService } from './highlight.service';
-import { DownloadService } from './download.service';
+import { FilesService } from './files.service';
+import { DebugConsoleService } from './debug-console.service';
 import { Tools } from './tools';
 
 @NgModule({
@@ -21,7 +22,8 @@ import { Tools } from './tools';
   providers: [
     P52OfService,
     HighlightService,
-    DownloadService,
+    FilesService,
+    DebugConsoleService,
     Tools
   ],
   bootstrap: [AppComponent]

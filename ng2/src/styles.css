@@ -242,20 +242,44 @@ h1 span{
 	outline:none;
 	border:1px solid #888;
 }
-#download{
-	margin:25px 0 0 38px;
+.files{
 	background:#fff;
-	color:#ee3987;
-	outline:none;
-	border:1px solid #888;
-	cursor:pointer;
-	width:85px;
 	font-size:13px;
 	padding:0;
+	cursor:pointer;
+	border:1px solid #888;
+	outline:none;
+	font-family: sans-serif, serif;
+}
+#download{
+	margin:25px 0 0 38px;
+	color:#ee3987;
+	width:85px;
+	height:18px;
 }
 #download:active{
 	background:#ee3987;
 	color:#fff;
+}
+#upload{
+	margin:25px 0 0 25px;
+	color:#0f4676;
+	display:block;
+	text-align:center;
+	width:83px;
+	height:16px;
+}
+#upload:active{
+	background:#0f4676;
+	color:#fff;
+}
+.inputfile{
+	width:0.1px;
+	height:0.1px;
+	opacity:0;
+	overflow:hidden;
+	position:absolute;
+	z-index:-1;
 }
 #refof #ref{
 	position:absolute;
@@ -299,6 +323,10 @@ select{
 	text-decoration:underline;
 }
 #debug{
+	margin:25px 0 0 35px;
+	width:90px;
+}
+#p5_debug{
 	margin:25px 0 0 35px;
 	width:90px;
 }

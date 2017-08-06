@@ -3,7 +3,7 @@
 		<img src="assets/img/logo.png"><img src="assets/img/rosetta.png" id="rosetta" alt="rosetta"><span>{{ver}}</span>
 	</h1>
 	<p id="git">
-		<a href="https://github.com/ibuioli/rosetta" target="blank">GitHub</a>
+		<a href="https://github.com/ibuioli/rosetta" target="blank" title="github.com/ibuioli/rosetta">GitHub</a>
 	<p>
 </header>
 
@@ -42,6 +42,11 @@
 		<option value="auto">auto</option>
 	</select>
 
+	<input (change)="d.upload($event)" type="file" name="file" id="file" class="inputfile">
+	<label id="upload" class="files" for="file">Upload ▲</label>
+
+	<p id="p5_debug"></p>
+
 	<p id="ref"><a href="https://processing.org/reference/" target="blank">P5 Reference</a></p>
 </div>
 
@@ -55,7 +60,7 @@
 		<option value="0.8.x">0.8.x</option>
 	</select>
 
-	<button id="download" (click)="d.download(main, app, apph)">Download ▾</button>
+	<button id="download" class="files" (click)="d.download(main, app, apph)">Download ▼</button>
 
 	<p id="debug"></p>
 
