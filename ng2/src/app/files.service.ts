@@ -32,24 +32,31 @@ export class FilesService {
   upload(e){
     let _this = this;
     if(fs !== undefined){
-      fs.readFile(e.target.files[0].path, 'utf8', function (err,data) {
-        if (err) {
-          return console.log(err);
-        }
-        (<HTMLInputElement>document.getElementById("p5")).value = data;
-        let ev = new KeyboardEvent("keyup", {
-            bubbles : true,
-            cancelable : true,
-            key : "",
-            shiftKey : true,
+      if(/(?:\.([^.]+))?$/.exec(e.target.files[0].name)[1] == "pde"){
+        fs.readFile(e.target.files[0].path, 'utf8', function (err,data) {
+          if (err) {
+            return console.log(err);
+          }
+          (<HTMLInputElement>document.getElementById("p5")).value = data;
+          let ev = new KeyboardEvent("keyup", {
+              bubbles : true,
+              cancelable : true,
+              key : "",
+              shiftKey : true,
+          });
+          document.getElementById("p5").dispatchEvent(ev);
+          document.getElementById("p5_debug").innerHTML = "*file load successful*";
+          setTimeout(function(){
+            document.getElementById("p5_debug").innerHTML = "";
+          }, 3000);
         });
-        document.getElementById("p5").dispatchEvent(ev);
-      });
 
-      document.getElementById("p5_debug").innerHTML = "*file load successful*";
-      setTimeout(function(){
-        document.getElementById("p5_debug").innerHTML = "";
-      }, 3000);
+      }else{
+        document.getElementById("p5_debug").innerHTML = '<p style="color:red;">*The File is not PDE*</p>';
+        setTimeout(function(){
+          document.getElementById("p5_debug").innerHTML = "";
+        }, 3000);
+      }
     }else{
       console.log("Upload only avaliable in Electron mode");
       document.getElementById("p5_debug").innerHTML = '<p style="color:red;">*Upload only avaliable in Electron mode*</p>';
