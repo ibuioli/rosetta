@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { P52OfService } from './p5-2-of.service';
 import { HighlightService } from './highlight.service';
 import { FilesService } from './files.service';
-import { DebugConsoleService } from './debug-console.service';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +22,7 @@ export class AppComponent {
   pathFile:string = "";
 
   constructor(public conversor: P52OfService, public hl: HighlightService,
-    public d: FilesService, public debug: DebugConsoleService){}
+    public d: FilesService){}
 
   ngAfterViewInit(){
     let _this = this;
@@ -65,9 +64,6 @@ export class AppComponent {
       let appcpp = _this.conversor.ofAppcpp(convers);
       _this.app = appcpp;
       document.getElementById('of').innerHTML = _this.hl.highlightC(appcpp);
-
-      //Debug P5 to Console
-      _this.debug.p5Debug(reset);
     });
     //Get Tab Event
     document.querySelector("textarea").addEventListener('keydown',function(e) {
