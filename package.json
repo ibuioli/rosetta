@@ -4,11 +4,11 @@
   "description": "A traductor-tool from Processing to OpenFrameworks",
   "main": "main.js",
   "scripts": {
-    "install_all": "npm install && cd ng2 && npm install && cd ..",
-    "start": "cd ng2 && ng build -prod -output-hashing=none -bh ./ && cd .. && electron .",
+    "install_all": "npm install && cd ng && npm install && cd ..",
+    "start": "cd ng && ng build -prod -output-hashing=none -bh ./ && cd .. && electron .",
     "electron": "electron .",
-    "serve": "cd ng2 && ng serve && cd ..",
-    "build": "cd ng2 && ng build -prod -output-hashing=none -bh ./ && cd .."
+    "serve": "cd ng && ng serve && cd ..",
+    "build": "cd ng && ng build -prod -output-hashing=none -bh ./ && cd .."
   },
   "repository": "https://github.com/ibuioli/rosetta",
   "keywords": [

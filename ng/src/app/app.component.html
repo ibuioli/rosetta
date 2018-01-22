@@ -13,22 +13,22 @@
 	<div id="oftxt2" class="txt" [hidden]="!displayB2">of | main.cpp</div>
 	<div id="oftxt3" class="txt" [hidden]="!displayB3">of | ofApp.h</div>
 	<div id="cp5">
-		<div id="fp5"></div>
-		<textarea id="p5" spellcheck="false" autofocus></textarea>
+		<div #fp5 id="fp5"></div>
+		<textarea #p5 id="p5" spellcheck="false" autofocus></textarea>
 	</div>
 	<div id="tras"></div>
 
-	<pre id="of" [hidden]="!displayB1" spellcheck="false"></pre>
-	<pre id="of2" [hidden]="!displayB2" spellcheck="false"></pre>
-	<pre id="of3" [hidden]="!displayB3" spellcheck="false"></pre>
+	<pre #of id="of" [hidden]="!displayB1" spellcheck="false"></pre>
+	<pre #of2 id="of2" [hidden]="!displayB2" spellcheck="false"></pre>
+	<pre #of3 id="of3" [hidden]="!displayB3" spellcheck="false"></pre>
 
-	<div id="boton1" class="botones" [class.bactive]="displayB1">
+	<div #boton1 id="boton1" class="botones" [class.bactive]="displayB1">
 		.CPP
 	</div>
-	<div id="boton2" class="botones" [class.bactive]="displayB2">
+	<div #boton2 id="boton2" class="botones" [class.bactive]="displayB2">
 		.CPP
 	</div>
-	<div id="boton3" class="botones" [class.bactive]="displayB3">
+	<div #boton3 id="boton3" class="botones" [class.bactive]="displayB3">
 		.H
 	</div>
 </div>

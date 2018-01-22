@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { P52OfService } from './p5-2-of.service';
 import { HighlightService } from './highlight.service';
 import { FilesService } from './files.service';
@@ -11,6 +11,16 @@ import { FilesService } from './files.service';
 export class AppComponent {
   ver:string = '1.0';
   /////////////////////////////
+  /*- Elements -*/
+  @ViewChild("p5") p5;
+  @ViewChild("fp5") fp5;
+  @ViewChild("of") of;
+  @ViewChild("of2") of2;
+  @ViewChild("of3") of3;
+  @ViewChild("boton1") boton1;
+  @ViewChild("boton2") boton2;
+  @ViewChild("boton3") boton3;
+  /////////////////////////////
   p5v:string = 'x.x.x';
   ofv:string = '0.9.x';
   displayB1:boolean = true;
@@ -22,32 +32,32 @@ export class AppComponent {
   pathFile:string = "";
 
   constructor(public conversor: P52OfService, public hl: HighlightService,
-    public d: FilesService){}
+    public d: FilesService, public renderer: Renderer2){}
 
-  ngAfterViewInit(){
+  public ngAfterViewInit(): void{
     let _this = this;
     //Listener Buttons
-    document.getElementById("boton1").addEventListener("click", function(){
+    this.renderer.listen(this.boton1.nativeElement, "click", () => {
       _this.displayB1 = true;
       _this.displayB2 = false;
       _this.displayB3 = false;
     });
-    document.getElementById("boton2").addEventListener("click", function(){
+    this.renderer.listen(this.boton2.nativeElement, "click", () => {
       _this.displayB1 = false;
       _this.displayB2 = true;
       _this.displayB3 = false;
     });
-    document.getElementById("boton3").addEventListener("click", function(){
+    this.renderer.listen(this.boton3.nativeElement, "click", () => {
       _this.displayB1 = false;
       _this.displayB2 = false;
       _this.displayB3 = true;
     });
     //Listener TextArea
-    document.getElementById("p5").addEventListener("keyup", function(e) {
+    this.renderer.listen(this.p5.nativeElement, "keyup", (e) => {
       //Get Value
-      let txt = (<HTMLInputElement>document.getElementById("p5")).value;
+      let txt = (<HTMLInputElement>_this.p5.nativeElement).value;
       let hlP5 = _this.hl.highlightP5(txt);
-      document.getElementById('fp5').innerHTML = hlP5 + "&#13;&#10;&#13;&#10;";
+      _this.fp5.nativeElement.innerHTML = hlP5 + "&#13;&#10;&#13;&#10;";
 
       let reset = _this.conversor.reset(txt);
       let convers = _this.conversor.conversor(reset, _this.ofv);
@@ -55,21 +65,21 @@ export class AppComponent {
 
       let apph = _this.conversor.ofApph(convers);
       _this.apph = apph;
-      document.getElementById('of3').innerHTML = _this.hl.highlightC(apph);
+      _this.of3.nativeElement.innerHTML = _this.hl.highlightC(apph);
 
       let maincpp = _this.conversor.maincpp(convers);
       _this.main = maincpp;
-      document.getElementById('of2').innerHTML = _this.hl.highlightC(maincpp);
+      _this.of2.nativeElement.innerHTML = _this.hl.highlightC(maincpp);
 
       let appcpp = _this.conversor.ofAppcpp(convers);
       _this.app = appcpp;
-      document.getElementById('of').innerHTML = _this.hl.highlightC(appcpp);
+      _this.of.nativeElement.innerHTML = _this.hl.highlightC(appcpp);
     });
     //Get Tab Event
-    document.querySelector("textarea").addEventListener('keydown',function(e) {
+    this.renderer.listen(this.p5.nativeElement, "keydown", (e) => {
       if(e.keyCode === 9) {
-          let start = this.selectionStart;
-          let end = this.selectionEnd;
+          let start = _this.p5.nativeElement.selectionStart;
+          let end = _this.p5.nativeElement.selectionEnd;
 
           let target = (<HTMLTextAreaElement>e.target);
           let value = target.value;
@@ -78,17 +88,17 @@ export class AppComponent {
                       + "\t"
                       + value.substring(end);
 
-          this.selectionStart = this.selectionEnd = start + 1;
+          _this.p5.nativeElement.selectionStart = _this.p5.nativeElement.selectionEnd = start + 1;
 
           e.preventDefault();
       }
-    },false);
+    });
     //Listener Scroll
-    document.getElementById("p5").addEventListener("scroll", function() {
-      let scrTop = document.getElementById("p5").scrollTop;
-      let clTop = document.getElementById("p5").clientTop;
+    this.renderer.listen(this.p5.nativeElement, "scroll", (e) => {
+      let scrTop = _this.p5.nativeElement.scrollTop;
+      let clTop = _this.p5.nativeElement.clientTop;
 
-      document.getElementById("fp5").scrollTop = (window.pageYOffset || scrTop)  - (clTop || 0);
+      _this.fp5.nativeElement.scrollTop = (window.pageYOffset || scrTop)  - (clTop || 0);
     });
   }
 
