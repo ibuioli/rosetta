@@ -5,10 +5,10 @@
   "main": "main.js",
   "scripts": {
     "install_all": "npm install && cd ng && npm install && cd ..",
-    "start": "cd ng && ng build -prod -output-hashing=none -bh ./ && cd .. && electron .",
+    "start": "npm run build && electron .",
     "electron": "electron .",
     "serve": "cd ng && ng serve && cd ..",
-    "build": "cd ng && ng build -prod -output-hashing=none -bh ./ && cd .."
+    "build": "cd ng && npm run build:prod && cd .."
   },
   "repository": "https://github.com/ibuioli/rosetta",
   "keywords": [
@@ -18,7 +18,7 @@
     "translate"
   ],
   "author": "Ignacio Buioli",
-  "license": "CC0-1.0",
+  "license": "MIT",
   "devDependencies": {
     "electron": "^1.4.1"
   },

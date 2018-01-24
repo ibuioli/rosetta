@@ -1,11 +1,13 @@
 {
   "name": "ng-rosetta",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
+  "author": "Ignacio Buioli",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --target production --build-optimizer --vendor-chunk -output-hashing=none -bh ./",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
