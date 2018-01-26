@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { P52OfService } from './p5-2-of.service';
-import { HighlightService } from './highlight.service';
-import { FilesService } from './files.service';
-import { DebugConsoleService } from './debug-console.service';
-import { Tools } from './tools';
+import { P52OfService } from './services/p5-2-of.service';
+import { HighlightService } from './services/highlight.service';
+import { FilesService } from './services/files.service';
+import { DebugConsoleService } from './services/debug-console.service';
+import { Tools } from './services/tools';
 
 @NgModule({
   declarations: [

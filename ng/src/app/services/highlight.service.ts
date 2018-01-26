@@ -12,7 +12,7 @@ export class HighlightService {
 
   constructor(public t: Tools) { }
 
-  highlightC(code:string){
+  public highlightC(code:string): string{
     let r_code = code;
     ///////////////
     r_code = r_code.replace(/\</g, "°<°");  //For HTML Tags
@@ -54,7 +54,7 @@ export class HighlightService {
     return r_code;
   }
 
-  highlightP5(code:string){
+  public highlightP5(code:string): string{
     let r_code = code;
 
     //VARs

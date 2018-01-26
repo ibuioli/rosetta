@@ -5,7 +5,7 @@ export class Tools {
 
   constructor() { }
 
-  repeted(string:string, subString:string, allowOverlapping:boolean) {
+  public repeted(string:string, subString:string, allowOverlapping:boolean): number {
     string += "";
     subString += "";
     if (subString.length <= 0) return (string.length + 1);
@@ -24,7 +24,7 @@ export class Tools {
     return n;
   }
 
-  extract(string:string, left:string, right:string){
+  public extract(string:string, left:string, right:string): string{
     let pleft:any = this.strpos(string, left, 0);
     if (pleft !== false){
       let pright:any = this.strpos(string, right, pleft + left.length);
@@ -35,12 +35,12 @@ export class Tools {
     return '';
   }
 
-  strpos(haystack:string, needle:string, offset:number) {
+  public strpos(haystack:string, needle:string, offset:number): any {
     let i = (haystack+'').indexOf(needle, (offset || 0));
     return i === -1 ? false : i;
   }
 
-  countpar(s:string, needle:string){
+  public countpar(s:string, needle:string): number{
     let brk = 0;
     let par = 0;
 
@@ -61,7 +61,7 @@ export class Tools {
     return par;
   }
 
-  params(s:string, needle:string, c:number){
+  public params(s:string, needle:string, c:number): any{
     let ipar = [];
     let par = [];
     let brk = 0;

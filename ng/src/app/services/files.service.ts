@@ -8,7 +8,7 @@ export class FilesService {
 
   constructor(public debug: DebugConsoleService) { }
 
-  download(main:string, app:string, apph:string){
+  public download(main:string, app:string, apph:string, debug:any): void{
     let _this = this;
 
     if(fs !== undefined){
@@ -19,14 +19,14 @@ export class FilesService {
       let data = zip.generate({base64:false,compression:'DEFLATE'});
       fs.writeFileSync('rosetta-of.zip', data, 'binary');
 
-      _this.debug.debug_console("*rosetta-of.zip saved in root directory*", "black", "debug");
+      _this.debug.debug_console("*rosetta-of.zip saved in root directory*", "black", debug);
     }else{
       console.log("Download only avaliable in Electron mode");
-      _this.debug.debug_console("*Download only avaliable in Electron mode*", "red", "debug");
+      _this.debug.debug_console("*Download only avaliable in Electron mode*", "red", debug);
     }
   }
 
-  upload(e){
+  public upload(e:any, p5:any, debug:any): void{
     let _this = this;
 
     if(fs !== undefined){
@@ -36,7 +36,7 @@ export class FilesService {
           if (err) {
             return console.log(err);
           }
-          (<HTMLInputElement>document.getElementById("p5")).value = data;
+          (<HTMLInputElement>p5).value  = data;
           let ev = new KeyboardEvent("keyup", {
               bubbles : true,
               cancelable : true,
@@ -44,15 +44,15 @@ export class FilesService {
               shiftKey : true,
           });
           document.getElementById("p5").dispatchEvent(ev);
-          _this.debug.debug_console("*file load successful*", "black", "p5_debug");
+          _this.debug.debug_console("*file load successful*", "black", debug);
         });
 
       }else{
-        _this.debug.debug_console("*The File is not PDE extension*", "red", "p5_debug");
+        _this.debug.debug_console("*The File is not PDE extension*", "red", debug);
       }
     }else{
       console.log("Upload only avaliable in Electron mode");
-      _this.debug.debug_console("*Upload only avaliable in Electron mode*", "red", "p5_debug");
+      _this.debug.debug_console("*Upload only avaliable in Electron mode*", "red", debug);
     }
   }
 }

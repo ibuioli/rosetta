@@ -12,7 +12,7 @@ export class P52OfService {
 
   constructor(public t: Tools) { }
 
-  reset(p5:string) {
+  public reset(p5:string): string {
     let r_p5 = p5;
     r_p5 = r_p5.trim();
     r_p5 = r_p5.replace(/ +(?= )/g,'');
@@ -35,7 +35,7 @@ export class P52OfService {
     return r_p5;
   }
 
-  conversor(p5:string, of:string){
+  public conversor(p5:string, of:string): string{
     let r_p5 = p5;
 
     /////// DATA ///////
@@ -434,7 +434,7 @@ export class P52OfService {
     return r_p5;
   }
 
-  ofApph(p5:string){
+  public ofApph(p5:string): string{
     let ofapph:string;
     let forfun:string = "";
 
@@ -509,7 +509,7 @@ export class P52OfService {
     return ofapph;
   }
 
-  ofAppcpp(p5:string){
+  public ofAppcpp(p5:string): string{
     let r_p5 = p5;
     let p_p5 = p5;
     let gvar = p5;  //Globals Vars
@@ -600,7 +600,7 @@ export class P52OfService {
     return r_p5
   }
 
-  maincpp(p5:string){
+  public maincpp(p5:string): string{
     let r_p5 = p5;
     let opengl = "";
 
@@ -628,7 +628,8 @@ export class P52OfService {
     return maincpp;
   }
   ////////////////////////////////////////////////
-  p5ver(p5:string){
+
+  public p5ver(p5:string): string{
     let ver:string = '1.0.0+';
 
     let c_rect = this.t.repeted(p5, 'rect(', false);

@@ -9,9 +9,7 @@
 
 <div id="con">
 	<div id="p5txt" class="txt">p5</div>
-	<div id="oftxt" class="txt" [hidden]="!displayB1">of | ofApp.cpp</div>
-	<div id="oftxt2" class="txt" [hidden]="!displayB2">of | main.cpp</div>
-	<div id="oftxt3" class="txt" [hidden]="!displayB3">of | ofApp.h</div>
+	<div id="oftxt" class="txt">{{disCFile}}</div>
 	<div id="cp5">
 		<div #fp5 id="fp5"></div>
 		<textarea #p5 id="p5" spellcheck="false" autofocus></textarea>
@@ -42,10 +40,10 @@
 		<option value="auto">auto</option>
 	</select>
 
-	<input (change)="d.upload($event)" type="file" name="file" id="file" class="inputfile">
+	<input (change)="d.upload($event, p5, p5_debug)" type="file" name="file" id="file" class="inputfile">
 	<label id="upload" class="files" for="file">Upload ▲</label>
 
-	<p id="p5_debug"></p>
+	<p id="p5_debug" #p5_debug></p>
 
 	<p id="ref"><a href="https://processing.org/reference/" target="blank">P5 Reference</a></p>
 </div>
@@ -60,9 +58,9 @@
 		<option value="0.8.x">0.8.x</option>
 	</select>
 
-	<button id="download" class="files" (click)="d.download(main, app, apph)">Download ▼</button>
+	<button id="download" class="files" (click)="d.download(main, app, apph, debug)">Download ▼</button>
 
-	<p id="debug"></p>
+	<p id="debug" #debug></p>
 
 	<p id="ref"><a href="http://openframeworks.cc/documentation/" target="blank">OF Reference</a></p>
 </div>

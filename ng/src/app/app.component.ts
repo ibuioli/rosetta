@@ -1,7 +1,7 @@
-import { Component, Renderer2, ViewChild, ElementRef } from '@angular/core';
-import { P52OfService } from './p5-2-of.service';
-import { HighlightService } from './highlight.service';
-import { FilesService } from './files.service';
+import { Component, Renderer2, ViewChild } from '@angular/core';
+import { P52OfService } from './services/p5-2-of.service';
+import { HighlightService } from './services/highlight.service';
+import { FilesService } from './services/files.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { FilesService } from './files.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  ver:string = '1.0';
+  public ver:string = '1.0';
   /////////////////////////////
   /*- Elements -*/
   @ViewChild("p5") p5;
@@ -20,16 +20,19 @@ export class AppComponent {
   @ViewChild("boton1") boton1;
   @ViewChild("boton2") boton2;
   @ViewChild("boton3") boton3;
+  @ViewChild("debug") debug;
+  @ViewChild("p5_debug") p5_debug;
   /////////////////////////////
-  p5v:string = 'x.x.x';
-  ofv:string = '0.9.x';
-  displayB1:boolean = true;
-  displayB2:boolean = false;
-  displayB3:boolean = false;
-  main:string = "";
-  app:string = "";
-  apph:string = "";
-  pathFile:string = "";
+  public p5v:string = 'x.x.x';
+  public ofv:string = '0.9.x';
+  public displayB1:boolean = true;
+  public displayB2:boolean = false;
+  public displayB3:boolean = false;
+  public disCFile:string = "of | ofApp.cpp";
+  public main:string = "";
+  public app:string = "";
+  public apph:string = "";
+  public pathFile:string = "";
 
   constructor(public conversor: P52OfService, public hl: HighlightService,
     public d: FilesService, public renderer: Renderer2){}
@@ -38,16 +41,19 @@ export class AppComponent {
     let _this = this;
     //Listener Buttons
     this.renderer.listen(this.boton1.nativeElement, "click", () => {
+      _this.disCFile = "of | ofApp.cpp";
       _this.displayB1 = true;
       _this.displayB2 = false;
       _this.displayB3 = false;
     });
     this.renderer.listen(this.boton2.nativeElement, "click", () => {
+      _this.disCFile = "of | main.cpp";
       _this.displayB1 = false;
       _this.displayB2 = true;
       _this.displayB3 = false;
     });
     this.renderer.listen(this.boton3.nativeElement, "click", () => {
+      _this.disCFile = "of | ofApp.h";
       _this.displayB1 = false;
       _this.displayB2 = false;
       _this.displayB3 = true;
@@ -102,14 +108,13 @@ export class AppComponent {
     });
   }
 
-  onChange($event, v){
+  public onChange($event:any, v:string): void{
     this.ofv = v;
 
-    ////////////////////////////
-
-    let txt = (<HTMLInputElement>document.getElementById("p5")).value;
+    ////////////////////////////////////////////////////////////////////////
+    let txt = (<HTMLInputElement>this.p5.nativeElement).value;
     let hlP5 = this.hl.highlightP5(txt);
-    document.getElementById('fp5').innerHTML = hlP5 + "&#13;&#10;&#13;&#10;";
+    this.fp5.nativeElement.innerHTML = hlP5 + "&#13;&#10;&#13;&#10;";
 
     let reset = this.conversor.reset(txt);
     let convers = this.conversor.conversor(reset, this.ofv);
@@ -117,15 +122,15 @@ export class AppComponent {
 
     let apph = this.conversor.ofApph(convers);
     this.apph = apph;
-    document.getElementById('of3').innerHTML = this.hl.highlightC(apph);
+    this.of3.nativeElement.innerHTML = this.hl.highlightC(apph);
 
     let maincpp = this.conversor.maincpp(convers);
     this.main = maincpp;
-    document.getElementById('of2').innerHTML = this.hl.highlightC(maincpp);
+    this.of2.nativeElement.innerHTML = this.hl.highlightC(maincpp);
 
     let appcpp = this.conversor.ofAppcpp(convers);
     this.app = appcpp;
-    document.getElementById('of').innerHTML = this.hl.highlightC(appcpp);
+    this.of.nativeElement.innerHTML = this.hl.highlightC(appcpp);
   }
 
 }
