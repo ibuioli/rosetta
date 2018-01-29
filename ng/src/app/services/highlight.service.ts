@@ -1,6 +1,6 @@
 /***********
 
-Service for Highlight for P5 and OF code
+Service for Highlight for P5 and OF/C++ code
 Code developed by Ignacio Buioli
 
 ***********/
@@ -61,7 +61,7 @@ export class HighlightService {
     let vars = [/\b(boolean)\b/g,/\b(int)\b/g,/\b(float)\b/g,/\b(char)\b/g,/\b(byte)\b/g,/\b(color)\b/g,/\b(double)\b/g,/\b(long)\b/g,
     /\b(Array)\b/g,/\b(ArrayList)\b/g,/\b(FloatDict)\b/g,/\b(FloatList)\b/g,/\b(HashMap)\b/g,/\b(IntDict)\b/g,/\b(IntList)\b/g,
     /\b(JSONArray)\b/g,/\b(JSONObject)\b/g,/\b(String)\b/g,/\b(StringDict)\b/g,/\b(StringList)\b/g,/\b(Table)\b/g,/\b(TableRow)\b/g,
-    /\b(XML)\b/g,/\b(PImage)\b/g,/\b(PFont)\b/g,/\b(PGraphics)\b/g,/\b(PVector)\b/g];
+    /\b(XML)\b/g,/\b(PImage)\b/g,/\b(PFont)\b/g,/\b(PGraphics)\b/g,/\b(PVector)\b/g,/\b(PShape)\b/g];
     for (let i = 0; i < vars.length; i++) {
         r_code = r_code.replace(vars[i], "<p5var>$1</p5var>");
     }
@@ -85,7 +85,9 @@ export class HighlightService {
     /\b(void keyPressed)\b/g,/\b(void keyReleased)\b/g,/\b(void mouseMoved)\b/g,/\b(void mouseDragged)\b/g,
     /\b(void mousePressed)\b/g,/\b(void mouseReleased)\b/g,
     /\b(image)\b/g,/\b(loadImage)\b/g,/\b(random)\b/g,/\b(text)\b/g,/\b(loadFont)\b/g,/\b(createFont)\b/g,
-    /\b(textFont)\b/g,/\b(pushStyle)\b/g,/\b(popStyle)\b/g
+    /\b(textFont)\b/g,/\b(pushStyle)\b/g,/\b(popStyle)\b/g,
+    /\b(alpha)\b/g,/\b(color)\b/g,/\b(blue)\b/g,/\b(red)\b/g,/\b(green)\b/g,
+    /\b(hue)\b/g,/\b(saturation)\b/g,/\b(brightness)\b/g,/\b(lerpColor)\b/g,
     ];
     for (let i = 0; i < fun.length; i++) {
         r_code = r_code.replace(fun[i], "<p5fun>$1</p5fun>");
