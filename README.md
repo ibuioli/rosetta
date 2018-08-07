@@ -33,7 +33,7 @@ cd rosetta
 Install the packages with this script:
 
 ```
-npm run install_all
+npm run install:all
 ```
 (don't use ```npm install```)
 

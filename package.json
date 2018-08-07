@@ -4,7 +4,7 @@
   "description": "A traductor-tool from Processing to OpenFrameworks",
   "main": "main.js",
   "scripts": {
-    "install_all": "npm install && cd ng && npm install && cd ..",
+    "install:all": "npm install && cd ng && npm install && cd ..",
     "start": "npm run build && electron .",
     "electron": "electron .",
     "serve": "cd ng && ng serve && cd ..",
