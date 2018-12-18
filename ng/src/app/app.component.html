@@ -7,60 +7,66 @@
 	<p>
 </header>
 
-<div id="con">
-	<div id="p5txt" class="txt">p5</div>
-	<div id="oftxt" class="txt">{{disCFile}}</div>
-	<div id="cp5">
-		<div #fp5 id="fp5"></div>
-		<textarea #p5 id="p5" spellcheck="false" autofocus></textarea>
+<div>
+	<div id="rosetta_container" class="row">
+		<div id="refp5" class="refdiv col d-none d-md-block col-md-2">
+			<img src="assets/img/p5-logo.png" alt="processing" id="img-r-p5">
+			<p id="p5v">v {{p5v}}</p>
+
+			<p id="p5tit">P5 version:</p>
+			<select id="p5vers" #t (change)="onChange($event, t.value)">
+				<option value="auto">auto</option>
+			</select>
+
+			<input (change)="d.upload($event, p5, p5_debug)" type="file" name="file" id="file" class="inputfile">
+			<label id="upload" class="files" for="file">Upload ▲</label>
+
+			<p id="p5_debug" #p5_debug></p>
+
+			<p class="ref"><a href="https://processing.org/reference/" target="blank">P5 Reference</a></p>
+		</div>
+		<div class="lancon row col-12 col-md-8">
+			<div class="col col-12 col-md-6">
+				<div id="p5txt" class="txt">p5</div>
+				<div id="cp5">
+					<div #fp5 id="fp5"></div>
+					<textarea #p5 id="p5" spellcheck="false" autofocus></textarea>
+				</div>
+			</div>
+			<div class="col col-12 col-md-6">
+				<div id="oftxt" class="txt">{{disCFile}}</div>
+
+				<pre #of id="of" [hidden]="!displayB1" spellcheck="false"></pre>
+				<pre #of2 id="of2" [hidden]="!displayB2" spellcheck="false"></pre>
+				<pre #of3 id="of3" [hidden]="!displayB3" spellcheck="false"></pre>
+
+				<div #boton1 id="boton1" class="botones" [class.bactive]="displayB1">
+					.CPP
+				</div>
+				<div #boton2 id="boton2" class="botones" [class.bactive]="displayB2">
+					.CPP
+				</div>
+				<div #boton3 id="boton3" class="botones" [class.bactive]="displayB3">
+					.H
+				</div>
+			</div>
+		</div>
+		<div id="refof" class="refdiv col d-none d-md-block col-md-2">
+			<img src="assets/img/of-logo.png" alt="openframeworks" id="img-r-of">
+			<p id="ofv">v {{ofv}} +</p>
+
+			<p id="oftit">OF version:</p>
+			<select id="ofvers" #t (change)="onChange($event, t.value)">
+				<option value="0.9.x">0.9.x</option>
+				<option value="0.8.x">0.8.x</option>
+			</select>
+			<p>
+				<button id="download" class="files" (click)="d.download(main, app, apph, debug)">Download ▼</button>
+			</p>
+
+			<p id="debug" #debug></p>
+
+			<p class="ref"><a href="http://openframeworks.cc/documentation/" target="blank">OF Reference</a></p>
+		</div>
 	</div>
-	<div id="tras"></div>
-
-	<pre #of id="of" [hidden]="!displayB1" spellcheck="false"></pre>
-	<pre #of2 id="of2" [hidden]="!displayB2" spellcheck="false"></pre>
-	<pre #of3 id="of3" [hidden]="!displayB3" spellcheck="false"></pre>
-
-	<div #boton1 id="boton1" class="botones" [class.bactive]="displayB1">
-		.CPP
-	</div>
-	<div #boton2 id="boton2" class="botones" [class.bactive]="displayB2">
-		.CPP
-	</div>
-	<div #boton3 id="boton3" class="botones" [class.bactive]="displayB3">
-		.H
-	</div>
-</div>
-
-<div id="refp5" class="refdiv">
-	<img src="assets/img/p5-logo.png" alt="processing" id="img-r-p5">
-	<p id="p5v">v {{p5v}}</p>
-
-	<p id="p5tit">P5 version:</p>
-	<select id="p5vers" #t (change)="onChange($event, t.value)">
-		<option value="auto">auto</option>
-	</select>
-
-	<input (change)="d.upload($event, p5, p5_debug)" type="file" name="file" id="file" class="inputfile">
-	<label id="upload" class="files" for="file">Upload ▲</label>
-
-	<p id="p5_debug" #p5_debug></p>
-
-	<p id="ref"><a href="https://processing.org/reference/" target="blank">P5 Reference</a></p>
-</div>
-
-<div id="refof" class="refdiv">
-	<img src="assets/img/of-logo.png" alt="openframeworks" id="img-r-of">
-	<p id="ofv">v {{ofv}} +</p>
-
-	<p id="oftit">OF version:</p>
-	<select id="ofvers" #t (change)="onChange($event, t.value)">
-		<option value="0.9.x">0.9.x</option>
-		<option value="0.8.x">0.8.x</option>
-	</select>
-
-	<button id="download" class="files" (click)="d.download(main, app, apph, debug)">Download ▼</button>
-
-	<p id="debug" #debug></p>
-
-	<p id="ref"><a href="http://openframeworks.cc/documentation/" target="blank">OF Reference</a></p>
 </div>

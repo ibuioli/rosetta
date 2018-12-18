@@ -1,0 +1,80 @@
+/* Imports */
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+
+/*Contenido*/
+@font-face {
+	font-family: "theSerif";
+	src: url("assets/font/TheSerif_B4_Plain_.eot"), url("assets/font/TheSerif_B4_Plain_.woff") format("woff");
+	font-weight: 400;
+	font-style: normal;
+}
+body, html{
+	width:100%;
+	height:100%;
+	overflow: hidden;
+}
+body {
+	position:relative;
+	font-family: "theSerif", georgia, times, serif;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: none;
+	font-size: 100%;
+  font-size: 0.79em;
+	font-weight: normal;
+	line-height: 1.5em;
+	color:#252525;
+	background:#eee;
+	width:100%;
+	height:100%;
+}
+/*HIGHLIGHT*/
+/*C++*/
+brk{
+  color:#ff0000;
+}
+vars{
+  color:#0000a0;
+}
+str{
+	color:#0000ff;
+}
+chr{
+	color:#e0a000;
+}
+num{
+	color:#f000f0;
+}
+com {
+	color:#00a000 !important;
+}
+/*P5*/
+p5var{
+	color:#e36d24;
+}
+p5typ{
+	color:#33997e;
+}
+p5fun{
+	color:#006699;
+}
+p5sys{
+	color:#d94a7a;
+}
+p5com{
+	color:#666;
+}
+p5str{
+	color:#7d4793;
+}
+p5con{
+	color:#718a62;
+}
+brk{
+  color:#0000ff;
+  font-weight:bold;
+}
+vars{
+  color:#8000ff;
+}

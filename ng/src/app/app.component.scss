@@ -1,7 +1,6 @@
 a{
 	text-decoration:none;
 }
-
 header{
 	width:100%;
 	height:40px;
@@ -10,6 +9,7 @@ header{
 	opacity:.9;
 	position:relative;
 	user-select: none;
+	z-index:99;
 }
 h1{
 	font-size:20px;
@@ -45,6 +45,13 @@ h1 span{
 #git a:hover{
 	text-decoration:underline;
 }
+
+#rosetta_container{
+	height: calc(100vh - 40px);
+	max-height: calc(100vh - 40px);
+	overflow: hidden;
+}
+
 #con{
 	width:734px;
 	height:94%;
@@ -53,8 +60,8 @@ h1 span{
 	position:relative;
 }
 #cp5{
-	width:360px;
-	height:92%;
+	width:100%;
+	height:100%;
 	font-size:14px;
 	float:left;
 	background:#fff;
@@ -63,7 +70,7 @@ h1 span{
 #cp5 #p5, #cp5 #fp5, #of, #of2, #of3{
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	font-size:14px;
-	width:350px;
+	width:100%;
 	padding:5px;
 	color: black;
 	border:0 solid;
@@ -80,12 +87,14 @@ h1 span{
 	overflow-x:hidden;
 	overflow-wrap: break-word;
 	word-wrap: break-word;
-	word-break: normal
+	word-break: normal;
+	max-height:100%;
 }
 #cp5 #p5{
 	position:absolute;
 	top:0;left:0;
-	height:92%;
+	height:100%;
+	max-height:100%;
 	background:rgba(0,0,0,0);
 	box-shadow: inset 0px 0px 8px 1px rgba(220,220,220,1);
 	border:1px solid #999;
@@ -93,10 +102,12 @@ h1 span{
 }
 #cp5 #fp5{
 	height:100%;
+	max-height:100%;
 	background:#fff;
 }
 #of, #of2, #of3 {
-	height:92%;
+	height:100%;
+	max-height:100%;
 	float:left;
 	background:#fff;
 	border:1px solid #999;
@@ -110,15 +121,11 @@ h1 span{
 }
 #p5txt{
 	color:#0f4676;
-	left:315px;
-	top:5px;
 	width:25px;
 	display:block;
 }
 #oftxt{
 	color:#ee3987;
-	left:620px;
-	top:5px;
 	width:90px;
 	display:block;
 }
@@ -140,19 +147,16 @@ h1 span{
 	text-align:center;
 	z-index:10;
 	user-select: none;
+	right:13px;
+	top:5px;
 }
 .refdiv{
-	top:40px;
-	width:130px;
-	height:100%;
-	position:fixed;
-	background:#e9e9e9;
+	background:#e1e1e1;
 	opacity:0.9;
-	box-shadow: inset 0px 0px 8px 1px rgba(100,100,100,1);
 	user-select: none;
 	display:block;
 }
-#refp5{
+#refp5 .ref{
 	left:0px;
 }
 #refof{
@@ -178,7 +182,7 @@ h1 span{
 	text-align:center;
 	color:#222;
 	background:#fff;
-	top:90%;
+	bottom:8px;
 	user-select: none;
 }
 .botones:hover{
@@ -191,13 +195,13 @@ h1 span{
 	color:#fff;
 }
 #boton1{
-	right:22px;
+	right:13px;
 }
 #boton2{
-	right:57px;
+	right:44px;
 }
 #boton3{
-	right:92px;
+	right:75px;
 }
 #copy{
 	position:absolute;
@@ -258,16 +262,18 @@ h1 span{
 	position:absolute;
 	z-index:-1;
 }
-#refof #ref{
+.ref{
 	position:absolute;
-	bottom:65px;
+	bottom:20px;
+}
+.ref a:hover{
+	text-decoration:underline;
+}
+#refof .ref{
 	right:5px;
 }
-#refof #ref a{
+#refof a{
 	color:#ee3987;
-}
-#refof #ref a:hover{
-	text-decoration:underline;
 }
 #p5v{
 	margin:10px 0 0 5px;
@@ -288,16 +294,11 @@ h1 span{
 select{
 	font-size:13px;
 }
-#refp5 #ref{
-	position:absolute;
-	bottom:65px;
+#refp5{
 	left:5px;
 }
-#refp5 #ref a{
+#refp5 a{
 	color:#0f4676;
-}
-#refp5 #ref a:hover{
-	text-decoration:underline;
 }
 #debug{
 	text-align:right;
@@ -310,156 +311,15 @@ select{
 	margin:25px 0 0 5px;
 	width:80%;
 }
-
-/*******************************/
-/*Responsive Design*/
-@media (max-width: 995px) {
-	.refdiv{
-		width:100px;
-		display:block;
-	}
-	#con{
-		width:70%;
-		margin-left:17.9%;
-	}
-	#of, #of2, #of3{
-		width:44%;
-	}
-	#cp5{
-		width:44%;
-	}
-	#cp5 #fp5{
-		width:100%;
-	}
-	#cp5 #p5{
-		width:44%;
-	}
-	#p5txt{
-		left:38%;
-		top:5px;
-	}
-	#oftxt{
-		left:73%;
-		top:5px;
-	}
-	#oftxt2{
-		left:73%;
-		top:5px;
-	}
-	#oftxt3{
-		left:73%;
-		top:5px;
-	}
-	#boton1{
-		right:11%;
-	}
-	#boton2{
-		right:16%;
-	}
-	#boton3{
-		right:21%;
-	}
+.col{
+	padding:0 !important;
+	max-height: 100%;
 }
-@media (max-width: 768px) {
-	.refdiv{
-		display:none;
-	}
-	#con{
-		width:100%;
-		margin-left:0;
-		padding:0;
-	}
-	#of, #of2, #of3{
-		width:100%;
-		height:47%;
-		margin:0;
-	}
-	#cp5{
-		width:100%;
-		height:45%;
-		margin:0;
-	}
-	#cp5 #fp5{
-		width:100%;
-		height:94%;
-		margin:0;
-	}
-	#cp5 #p5{
-		width:100%;
-		height:43%;
-		margin:0;
-	}
-	#p5txt{
-		display:none;
-	}
-	#oftxt{
-		display:none;
-	}
-	#oftxt2{
-		display:none;
-	}
-	#oftxt3{
-		display:none;
-	}
-	#boton1{
-		right:22px;
-	}
-	#boton2{
-		right:57px;
-	}
-	#boton3{
-		right:92px;
-	}
+.row{
+	margin:0 !important;
+	max-height: 100%;
 }
-
-/******************************/
-/******************************/
-/*HIGHLIGHT*/
-/*C++*/
-brk{
-  color:#ff0000;
-}
-vars{
-  color:#0000a0;
-}
-str{
-	color:#0000ff;
-}
-chr{
-	color:#e0a000;
-}
-num{
-	color:#f000f0;
-}
-com{
-	color:#00a000;
-}
-/*P5*/
-p5var{
-	color:#e36d24;
-}
-p5typ{
-	color:#33997e;
-}
-p5fun{
-	color:#006699;
-}
-p5sys{
-	color:#d94a7a;
-}
-p5com{
-	color:#666;
-}
-p5str{
-	color:#7d4793;
-}
-p5con{
-	color:#718a62;
-}
-brk{
-  color:#0000ff;
-  font-weight:bold;
-}
-vars{
-  color:#8000ff;
+.lancon{
+	margin:10px 0 !important;
+	max-height: 97%;
 }
