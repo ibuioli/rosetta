@@ -5,19 +5,19 @@ export class DebugConsoleService {
 
   constructor() { }
 
-  public debug_console(text:string, color:string, debug:any): void{
-    let s:string;
+  public debug_console(text: string, color: string, debug: any): void {
+    let s: string;
 
-    switch(color) {
-    case "red":
-        s = "<p style='color:red;'>"+text+"</p>";
+    switch (color) {
+    case 'red':
+        s = '<p style="color:red;">' + text + '</p>';
         break;
     default:
         s = text;
     }
     debug.innerHTML = s;
-    setTimeout(function(){
-      debug.innerHTML = "";
+    setTimeout(function() {
+      debug.innerHTML = '';
     }, 3000);
   }
 
