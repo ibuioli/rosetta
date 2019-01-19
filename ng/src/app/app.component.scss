@@ -147,7 +147,7 @@ h1 span{
 	text-align:center;
 	z-index:10;
 	user-select: none;
-	right:13px;
+	right:20px;
 	top:5px;
 }
 .refdiv{
@@ -195,13 +195,13 @@ h1 span{
 	color:#fff;
 }
 #boton1{
-	right:13px;
+	right:20px;
 }
 #boton2{
-	right:44px;
+	right:51px;
 }
 #boton3{
-	right:75px;
+	right:82px;
 }
 #copy{
 	position:absolute;
@@ -233,22 +233,24 @@ h1 span{
 	font-family: sans-serif, serif;
 }
 #download{
+	font-family: "theSerif", georgia, times, serif;
 	margin:25px 5px 0 0;
 	color:#ee3987;
 	width:85px;
-	height:18px;
+	height:22px;
 }
 #download:active{
 	background:#ee3987;
 	color:#fff;
 }
 #upload{
+	font-family: "theSerif", georgia, times, serif;
 	margin:25px 0 0 5px;
 	color:#0f4676;
 	display:block;
 	text-align:center;
 	width:83px;
-	height:16px;
+	height:22px;
 }
 #upload:active{
 	background:#0f4676;
