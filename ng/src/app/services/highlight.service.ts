@@ -68,45 +68,57 @@ export class HighlightService {
     }
 
     // SYSs
-    const sys = [/\b(mouseX)\b/g, /\b(mouseY)\b/g, /\b(pmouseX)\b/g, /\b(pmouseY)\b/g,
-    /\b(key)\b/g, /\b(keyCode)\b/g, /\b(frameCount)\b/g, /\b(frameRate)\b/g, /\b(width)\b/g, /\b(height)\b/g,
-    /\b(displayWidth)\b/g, /\b(displayHeight)\b/g, /\b(screen)\b/g, /\b(pixelWidth)\b/g, /\b(pixelHeight)\b/g,
-    /\b(focused)\b/g];
+    const sys = [/\b(mouseX)\b/g, /\b(mouseY)\b/g, /\b(pmouseX)\b/g, /\b(pmouseY)\b/g, /\b(key)\b/g, /\b(keyCode)\b/g,
+    /\b(frameCount)\b/g, /\b(frameRate)\b/g, /\b(width)\b/g, /\b(height)\b/g, /\b(displayWidth)\b/g, /\b(displayHeight)\b/g,
+    /\b(screen)\b/g, /\b(pixelWidth)\b/g, /\b(pixelHeight)\b/g, /\b(focused)\b/g];
     for (let i = 0; i < sys.length; i++) {
         r_code = r_code.replace(sys[i], '<p5sys>$1</p5sys>');
     }
 
     // FUNs
     const fun = [
-    /\b(setup)\b/g, /\b(draw)\b/g, /\b(settings)\b/g,
-    /\b(print)\b/g, /\b(printArray)\b/g, /\b(println)\b/g, /\b(size)\b/g, /\b(fullScreen)\b/g, /\b(exit)\b/g, /\b(thread)\b/g,
-    /\b(rect)\b/g, /\b(ellipse)\b/g, /\b(triangle)\b/g, /\b(line)\b/g, /\b(point)\b/g, /\b(arc)\b/g, /\b(quad)\b/g,
-    /\b(vertex)\b/g, /\b(beginShape)\b/g, /\b(endShape)\b/g, /\b(bezierVertex)\b/g, /\b(curveVertex)\b/g, /\b(quadraticVertex)\b/g,
-    /\b(beginContour)\b/g, /\b(endContour)\b/g, /\b(shape)\b/g, /\b(shapeMode)\b/g, /\b(clear)\b/g,
-    /\b(box)\b/g, /\b(sphere)\b/g, /\b(sphereDetail)\b/g, /\b(curve)\b/g, /\b(bezier)\b/g,
-    /\b(background)\b/g, /\b(fill)\b/g, /\b(noFill)\b/g, /\b(stroke)\b/g, /\b(noStroke)\b/g,
-    /\b(cursor)\b/g, /\b(noCursor)\b/g, /\b(loop)\b/g, /\b(noLoop)\b/g, /\b(redraw)\b/g, /\b(delay)\b/g, /\b(displayDensity)\b/g,
-    /\b(pushMatrix)\b/g, /\b(popMatrix)\b/g, /\b(translate)\b/g, /\b(rotate)\b/g, /\b(scale)\b/g, /\b(resetMatrix)\b/g,
-    /\b(rotateX)\b/g, /\b(rotateY)\b/g, /\b(rotateZ)\b/g, /\b(shearX)\b/g, /\b(shearY)\b/g, /\b(printMatrix)\b/g, /\b(applyMatrix)\b/g,
-    /\b(void keyPressed)\b/g, /\b(void keyReleased)\b/g, /\b(void mouseMoved)\b/g, /\b(void mouseDragged)\b/g,
-    /\b(void mousePressed)\b/g, /\b(void mouseReleased)\b/g, /\b(createShape)\b/g, /\b(loadShape)\b/g, /\b(createImage)\b/g,
-    /\b(loadShader)\b/g, /\b(resetShader)\b/g, /\b(shader)\b/g, /\b(noise)\b/g, /\b(noiseSeed)\b/g, /\b(noiseDetail)\b/g,
-    /\b(image)\b/g, /\b(loadImage)\b/g, /\b(random)\b/g, /\b(text)\b/g, /\b(loadFont)\b/g, /\b(createFont)\b/g, /\b(textAlign)\b/g,
-    /\b(textLeading)\b/g, /\b(textMode)\b/g, /\b(textSize)\b/g, /\b(textWidth)\b/g, /\b(textFont)\b/g, /\b(textAscent)\b/g,
-    /\b(textDescent)\b/g, /\b(pushStyle)\b/g, /\b(popStyle)\b/g, /\b(tint)\b/g, /\b(noTint)\b/g, /\b(randomGaussian)\b/g,
-    /\b(randomSeed)\b/g, /\b(alpha)\b/g, /\b(color)\b/g, /\b(blue)\b/g, /\b(red)\b/g, /\b(green)\b/g, /\b(smooth)\b/g, /\b(noSmooth)\b/g,
-    /\b(hue)\b/g, /\b(saturation)\b/g, /\b(brightness)\b/g, /\b(lerpColor)\b/g, /\b(colorMode)\b/g,
-    /\b(day)\b/g, /\b(hour)\b/g, /\b(millis)\b/g, /\b(minute)\b/g, /\b(month)\b/g, /\b(second)\b/g, /\b(year)\b/g,
-    /\b(acos)\b/g, /\b(asin)\b/g, /\b(atan)\b/g, /\b(atan2)\b/g, /\b(cos)\b/g, /\b(degrees)\b/g, /\b(radians)\b/g, /\b(sin)\b/g,
-    /\b(tan)\b/g, /\b(abs)\b/g, /\b(ceil)\b/g, /\b(constrain)\b/g, /\b(dist)\b/g, /\b(exp)\b/g, /\b(floor)\b/g, /\b(lerp)\b/g,
-    /\b(log)\b/g, /\b(mag)\b/g, /\b(map)\b/g, /\b(max)\b/g, /\b(min)\b/g, /\b(norm)\b/g, /\b(pow)\b/g, /\b(round)\b/g,
-    /\b(sq)\b/g, /\b(sqrt)\b/g];
+    /\b(setup(\b|\s+))(\()/g, /\b(draw(\b|\s+))(\()/g, /\b(settings(\b|\s+))(\()/g,
+    /\b(print(\b|\s+))(\()/g, /\b(printArray(\b|\s+))(\()/g, /\b(println(\b|\s+))(\()/g, /\b(size(\b|\s+))(\()/g,
+    /\b(fullScreen(\b|\s+))(\()/g, /\b(exit(\b|\s+))(\()/g, /\b(thread(\b|\s+))(\()/g, /\b(rect(\b|\s+))(\()/g,
+    /\b(ellipse(\b|\s+))(\()/g, /\b(triangle(\b|\s+))(\()/g, /\b(line(\b|\s+))(\()/g, /\b(point(\b|\s+))(\()/g, /\b(arc(\b|\s+))(\()/g,
+    /\b(quad(\b|\s+))(\()/g, /\b(vertex(\b|\s+))(\()/g, /\b(beginShape(\b|\s+))(\()/g, /\b(endShape(\b|\s+))(\()/g,
+    /\b(bezierVertex(\b|\s+))(\()/g, /\b(curveVertex(\b|\s+))(\()/g, /\b(quadraticVertex(\b|\s+))(\()/g,
+    /\b(beginContour(\b|\s+))(\()/g, /\b(endContour(\b|\s+))(\()/g, /\b(shape(\b|\s+))(\()/g, /\b(shapeMode(\b|\s+))(\()/g,
+    /\b(clear(\b|\s+))(\()/g, /\b(box(\b|\s+))(\()/g, /\b(sphere(\b|\s+))(\()/g, /\b(sphereDetail(\b|\s+))(\()/g,
+    /\b(curve(\b|\s+))(\()/g, /\b(bezier(\b|\s+))(\()/g, /\b(applyMatrix(\b|\s+))(\()/g, /\b(background(\b|\s+))(\()/g,
+    /\b(fill(\b|\s+))(\()/g, /\b(noFill(\b|\s+))(\()/g, /\b(stroke(\b|\s+))(\()/g, /\b(noStroke(\b|\s+))(\()/g,
+    /\b(displayDensity(\b|\s+))(\()/g, /\b(cursor(\b|\s+))(\()/g, /\b(noCursor(\b|\s+))(\()/g, /\b(loop(\b|\s+))(\()/g,
+    /\b(noLoop(\b|\s+))(\()/g, /\b(redraw(\b|\s+))(\()/g, /\b(delay(\b|\s+))(\()/g, /\b(pushMatrix(\b|\s+))(\()/g,
+    /\b(popMatrix(\b|\s+))(\()/g, /\b(translate(\b|\s+))(\()/g, /\b(rotate(\b|\s+))(\()/g, /\b(scale(\b|\s+))(\()/g,
+    /\b(resetMatrix(\b|\s+))(\()/g, /\b(rotateX(\b|\s+))(\()/g, /\b(rotateY(\b|\s+))(\()/g, /\b(rotateZ(\b|\s+))(\()/g,
+    /\b(shearX(\b|\s+))(\()/g, /\b(shearY(\b|\s+))(\()/g, /\b(printMatrix(\b|\s+))(\()/g, /\b(keyPressed(\b|\s+))(\()/g,
+    /\b(keyReleased(\b|\s+))(\()/g, /\b(mouseMoved(\b|\s+))(\()/g, /\b(mouseDragged(\b|\s+))(\()/g, /\b(mousePressed(\b|\s+))(\()/g,
+    /\b(mouseReleased(\b|\s+))(\()/g, /\b(createShape(\b|\s+))(\()/g, /\b(loadShape(\b|\s+))(\()/g, /\b(createImage(\b|\s+))(\()/g,
+    /\b(loadShader(\b|\s+))(\()/g, /\b(resetShader(\b|\s+))(\()/g, /\b(shader(\b|\s+))(\()/g, /\b(noise(\b|\s+))(\()/g,
+    /\b(noiseSeed(\b|\s+))(\()/g, /\b(noiseDetail(\b|\s+))(\()/g, /\b(image(\b|\s+))(\()/g, /\b(loadImage(\b|\s+))(\()/g,
+    /\b(random(\b|\s+))(\()/g, /\b(text(\b|\s+))(\()/g, /\b(loadFont(\b|\s+))(\()/g, /\b(createFont(\b|\s+))(\()/g,
+    /\b(textLeading(\b|\s+))(\()/g, /\b(textMode(\b|\s+))(\()/g, /\b(textSize(\b|\s+))(\()/g, /\b(textWidth(\b|\s+))(\()/g,
+    /\b(textFont(\b|\s+))(\()/g, /\b(textAscent(\b|\s+))(\()/g, /\b(textDescent(\b|\s+))(\()/g, /\b(pushStyle(\b|\s+))(\()/g,
+    /\b(popStyle(\b|\s+))(\()/g, /\b(tint(\b|\s+))(\()/g, /\b(noTint(\b|\s+))(\()/g, /\b(randomGaussian(\b|\s+))(\()/g,
+    /\b(randomSeed(\b|\s+))(\()/g, /\b(alpha(\b|\s+))(\()/g, /\b(color(\b|\s+))(\()/g, /\b(blue(\b|\s+))(\()/g, /\b(red(\b|\s+))(\()/g,
+    /\b(green(\b|\s+))(\()/g, /\b(smooth(\b|\s+))(\()/g, /\b(hue(\b|\s+))(\()/g, /\b(saturation(\b|\s+))(\()/g,
+    /\b(brightness(\b|\s+))(\()/g, /\b(lerpColor(\b|\s+))(\()/g, /\b(colorMode(\b|\s+))(\()/g, /\b(noSmooth(\b|\s+))(\()/g,
+    /\b(day(\b|\s+))(\()/g, /\b(hour(\b|\s+))(\()/g, /\b(millis(\b|\s+))(\()/g, /\b(minute(\b|\s+))(\()/g, /\b(month(\b|\s+))(\()/g,
+    /\b(second(\b|\s+))(\()/g, /\b(year(\b|\s+))(\()/g, /\b(acos(\b|\s+))(\()/g, /\b(asin(\b|\s+))(\()/g, /\b(atan(\b|\s+))(\()/g,
+    /\b(atan2(\b|\s+))(\()/g, /\b(cos(\b|\s+))(\()/g, /\b(degrees(\b|\s+))(\()/g, /\b(radians(\b|\s+))(\()/g, /\b(tan(\b|\s+))(\()/g,
+    /\b(abs(\b|\s+))(\()/g, /\b(ceil(\b|\s+))(\()/g, /\b(constrain(\b|\s+))(\()/g, /\b(dist(\b|\s+))(\()/g, /\b(exp(\b|\s+))(\()/g,
+    /\b(floor(\b|\s+))(\()/g, /\b(log(\b|\s+))(\()/g, /\b(mag(\b|\s+))(\()/g, /\b(map(\b|\s+))(\()/g, /\b(max(\b|\s+))(\()/g,
+    /\b(min(\b|\s+))(\()/g, /\b(norm(\b|\s+))(\()/g, /\b(pow(\b|\s+))(\()/g, /\b(round(\b|\s+))(\()/g, /\b(sq(\b|\s+))(\()/g,
+    /\b(sqrt(\b|\s+))(\()/g, /\b(textAlign(\b|\s+))(\()/g, /\b(lerp(\b|\s+))(\()/g, /\b(sin(\b|\s+))(\()/g, /\b(binary(\b|\s+))(\()/g,
+    /\b(boolean(\b|\s+))(\()/g, /\b(byte(\b|\s+))(\()/g, /\b(char(\b|\s+))(\()/g, /\b(float(\b|\s+))(\()/g, /\b(hex(\b|\s+))(\()/g,
+    /\b(int(\b|\s+))(\()/g, /\b(str(\b|\s+))(\()/g, /\b(unbinary(\b|\s+))(\()/g, /\b(unhex(\b|\s+))(\()/g, /\b(frameRate(\b|\s+))(\()/g,
+    /\b(set(\b|\s+))(\()/g, /\b(get(\b|\s+))(\()/g];
     for (let i = 0; i < fun.length; i++) {
-        r_code = r_code.replace(fun[i], '<p5fun>$1</p5fun>');
+        r_code = r_code.replace(fun[i], '<p5fun>$1</p5fun>$3');
     }
 
     // TYPs
-    const typ = [/\b(void)\b/g, /\b(public)\b/g, /\b(private)\b/g, /\b(return)\b/g, /\b(true)\b/g, /\b(false)\b/g, /\b(super)\b/g ,
+    const typ = [/\b(void)\b/g, /\b(public)\b/g, /\b(private)\b/g, /\b(return)\b/g, /\b(true)\b/g, /\b(false)\b/g, /\b(super)\b/g,
     /\b(this)\b/g, /\b(default)\b/g, /\b(break)\b/g, /\b(case)\b/g, /\b(null)\b/g, /\b(new)\b/g, /\b(implements)\b/g, /\b(import)\b/g,
     /\b(extends)\b/g, /\b(final)\b/g];
     for (let i = 0; i < typ.length; i++) {
@@ -114,12 +126,11 @@ export class HighlightService {
     }
 
     // CONs
-    const con = [/\b(P2D)\b/g, /\b(P3D)\b/g, /\b(FX2D)\b/g, /\b(PDF)\b/g, /\b(JAVA2D)\b/g, /\b(OPENGL)\b/g,
-    /\b(HALF_PI)\b/g, /\b(PI)\b/g, /\b(QUARTER_PI)\b/g, /\b(TAU)\b/g, /\b(TWO_PI)\b/g,
-    /\b(if)\b/g, /\b(else)\b/g, /\b(for)\b/g, /\b(while)\b/g, /\b(switch)\b/g, /\b(try)\b/g,
-    /\b(RGB)\b/g, /\b(ARGB)\b/g, /\b(ALPHA)\b/g, /\b(OPEN)\b/g, /\b(CHORD)\b/g, /\b(PIE)\b/g,
-    /\b(UP)\b/g, /\b(DOWN)\b/g, /\b(LEFT)\b/g, /\b(RIGHT)\b/g, /\b(ALT)\b/g, /\b(CONTROL)\b/g, /\b(SHIFT)\b/g,
-    /\b(TAB)\b/g, /\b(ENTER)\b/g, /\b(RETURN)\b/g, /\b(BACKSPACE)\b/g, /\b(DELETE)\b/g];
+    const con = [/\b(P2D)\b/g, /\b(P3D)\b/g, /\b(FX2D)\b/g, /\b(PDF)\b/g, /\b(JAVA2D)\b/g, /\b(OPENGL)\b/g, /\b(SVG)\b/g, /\b(HALF_PI)\b/g,
+    /\b(PI)\b/g, /\b(QUARTER_PI)\b/g, /\b(TAU)\b/g, /\b(TWO_PI)\b/g, /\b(if)\b/g, /\b(else)\b/g, /\b(for)\b/g, /\b(while)\b/g,
+    /\b(switch)\b/g, /\b(try)\b/g, /\b(RGB)\b/g, /\b(ARGB)\b/g, /\b(ALPHA)\b/g, /\b(OPEN)\b/g, /\b(CHORD)\b/g, /\b(PIE)\b/g, /\b(UP)\b/g,
+    /\b(DOWN)\b/g, /\b(LEFT)\b/g, /\b(RIGHT)\b/g, /\b(ALT)\b/g, /\b(CONTROL)\b/g, /\b(SHIFT)\b/g, /\b(TAB)\b/g, /\b(ENTER)\b/g,
+    /\b(RETURN)\b/g, /\b(BACKSPACE)\b/g, /\b(DELETE)\b/g];
     for (let i = 0; i < con.length; i++) {
         r_code = r_code.replace(con[i], '<p5con>$1</p5con>');
     }
