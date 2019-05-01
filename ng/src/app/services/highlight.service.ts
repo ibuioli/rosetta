@@ -112,7 +112,7 @@ export class HighlightService {
     /\b(sqrt(\b|\s+))(\()/g, /\b(textAlign(\b|\s+))(\()/g, /\b(lerp(\b|\s+))(\()/g, /\b(sin(\b|\s+))(\()/g, /\b(binary(\b|\s+))(\()/g,
     /\b(boolean(\b|\s+))(\()/g, /\b(byte(\b|\s+))(\()/g, /\b(char(\b|\s+))(\()/g, /\b(float(\b|\s+))(\()/g, /\b(hex(\b|\s+))(\()/g,
     /\b(int(\b|\s+))(\()/g, /\b(str(\b|\s+))(\()/g, /\b(unbinary(\b|\s+))(\()/g, /\b(unhex(\b|\s+))(\()/g, /\b(frameRate(\b|\s+))(\()/g,
-    /\b(set(\b|\s+))(\()/g, /\b(get(\b|\s+))(\()/g];
+    /\b(set(\b|\s+))(\()/g, /\b(get(\b|\s+))(\()/g, /\b(push(\b|\s+))(\()/g, /\b(pop(\b|\s+))(\()/g];
     for (let i = 0; i < fun.length; i++) {
         r_code = r_code.replace(fun[i], '<p5fun>$1</p5fun>$3');
     }

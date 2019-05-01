@@ -655,6 +655,8 @@ export class P52OfService {
       ver = '2.0.0+';
     } else if (p5.search(/\bfullScreen\b\(/) !== -1 || p5.search(/\bFX2D\b/) !== -1) {
       ver = '3.0.0+';
+    } else if (p5.search(/\bpush\b\(/) !== -1 || p5.search(/\bpop\b\(/) !== -1) {
+      ver = '3.5.0+';
     }
     ///////////////
     return ver;
