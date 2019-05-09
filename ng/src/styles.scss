@@ -2,8 +2,23 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap/scss/bootstrap-reboot';
 @import '~bootstrap/scss/bootstrap-grid';
+@import '~@angular/material/theming';
 
-/*Contenido*/
+/*NG Material Theme*/
+@include mat-core();
+
+$elements-primary: mat-palette($mat-indigo);
+$elements-accent: mat-palette($mat-pink, A200, A100, A400);
+
+$elements-warn: mat-palette($mat-red);
+
+$elements-theme: mat-light-theme($elements-primary, $elements-accent, $elements-warn);
+
+/***************************************************************************************************/
+
+@include angular-material-theme($elements-theme);
+
+/*Content*/
 @font-face {
 	font-family: "theSerif";
 	src: url("assets/font/TheSerif_B4_Plain_.eot"), url("assets/font/TheSerif_B4_Plain_.woff") format("woff");
@@ -73,3 +88,5 @@ p5str{
 p5con{
 	color:#718a62;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
