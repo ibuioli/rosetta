@@ -223,38 +223,20 @@ h1 span{
 	outline:none;
 	border:1px solid #888;
 }
-.files{
+.button-container{
+	width:100%;
+	min-height:90px;
+}
+#download, #upload{
 	background:#fff;
-	font-size:13px;
-	padding:0;
-	cursor:pointer;
-	border:1px solid #888;
-	outline:none;
-	font-family: sans-serif, serif;
-}
-#download{
-	font-family: "theSerif", georgia, times, serif;
-	margin:25px 5px 0 0;
-	color:#ee3987;
-	width:85px;
-	height:22px;
-}
-#download:active{
-	background:#ee3987;
-	color:#fff;
-}
-#upload{
-	font-family: "theSerif", georgia, times, serif;
-	margin:25px 0 0 5px;
-	color:#0f4676;
+	margin:20px 5px;
 	display:block;
-	text-align:center;
-	width:83px;
-	height:22px;
 }
-#upload:active{
-	background:#0f4676;
-	color:#fff;
+#upload label {
+	margin:0;
+}
+#upload label:hover {
+	cursor:pointer;
 }
 .inputfile{
 	width:0.1px;
@@ -296,22 +278,11 @@ h1 span{
 select{
 	font-size:13px;
 }
-#refp5{
-	left:5px;
-}
 #refp5 a{
 	color:#0f4676;
 }
-#debug{
-	text-align:right;
-	position:absolute;
-	right:5px;
-	margin:25px 0 0 0;
-	width:80%;
-}
-#p5_debug{
-	margin:25px 0 0 5px;
-	width:80%;
+#debug, #p5_debug{
+	padding:5px;
 }
 .col{
 	padding:0 !important;

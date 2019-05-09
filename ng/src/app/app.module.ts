@@ -9,7 +9,10 @@ import { HighlightService } from './services/highlight.service';
 import { FilesService } from './services/files.service';
 import { DebugConsoleService } from './services/debug-console.service';
 import { Tools } from './services/tools';
+
+/* MATERIAL */
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     FormsModule,
     HttpModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    MatButtonModule
   ],
   providers: [
     P52OfService,

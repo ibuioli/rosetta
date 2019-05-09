@@ -19,7 +19,8 @@
 			</select>
 
 			<input (change)="d.upload($event, p5, p5_debug)" type="file" name="file" id="file" class="inputfile">
-			<label id="upload" class="files" for="file">Upload ▲</label>
+
+			<button id="upload" mat-stroked-button color="primary"><label for="file">Upload ▲</label></button>
 
 			<p id="p5_debug" #p5_debug></p>
 
@@ -56,13 +57,15 @@
 			<p id="ofv">v {{ofv}} +</p>
 
 			<p id="oftit">OF version:</p>
+
 			<select id="ofvers" #t (change)="onChange($event, t.value)">
 				<option value="0.9.x">0.9.x</option>
 				<option value="0.8.x">0.8.x</option>
 			</select>
-			<p>
-				<button id="download" class="files" (click)="d.download(main, app, apph, debug)">Download ▼</button>
-			</p>
+
+			<div class="button-container">
+				<button id="download" class="float-right" mat-stroked-button color="accent" (click)="d.download(main, app, apph, debug)">Download ▼</button>
+			</div>
 
 			<p id="debug" #debug></p>
 
