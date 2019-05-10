@@ -164,6 +164,14 @@ export class P52OfService {
     /////// PRIMS 2D ///////
     if (of === '0.9.x') {
       r_p5 = r_p5.replace(/\bellipse\b\(/g, 'ofDrawEllipse(');
+      const c_circle = this.t.repeted(r_p5, 'circle(', false);
+      for (let i = 0; i < c_circle; i++) {
+        const m = this.t.extract(r_p5, 'circle(', ');');
+        if (m.indexOf('(') === -1) {
+          const n = m.split(',');
+          r_p5 = r_p5.replace('circle(' + m + ');', 'ofDrawCircle(' + n[0] + ',' + n[1] + ',' + String(Number(n[2]) / 2) + ');');
+        }
+      }
       const c_rect = this.t.repeted(r_p5, 'rect(', false);
       for (let i = 0; i < c_rect; i++) {
         const m = this.t.extract(r_p5, 'rect(', ');');
@@ -183,6 +191,14 @@ export class P52OfService {
       }
     } else if (of === '0.8.x') {
       r_p5 = r_p5.replace(/\bellipse\b\(/g, 'ofEllipse(');
+      const c_circle = this.t.repeted(r_p5, 'circle(', false);
+      for (let i = 0; i < c_circle; i++) {
+        const m = this.t.extract(r_p5, 'circle(', ');');
+        if (m.indexOf('(') === -1) {
+          const n = m.split(',');
+          r_p5 = r_p5.replace('circle(' + m + ');', 'ofCircle(' + n[0] + ',' + n[1] + ',' + String(Number(n[2]) / 2) + ');');
+        }
+      }
       const c_rect = this.t.repeted(r_p5, 'rect(', false);
       for (let i = 0; i < c_rect; i++) {
         const m = this.t.extract(r_p5, 'rect(', ');');
