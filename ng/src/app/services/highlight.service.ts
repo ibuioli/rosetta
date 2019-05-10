@@ -82,7 +82,7 @@ export class HighlightService {
     /\b(fullScreen(\b|\s+))(\()/g, /\b(exit(\b|\s+))(\()/g, /\b(thread(\b|\s+))(\()/g, /\b(rect(\b|\s+))(\()/g,
     /\b(ellipse(\b|\s+))(\()/g, /\b(triangle(\b|\s+))(\()/g, /\b(line(\b|\s+))(\()/g, /\b(point(\b|\s+))(\()/g, /\b(arc(\b|\s+))(\()/g,
     /\b(quad(\b|\s+))(\()/g, /\b(vertex(\b|\s+))(\()/g, /\b(beginShape(\b|\s+))(\()/g, /\b(endShape(\b|\s+))(\()/g,
-    /\b(bezierVertex(\b|\s+))(\()/g, /\b(curveVertex(\b|\s+))(\()/g, /\b(quadraticVertex(\b|\s+))(\()/g, /\b(circle(\b|\s+))(\()/g,
+    /\b(bezierVertex(\b|\s+))(\()/g, /\b(curveVertex(\b|\s+))(\()/g, /\b(quadraticVertex(\b|\s+))(\()/g,
     /\b(beginContour(\b|\s+))(\()/g, /\b(endContour(\b|\s+))(\()/g, /\b(shape(\b|\s+))(\()/g, /\b(shapeMode(\b|\s+))(\()/g,
     /\b(clear(\b|\s+))(\()/g, /\b(box(\b|\s+))(\()/g, /\b(sphere(\b|\s+))(\()/g, /\b(sphereDetail(\b|\s+))(\()/g,
     /\b(curve(\b|\s+))(\()/g, /\b(bezier(\b|\s+))(\()/g, /\b(applyMatrix(\b|\s+))(\()/g, /\b(background(\b|\s+))(\()/g,
@@ -112,7 +112,8 @@ export class HighlightService {
     /\b(sqrt(\b|\s+))(\()/g, /\b(textAlign(\b|\s+))(\()/g, /\b(lerp(\b|\s+))(\()/g, /\b(sin(\b|\s+))(\()/g, /\b(binary(\b|\s+))(\()/g,
     /\b(boolean(\b|\s+))(\()/g, /\b(byte(\b|\s+))(\()/g, /\b(char(\b|\s+))(\()/g, /\b(float(\b|\s+))(\()/g, /\b(hex(\b|\s+))(\()/g,
     /\b(int(\b|\s+))(\()/g, /\b(str(\b|\s+))(\()/g, /\b(unbinary(\b|\s+))(\()/g, /\b(unhex(\b|\s+))(\()/g, /\b(frameRate(\b|\s+))(\()/g,
-    /\b(set(\b|\s+))(\()/g, /\b(get(\b|\s+))(\()/g, /\b(push(\b|\s+))(\()/g, /\b(pop(\b|\s+))(\()/g];
+    /\b(set(\b|\s+))(\()/g, /\b(get(\b|\s+))(\()/g, /\b(push(\b|\s+))(\()/g, /\b(pop(\b|\s+))(\()/g, /\b(circle(\b|\s+))(\()/g,
+    /\b(square(\b|\s+))(\()/g];
     for (let i = 0; i < fun.length; i++) {
         r_code = r_code.replace(fun[i], '<p5fun>$1</p5fun>$3');
     }

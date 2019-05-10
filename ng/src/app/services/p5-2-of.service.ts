@@ -172,6 +172,14 @@ export class P52OfService {
           r_p5 = r_p5.replace('circle(' + m + ');', 'ofDrawCircle(' + n[0] + ',' + n[1] + ',' + String(Number(n[2]) / 2) + ');');
         }
       }
+      const c_square = this.t.repeted(r_p5, 'square(', false);
+      for (let i = 0; i < c_square; i++) {
+        const m = this.t.extract(r_p5, 'square(', ');');
+        if (m.indexOf('(') === -1) {
+          const n = m.split(',');
+          r_p5 = r_p5.replace('square(' + m + ');', 'ofDrawRectangle(' + n[0] + ',' + n[1] + ',' + n[2] + ',' + n[2] + ');');
+        }
+      }
       const c_rect = this.t.repeted(r_p5, 'rect(', false);
       for (let i = 0; i < c_rect; i++) {
         const m = this.t.extract(r_p5, 'rect(', ');');
@@ -197,6 +205,14 @@ export class P52OfService {
         if (m.indexOf('(') === -1) {
           const n = m.split(',');
           r_p5 = r_p5.replace('circle(' + m + ');', 'ofCircle(' + n[0] + ',' + n[1] + ',' + String(Number(n[2]) / 2) + ');');
+        }
+      }
+      const c_square = this.t.repeted(r_p5, 'square(', false);
+      for (let i = 0; i < c_square; i++) {
+        const m = this.t.extract(r_p5, 'square(', ');');
+        if (m.indexOf('(') === -1) {
+          const n = m.split(',');
+          r_p5 = r_p5.replace('square(' + m + ');', 'ofRect(' + n[0] + ',' + n[1] + ',' + n[2] + ',' + n[2] + ');');
         }
       }
       const c_rect = this.t.repeted(r_p5, 'rect(', false);
