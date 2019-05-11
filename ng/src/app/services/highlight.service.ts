@@ -77,45 +77,23 @@ export class HighlightService {
 
     // FUNs
     const fun = [
-    /\b(setup(\b|\s+))(\()/g, /\b(draw(\b|\s+))(\()/g, /\b(settings(\b|\s+))(\()/g,
-    /\b(print(\b|\s+))(\()/g, /\b(printArray(\b|\s+))(\()/g, /\b(println(\b|\s+))(\()/g, /\b(size(\b|\s+))(\()/g,
-    /\b(fullScreen(\b|\s+))(\()/g, /\b(exit(\b|\s+))(\()/g, /\b(thread(\b|\s+))(\()/g, /\b(rect(\b|\s+))(\()/g,
-    /\b(ellipse(\b|\s+))(\()/g, /\b(triangle(\b|\s+))(\()/g, /\b(line(\b|\s+))(\()/g, /\b(point(\b|\s+))(\()/g, /\b(arc(\b|\s+))(\()/g,
-    /\b(quad(\b|\s+))(\()/g, /\b(vertex(\b|\s+))(\()/g, /\b(beginShape(\b|\s+))(\()/g, /\b(endShape(\b|\s+))(\()/g,
-    /\b(bezierVertex(\b|\s+))(\()/g, /\b(curveVertex(\b|\s+))(\()/g, /\b(quadraticVertex(\b|\s+))(\()/g,
-    /\b(beginContour(\b|\s+))(\()/g, /\b(endContour(\b|\s+))(\()/g, /\b(shape(\b|\s+))(\()/g, /\b(shapeMode(\b|\s+))(\()/g,
-    /\b(clear(\b|\s+))(\()/g, /\b(box(\b|\s+))(\()/g, /\b(sphere(\b|\s+))(\()/g, /\b(sphereDetail(\b|\s+))(\()/g,
-    /\b(curve(\b|\s+))(\()/g, /\b(bezier(\b|\s+))(\()/g, /\b(applyMatrix(\b|\s+))(\()/g, /\b(background(\b|\s+))(\()/g,
-    /\b(fill(\b|\s+))(\()/g, /\b(noFill(\b|\s+))(\()/g, /\b(stroke(\b|\s+))(\()/g, /\b(noStroke(\b|\s+))(\()/g,
-    /\b(displayDensity(\b|\s+))(\()/g, /\b(cursor(\b|\s+))(\()/g, /\b(noCursor(\b|\s+))(\()/g, /\b(loop(\b|\s+))(\()/g,
-    /\b(noLoop(\b|\s+))(\()/g, /\b(redraw(\b|\s+))(\()/g, /\b(delay(\b|\s+))(\()/g, /\b(pushMatrix(\b|\s+))(\()/g,
-    /\b(popMatrix(\b|\s+))(\()/g, /\b(translate(\b|\s+))(\()/g, /\b(rotate(\b|\s+))(\()/g, /\b(scale(\b|\s+))(\()/g,
-    /\b(resetMatrix(\b|\s+))(\()/g, /\b(rotateX(\b|\s+))(\()/g, /\b(rotateY(\b|\s+))(\()/g, /\b(rotateZ(\b|\s+))(\()/g,
-    /\b(shearX(\b|\s+))(\()/g, /\b(shearY(\b|\s+))(\()/g, /\b(printMatrix(\b|\s+))(\()/g, /\b(keyPressed(\b|\s+))(\()/g,
-    /\b(keyReleased(\b|\s+))(\()/g, /\b(mouseMoved(\b|\s+))(\()/g, /\b(mouseDragged(\b|\s+))(\()/g, /\b(mousePressed(\b|\s+))(\()/g,
-    /\b(mouseReleased(\b|\s+))(\()/g, /\b(createShape(\b|\s+))(\()/g, /\b(loadShape(\b|\s+))(\()/g, /\b(createImage(\b|\s+))(\()/g,
-    /\b(loadShader(\b|\s+))(\()/g, /\b(resetShader(\b|\s+))(\()/g, /\b(shader(\b|\s+))(\()/g, /\b(noise(\b|\s+))(\()/g,
-    /\b(noiseSeed(\b|\s+))(\()/g, /\b(noiseDetail(\b|\s+))(\()/g, /\b(image(\b|\s+))(\()/g, /\b(loadImage(\b|\s+))(\()/g,
-    /\b(random(\b|\s+))(\()/g, /\b(text(\b|\s+))(\()/g, /\b(loadFont(\b|\s+))(\()/g, /\b(createFont(\b|\s+))(\()/g,
-    /\b(textLeading(\b|\s+))(\()/g, /\b(textMode(\b|\s+))(\()/g, /\b(textSize(\b|\s+))(\()/g, /\b(textWidth(\b|\s+))(\()/g,
-    /\b(textFont(\b|\s+))(\()/g, /\b(textAscent(\b|\s+))(\()/g, /\b(textDescent(\b|\s+))(\()/g, /\b(pushStyle(\b|\s+))(\()/g,
-    /\b(popStyle(\b|\s+))(\()/g, /\b(tint(\b|\s+))(\()/g, /\b(noTint(\b|\s+))(\()/g, /\b(randomGaussian(\b|\s+))(\()/g,
-    /\b(randomSeed(\b|\s+))(\()/g, /\b(alpha(\b|\s+))(\()/g, /\b(color(\b|\s+))(\()/g, /\b(blue(\b|\s+))(\()/g, /\b(red(\b|\s+))(\()/g,
-    /\b(green(\b|\s+))(\()/g, /\b(smooth(\b|\s+))(\()/g, /\b(hue(\b|\s+))(\()/g, /\b(saturation(\b|\s+))(\()/g,
-    /\b(brightness(\b|\s+))(\()/g, /\b(lerpColor(\b|\s+))(\()/g, /\b(colorMode(\b|\s+))(\()/g, /\b(noSmooth(\b|\s+))(\()/g,
-    /\b(day(\b|\s+))(\()/g, /\b(hour(\b|\s+))(\()/g, /\b(millis(\b|\s+))(\()/g, /\b(minute(\b|\s+))(\()/g, /\b(month(\b|\s+))(\()/g,
-    /\b(second(\b|\s+))(\()/g, /\b(year(\b|\s+))(\()/g, /\b(acos(\b|\s+))(\()/g, /\b(asin(\b|\s+))(\()/g, /\b(atan(\b|\s+))(\()/g,
-    /\b(atan2(\b|\s+))(\()/g, /\b(cos(\b|\s+))(\()/g, /\b(degrees(\b|\s+))(\()/g, /\b(radians(\b|\s+))(\()/g, /\b(tan(\b|\s+))(\()/g,
-    /\b(abs(\b|\s+))(\()/g, /\b(ceil(\b|\s+))(\()/g, /\b(constrain(\b|\s+))(\()/g, /\b(dist(\b|\s+))(\()/g, /\b(exp(\b|\s+))(\()/g,
-    /\b(floor(\b|\s+))(\()/g, /\b(log(\b|\s+))(\()/g, /\b(mag(\b|\s+))(\()/g, /\b(map(\b|\s+))(\()/g, /\b(max(\b|\s+))(\()/g,
-    /\b(min(\b|\s+))(\()/g, /\b(norm(\b|\s+))(\()/g, /\b(pow(\b|\s+))(\()/g, /\b(round(\b|\s+))(\()/g, /\b(sq(\b|\s+))(\()/g,
-    /\b(sqrt(\b|\s+))(\()/g, /\b(textAlign(\b|\s+))(\()/g, /\b(lerp(\b|\s+))(\()/g, /\b(sin(\b|\s+))(\()/g, /\b(binary(\b|\s+))(\()/g,
-    /\b(boolean(\b|\s+))(\()/g, /\b(byte(\b|\s+))(\()/g, /\b(char(\b|\s+))(\()/g, /\b(float(\b|\s+))(\()/g, /\b(hex(\b|\s+))(\()/g,
-    /\b(int(\b|\s+))(\()/g, /\b(str(\b|\s+))(\()/g, /\b(unbinary(\b|\s+))(\()/g, /\b(unhex(\b|\s+))(\()/g, /\b(frameRate(\b|\s+))(\()/g,
-    /\b(set(\b|\s+))(\()/g, /\b(get(\b|\s+))(\()/g, /\b(push(\b|\s+))(\()/g, /\b(pop(\b|\s+))(\()/g, /\b(circle(\b|\s+))(\()/g,
-    /\b(square(\b|\s+))(\()/g, /\b(push(\b|\s+))(\()/g, /\b(pop(\b|\s+))(\()/g];
+    'setup', 'draw', 'settings', 'print', 'printArray', 'println', 'size', 'fullScreen', 'exit', 'thread', 'rect',
+    'ellipse', 'triangle', 'line', 'point', 'arc', 'quad', 'vertex', 'beginShape', 'endShape', 'bezierVertex', 'curveVertex',
+    'quadraticVertex', 'beginContour', 'endContour', 'shape', 'shapeMode', 'clear', 'box', 'sphere', 'sphereDetail',
+    'curve', 'bezier', 'applyMatrix', 'background', 'fill', 'noFill', 'stroke', 'noStroke', 'displayDensity', 'cursor', 'noCursor', 'loop',
+    'noLoop', 'redraw', 'delay', 'pushMatrix', 'popMatrix', 'translate', 'rotate', 'scale', 'resetMatrix', 'rotateX', 'rotateY', 'rotateZ',
+    'shearX', 'shearY', 'printMatrix', 'keyPressed', 'keyReleased', 'mouseMoved', 'mouseDragged', 'mousePressed', 'mouseReleased',
+    'createShape', 'loadShape', 'createImage', 'loadShader', 'resetShader', 'shader', 'noise', 'noiseSeed', 'noiseDetail', 'image',
+    'loadImage', 'random', 'text', 'loadFont', 'createFont', 'textLeading', 'textMode', 'textSize', 'textWidth', 'textFont', 'textAscent',
+    'textDescent', 'pushStyle', 'popStyle', 'tint', 'noTint', 'randomGaussian', 'randomSeed', 'alpha', 'color', 'blue', 'red',
+    'green', 'smooth', 'hue', 'saturation', 'brightness', 'lerpColor', 'colorMode', 'noSmooth', 'day', 'hour', 'millis', 'minute', 'month',
+    'second', 'year', 'acos', 'asin', 'atan', 'atan2', 'cos', 'degrees', 'radians', 'tan', 'abs', 'ceil', 'constrain', 'dist', 'exp',
+    'floor', 'log', 'mag', 'map', 'max', 'min', 'norm', 'pow', 'round', 'sq', 'sqrt', 'textAlign', 'lerp', 'sin', 'binary',
+    'boolean', 'byte', 'char', 'float', 'hex', 'int', 'str', 'unbinary', 'unhex', 'frameRate', 'set', 'get', 'push', 'pop', 'circle',
+    'square', 'push', 'pop'];
     for (let i = 0; i < fun.length; i++) {
-        r_code = r_code.replace(fun[i], '<p5fun>$1</p5fun>$3');
+        const re = new RegExp('\\b(' + fun[i] + '(\\b|\\s+))(\\()', 'g');
+        r_code = r_code.replace(re, '<p5fun>$1</p5fun>$3');
     }
 
     // TYPs
