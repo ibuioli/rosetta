@@ -58,21 +58,20 @@ export class HighlightService {
     let r_code = code;
 
     // VARs
-    const vars = [/\b(boolean)\b/g, /\b(int)\b/g, /\b(float)\b/g, /\b(char)\b/g, /\b(byte)\b/g, /\b(color)\b/g, /\b(double)\b/g,
-    /\b(long)\b/g, /\b(Array)\b/g, /\b(ArrayList)\b/g, /\b(FloatDict)\b/g, /\b(FloatList)\b/g, /\b(HashMap)\b/g, /\b(IntDict)\b/g,
-    /\b(IntList)\b/g, /\b(JSONArray)\b/g, /\b(JSONObject)\b/g, /\b(String)\b/g, /\b(StringDict)\b/g, /\b(StringList)\b/g,
-    /\b(Table)\b/g, /\b(TableRow)\b/g, /\b(XML)\b/g, /\b(PImage)\b/g, /\b(PFont)\b/g, /\b(PGraphics)\b/g, /\b(PVector)\b/g,
-    /\b(PShape)\b/g, /\b(PShader)\b/g];
+    const vars = ['boolean', 'int', 'float', 'char', 'byte', 'color', 'double', 'long', 'Array', 'ArrayList', 'FloatDict', 'FloatList',
+    'HashMap', 'IntDict', 'IntList', 'JSONArray', 'JSONObject', 'String', 'StringDict', 'StringList', 'Table', 'TableRow', 'XML', 'PImage',
+    'PFont', 'PGraphics', 'PVector', 'PShape', 'PShader'];
     for (let i = 0; i < vars.length; i++) {
-        r_code = r_code.replace(vars[i], '<p5var>$1</p5var>');
+      const re = new RegExp('\\b(' + vars[i] + ')\\b', 'g');
+      r_code = r_code.replace(re, '<p5var>$1</p5var>');
     }
 
     // SYSs
-    const sys = [/\b(mouseX)\b/g, /\b(mouseY)\b/g, /\b(pmouseX)\b/g, /\b(pmouseY)\b/g, /\b(key)\b/g, /\b(keyCode)\b/g,
-    /\b(frameCount)\b/g, /\b(frameRate)\b/g, /\b(width)\b/g, /\b(height)\b/g, /\b(displayWidth)\b/g, /\b(displayHeight)\b/g,
-    /\b(screen)\b/g, /\b(pixelWidth)\b/g, /\b(pixelHeight)\b/g, /\b(focused)\b/g];
+    const sys = ['mouseX', 'mouseY', 'pmouseX', 'pmouseY', 'key', 'keyCode', 'frameCount', 'frameRate', 'width', 'height', 'displayWidth',
+    'displayHeight', 'screen', 'pixelWidth', 'pixelHeight', 'focused'];
     for (let i = 0; i < sys.length; i++) {
-        r_code = r_code.replace(sys[i], '<p5sys>$1</p5sys>');
+      const re = new RegExp('\\b(' + sys[i] + ')\\b', 'g');
+      r_code = r_code.replace(re, '<p5sys>$1</p5sys>');
     }
 
     // FUNs
@@ -92,8 +91,8 @@ export class HighlightService {
     'boolean', 'byte', 'char', 'float', 'hex', 'int', 'str', 'unbinary', 'unhex', 'frameRate', 'set', 'get', 'push', 'pop', 'circle',
     'square', 'push', 'pop'];
     for (let i = 0; i < fun.length; i++) {
-        const re = new RegExp('\\b(' + fun[i] + '(\\b|\\s+))(\\()', 'g');
-        r_code = r_code.replace(re, '<p5fun>$1</p5fun>$3');
+      const re = new RegExp('\\b(' + fun[i] + '(\\b|\\s+))(\\()', 'g');
+      r_code = r_code.replace(re, '<p5fun>$1</p5fun>$3');
     }
 
     // TYPs
