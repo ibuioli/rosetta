@@ -9,7 +9,7 @@ import { FilesService } from './services/files.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-  public title = 'app works';
+  public title = 'Rosetta';
   public ver = '1.0';
   /////////////////////////////
   /*- Elements -*/
