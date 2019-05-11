@@ -137,6 +137,8 @@ export class P52OfService {
     r_p5 = r_p5.replace(/\bpopStyle\b\(/g, 'ofPopStyle(');
     r_p5 = r_p5.replace(/\bpushMatrix\b\(/g, 'ofPushMatrix(');
     r_p5 = r_p5.replace(/\bpushStyle\b\(/g, 'ofPushStyle(');
+    r_p5 = r_p5.replace(/\bpush\b\(/g, 'ofPushMatrix();ofPushStyle(');
+    r_p5 = r_p5.replace(/\bpop\b\(/g, 'ofPopStyle();ofPopMatrix(');
     r_p5 = r_p5.replace(/\brotate\b\(/g, 'ofRotate(');
     r_p5 = r_p5.replace(/\brotateX\b\(/g, 'ofRotateX(');
     r_p5 = r_p5.replace(/\brotateY\b\(/g, 'ofRotateY(');
