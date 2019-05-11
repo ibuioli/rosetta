@@ -20,29 +20,32 @@ export class HighlightService {
     r_code = r_code.replace(/\//g, '°/°');
     ///////////////
     // BRKs
-    const brk = [/({)/g, /(})/g, /(\[)/g, /(\])/g, /(\()/g, /(\))/g, /(\.)/g, /(\+)/g, /(-)/g,
-    /(\*)/g, /(%)/g, /(,)/g, /(;)/g, /(:)/g, /(=)/g, /(!)/g, /(\|)/g, /(°\/°)/g, /(&)/g, /(°<°)/g, /(°>°)/g];
+    const brk = ['{', '}', '\\[', '\\]', '\\(', '\\)', '\\.', '\\+', '-', '\\*', '%', ',', ';', ':', '=', '!', '\\|', '°\\/°', '&', '°<°',
+    '°>°'];
     for (let i = 0; i < brk.length; i++) {
-        r_code = r_code.replace(brk[i], '<brk>$1</brk>');
+      const re = new RegExp('(' + brk[i] + ')', 'g');
+      r_code = r_code.replace(re, '<brk>$1</brk>');
     }
     r_code = r_code.replace(/°<°/g, '<');  // For Tags
     r_code = r_code.replace(/°>°/g, '>');
     r_code = r_code.replace(/°\/°/g, '/');
 
     // VARs
-    const vars = [/(public )/g, /(private )/g, /(bool )/g, /(int )/g, /(float )/g, /(char )/g, /(unsigned )/g, /(double )/g, /(long )/g,
-    /(void )/g, /(new )/g, /(class )/g, /(if )/g, /(else )/g, /(for )/g, /(while )/g, /\b(true)\b/g, /\b(false)\b/g];
+    const vars = ['public ', 'private ', 'bool ', 'int ', 'float ', 'char ', 'unsigned ', 'double ', 'long ',
+    'void ', 'new ', 'class ', 'if ', 'else ', 'for ', 'while ', 'true', 'false'];
     for (let i = 0; i < vars.length; i++) {
-        r_code = r_code.replace(vars[i], '<vars>$1</vars>');
+      const re = new RegExp('\\b(' + vars[i] + ')\\b', 'g');
+      r_code = r_code.replace(re, '<vars>$1</vars>');
     }
 
     // NUMs
     r_code = r_code.replace(/\b(\d+)\b/g, '<num>$1</num>')
 
     // COMs
-    const com = [/\b(cout)\b/g, /\b(endl)\b/g];
+    const com = ['cout', 'endl'];
     for (let i = 0; i < com.length; i++) {
-        r_code = r_code.replace(com[i], '<com>$1</com>');
+      const re = new RegExp('\\b(' + com[i] + ')\\b', 'g');
+      r_code = r_code.replace(re, '<com>$1</com>');
     }
     r_code = r_code.replace(/\#(.+)*$/gm, '<com>#$1</com>');
 
@@ -50,7 +53,8 @@ export class HighlightService {
     r_code = r_code.replace(/"([^"]+)"/g, '<str>"$1"</str>');
     r_code = r_code.replace(/\'([^']+)\'/g, '<chr>"$1"</chr>');
 
-    ///////////////
+    /////////////////////////////////////////////////////////////
+
     return r_code;
   }
 
@@ -105,7 +109,7 @@ export class HighlightService {
 
     // CONs
     const con = ['P2D', 'P3D', 'FX2D', 'PDF', 'JAVA2D', 'OPENGL', 'SVG', 'HALF_PI', 'PI', 'QUARTER_PI', 'TAU', 'TWO_PI', 'if', 'else',
-    'for', 'while', 'switch', 'try', 'RGB', 'ARGB', 'ALPHA', 'OPEN', 'CHORD', 'PIE', 'UP', 'DOWN', 'LEFT', 'RIGHT', 'ALT', 'CONTROL', 
+    'for', 'while', 'switch', 'try', 'RGB', 'ARGB', 'ALPHA', 'OPEN', 'CHORD', 'PIE', 'UP', 'DOWN', 'LEFT', 'RIGHT', 'ALT', 'CONTROL',
     'SHIFT', 'TAB', 'ENTER', 'RETURN', 'BACKSPACE', 'DELETE'];
     for (let i = 0; i < con.length; i++) {
       const re = new RegExp('\\b(' + con[i] + ')\\b', 'g');
@@ -125,7 +129,8 @@ export class HighlightService {
     }
     r_code = r_code.replace(/\/\/(.+)*$/gm, '<p5com>//$1</p5com>');
 
-    /////////////
+    /////////////////////////////////////////////////////////////
+
     return r_code;
   }
 }
