@@ -96,21 +96,20 @@ export class HighlightService {
     }
 
     // TYPs
-    const typ = [/\b(void)\b/g, /\b(public)\b/g, /\b(private)\b/g, /\b(return)\b/g, /\b(true)\b/g, /\b(false)\b/g, /\b(super)\b/g,
-    /\b(this)\b/g, /\b(default)\b/g, /\b(break)\b/g, /\b(case)\b/g, /\b(null)\b/g, /\b(new)\b/g, /\b(implements)\b/g, /\b(import)\b/g,
-    /\b(extends)\b/g, /\b(final)\b/g];
+    const typ = ['void', 'public', 'private', 'return', 'true', 'false', 'super', 'this', 'default', 'break', 'case', 'null', 'new',
+    'implements', 'import', 'extends', 'final'];
     for (let i = 0; i < typ.length; i++) {
-        r_code = r_code.replace(typ[i], '<p5typ>$1</p5typ>');
+      const re = new RegExp('\\b(' + typ[i] + ')\\b', 'g');
+      r_code = r_code.replace(re, '<p5typ>$1</p5typ>');
     }
 
     // CONs
-    const con = [/\b(P2D)\b/g, /\b(P3D)\b/g, /\b(FX2D)\b/g, /\b(PDF)\b/g, /\b(JAVA2D)\b/g, /\b(OPENGL)\b/g, /\b(SVG)\b/g, /\b(HALF_PI)\b/g,
-    /\b(PI)\b/g, /\b(QUARTER_PI)\b/g, /\b(TAU)\b/g, /\b(TWO_PI)\b/g, /\b(if)\b/g, /\b(else)\b/g, /\b(for)\b/g, /\b(while)\b/g,
-    /\b(switch)\b/g, /\b(try)\b/g, /\b(RGB)\b/g, /\b(ARGB)\b/g, /\b(ALPHA)\b/g, /\b(OPEN)\b/g, /\b(CHORD)\b/g, /\b(PIE)\b/g, /\b(UP)\b/g,
-    /\b(DOWN)\b/g, /\b(LEFT)\b/g, /\b(RIGHT)\b/g, /\b(ALT)\b/g, /\b(CONTROL)\b/g, /\b(SHIFT)\b/g, /\b(TAB)\b/g, /\b(ENTER)\b/g,
-    /\b(RETURN)\b/g, /\b(BACKSPACE)\b/g, /\b(DELETE)\b/g];
+    const con = ['P2D', 'P3D', 'FX2D', 'PDF', 'JAVA2D', 'OPENGL', 'SVG', 'HALF_PI', 'PI', 'QUARTER_PI', 'TAU', 'TWO_PI', 'if', 'else',
+    'for', 'while', 'switch', 'try', 'RGB', 'ARGB', 'ALPHA', 'OPEN', 'CHORD', 'PIE', 'UP', 'DOWN', 'LEFT', 'RIGHT', 'ALT', 'CONTROL', 
+    'SHIFT', 'TAB', 'ENTER', 'RETURN', 'BACKSPACE', 'DELETE'];
     for (let i = 0; i < con.length; i++) {
-        r_code = r_code.replace(con[i], '<p5con>$1</p5con>');
+      const re = new RegExp('\\b(' + con[i] + ')\\b', 'g');
+      r_code = r_code.replace(re, '<p5con>$1</p5con>');
     }
 
     // STRs & CHARs
