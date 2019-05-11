@@ -212,17 +212,6 @@ h1 span{
 	margin:10px 5px 0 0;
 	font-size:16px;
 }
-#oftit{
-	margin:25px 5px 0 0;
-}
-#ofvers{
-	margin:5px 5px 0 0;
-	width:65px;
-	background:#fff;
-	color:#ee3987;
-	outline:none;
-	border:1px solid #888;
-}
 .button-container{
 	width:100%;
 	min-height:90px;
@@ -264,20 +253,6 @@ h1 span{
 	font-size:16px;
 	user-select: none;
 }
-#p5tit{
-	margin:25px 0 0 5px;
-}
-#p5vers{
-	margin:5px 0 0 5px;
-	width:65px;
-	background:#fff;
-	color:#0f4676;
-	outline:none;
-	border:1px solid #888;
-}
-select{
-	font-size:13px;
-}
 #refp5 a{
 	color:#0f4676;
 }
@@ -295,4 +270,7 @@ select{
 .lancon{
 	margin:10px 0 !important;
 	max-height: 97%;
+}
+mat-form-field {
+	margin:20px 5px 0 5px;
 }

@@ -108,10 +108,7 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  public onChange($event: any, v: string): void {
-    this.ofv = v;
-
-    ////////////////////////////////////////////////////////////////////////
+  public onChange($event: any): void {
     const txt = (<HTMLInputElement>this.p5.nativeElement).value;
     const hlP5 = this.hl.highlightP5(txt);
     this.fp5.nativeElement.innerHTML = hlP5 + '&#13;&#10;&#13;&#10;';

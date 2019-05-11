@@ -13,10 +13,12 @@
 			<img src="assets/img/p5-logo.png" alt="processing" id="img-r-p5">
 			<p id="p5v">v {{p5v}}</p>
 
-			<p id="p5tit">P5 version:</p>
-			<select id="p5vers" #t (change)="onChange($event, t.value)">
-				<option value="auto">auto</option>
-			</select>
+			<mat-form-field>
+				<mat-label>P5 version</mat-label>
+				<mat-select value="auto">
+					<mat-option value="auto">auto</mat-option>
+				</mat-select>
+			</mat-form-field>
 
 			<input (change)="d.upload($event, p5, p5_debug)" type="file" name="file" id="file" class="inputfile">
 
@@ -56,12 +58,13 @@
 			<img src="assets/img/of-logo.png" alt="openframeworks" id="img-r-of">
 			<p id="ofv">v {{ofv}} +</p>
 
-			<p id="oftit">OF version:</p>
-
-			<select id="ofvers" #t (change)="onChange($event, t.value)">
-				<option value="0.9.x">0.9.x</option>
-				<option value="0.8.x">0.8.x</option>
-			</select>
+			<mat-form-field color="accent">
+				<mat-label>OF version</mat-label>
+				<mat-select [(value)]="ofv" (selectionChange)="onChange($event)">
+					<mat-option value="0.9.x">0.9.x</mat-option>
+					<mat-option value="0.8.x">0.8.x</mat-option>
+				</mat-select>
+			</mat-form-field>
 
 			<div class="button-container">
 				<button id="download" class="float-right" mat-stroked-button color="accent" (click)="d.download(main, app, apph, debug)">Download ▼</button>
