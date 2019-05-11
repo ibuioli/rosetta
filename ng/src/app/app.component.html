@@ -33,15 +33,15 @@
 				<div id="p5txt" class="txt">p5</div>
 				<div id="cp5">
 					<div #fp5 id="fp5"></div>
-					<textarea #p5 id="p5" spellcheck="false" autofocus></textarea>
+					<textarea #p5 id="p5" class="p5Scroll" spellcheck="false" autofocus></textarea>
 				</div>
 			</div>
 			<div class="col col-12 col-md-6">
 				<div id="oftxt" class="txt">of | {{disCFile}}</div>
 
-				<pre #of id="of" [hidden]="!displayB1" spellcheck="false"></pre>
-				<pre #of2 id="of2" [hidden]="!displayB2" spellcheck="false"></pre>
-				<pre #of3 id="of3" [hidden]="!displayB3" spellcheck="false"></pre>
+				<pre #of id="of" class="ofScroll" [hidden]="!displayB1" spellcheck="false"></pre>
+				<pre #of2 id="of2" class="ofScroll" [hidden]="!displayB2" spellcheck="false"></pre>
+				<pre #of3 id="of3" class="ofScroll" [hidden]="!displayB3" spellcheck="false"></pre>
 
 				<mat-button-toggle-group appearance="legacy" #groupApp="matButtonToggleGroup" (change)="onChangeFiles($event)">
 					<mat-button-toggle value="cpp_app" color="accent" checked>

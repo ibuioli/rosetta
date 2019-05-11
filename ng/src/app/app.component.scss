@@ -241,6 +241,24 @@ h1 span{
 	margin:10px 0 !important;
 	max-height: 97%;
 }
+.ofScroll::-webkit-scrollbar, .p5Scroll::-webkit-scrollbar {
+  width: 14px;
+}
+.ofScroll::-webkit-scrollbar-track, .p5Scroll::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+.ofScroll::-webkit-scrollbar-thumb {
+	background: rgba(238, 57, 135, 0.7);
+}
+.p5Scroll::-webkit-scrollbar-thumb {
+	background: rgba(3, 69, 128, 0.7);
+}
+.ofScroll::-webkit-scrollbar-thumb:hover{
+  background: rgba(238, 57, 135, 0.95);
+}
+.p5Scroll::-webkit-scrollbar-thumb:hover{
+  background: rgba(3, 69, 128, 0.95);
+}
 /*MATERIAL*/
 mat-form-field {
 	margin:20px 5px 0 5px;
