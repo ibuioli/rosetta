@@ -37,21 +37,23 @@
 				</div>
 			</div>
 			<div class="col col-12 col-md-6">
-				<div id="oftxt" class="txt">{{disCFile}}</div>
+				<div id="oftxt" class="txt">of | {{disCFile}}</div>
 
 				<pre #of id="of" [hidden]="!displayB1" spellcheck="false"></pre>
 				<pre #of2 id="of2" [hidden]="!displayB2" spellcheck="false"></pre>
 				<pre #of3 id="of3" [hidden]="!displayB3" spellcheck="false"></pre>
 
-				<div #boton1 id="boton1" class="botones" [class.bactive]="displayB1">
-					.CPP
-				</div>
-				<div #boton2 id="boton2" class="botones" [class.bactive]="displayB2">
-					.CPP
-				</div>
-				<div #boton3 id="boton3" class="botones" [class.bactive]="displayB3">
-					.H
-				</div>
+				<mat-button-toggle-group appearance="legacy" #groupApp="matButtonToggleGroup" (change)="onChangeFiles($event)">
+					<mat-button-toggle value="cpp_app" color="accent" checked>
+						.CPP
+					</mat-button-toggle>
+					<mat-button-toggle value="cpp_main">
+						.CPP
+					</mat-button-toggle>
+					<mat-button-toggle value="h_app">
+						.H
+					</mat-button-toggle>
+				</mat-button-toggle-group>
 			</div>
 		</div>
 		<div id="refof" class="refdiv col d-none d-md-block col-md-2">

@@ -173,37 +173,6 @@ h1 span{
 #img-r-p5{
 	margin:8px 0 0 0;
 }
-.botones{
-	position:absolute;
-	font-size:11px;
-	width:27px;
-	height:18px;
-	border:#777 1px solid;
-	opacity:.9;
-	text-align:center;
-	color:#222;
-	background:#fff;
-	bottom:8px;
-	user-select: none;
-}
-.botones:hover{
-	cursor:pointer;
-	background:#ee3987;
-	color:#fff;
-}
-.bactive{
-	background:#ee3987;
-	color:#fff;
-}
-#boton1{
-	right:20px;
-}
-#boton2{
-	right:51px;
-}
-#boton3{
-	right:82px;
-}
 #copy{
 	position:absolute;
 	bottom:40px;
@@ -272,6 +241,20 @@ h1 span{
 	margin:10px 0 !important;
 	max-height: 97%;
 }
+/*MATERIAL*/
 mat-form-field {
 	margin:20px 5px 0 5px;
+}
+mat-button-toggle-group {
+	position: absolute;
+	bottom: 8px;
+	right: 24px;
+}
+mat-button-toggle {
+	font-size: 12px !important;
+	font-weight: bold;
+}
+.mat-button-toggle-checked {
+    background-color: #ee3987;
+    color: #fff;
 }

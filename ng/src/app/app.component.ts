@@ -18,9 +18,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('of') of: any;
   @ViewChild('of2') of2: any;
   @ViewChild('of3') of3: any;
-  @ViewChild('boton1') boton1: any;
-  @ViewChild('boton2') boton2: any;
-  @ViewChild('boton3') boton3: any;
+  @ViewChild('groupApp') groupApp: any;
   @ViewChild('debug') debug: any;
   @ViewChild('p5_debug') p5_debug: any;
   /////////////////////////////
@@ -29,7 +27,7 @@ export class AppComponent implements AfterViewInit {
   public displayB1 = true;
   public displayB2 = false;
   public displayB3 = false;
-  public disCFile = 'of | ofApp.cpp';
+  public disCFile = 'ofApp.cpp';
   public main = '';
   public app = '';
   public apph = '';
@@ -39,25 +37,6 @@ export class AppComponent implements AfterViewInit {
     public d: FilesService, public renderer: Renderer2) {}
 
   public ngAfterViewInit(): void {
-    // Listener Buttons
-    this.renderer.listen(this.boton1.nativeElement, 'click', () => {
-      this.disCFile = 'of | ofApp.cpp';
-      this.displayB1 = true;
-      this.displayB2 = false;
-      this.displayB3 = false;
-    });
-    this.renderer.listen(this.boton2.nativeElement, 'click', () => {
-      this.disCFile = 'of | main.cpp';
-      this.displayB1 = false;
-      this.displayB2 = true;
-      this.displayB3 = false;
-    });
-    this.renderer.listen(this.boton3.nativeElement, 'click', () => {
-      this.disCFile = 'of | ofApp.h';
-      this.displayB1 = false;
-      this.displayB2 = false;
-      this.displayB3 = true;
-    });
     // Listener TextArea
     this.renderer.listen(this.p5.nativeElement, 'keyup', (e) => {
       // Get Value
@@ -128,6 +107,36 @@ export class AppComponent implements AfterViewInit {
     const appcpp = this.conversor.ofAppcpp(convers);
     this.app = appcpp;
     this.of.nativeElement.innerHTML = this.hl.highlightC(appcpp);
+  }
+
+  public onChangeFiles($event: any): void {
+    console.log(this.groupApp.value);
+    switch (this.groupApp.value) {
+      case 'cpp_app':
+        this.disCFile = 'ofApp.cpp';
+        this.displayB1 = true;
+        this.displayB2 = false;
+        this.displayB3 = false;
+        break;
+      case 'cpp_main':
+        this.disCFile = 'main.cpp';
+        this.displayB1 = false;
+        this.displayB2 = true;
+        this.displayB3 = false;
+        break;
+      case 'h_app':
+        this.disCFile = 'ofApp.h';
+        this.displayB1 = false;
+        this.displayB2 = false;
+        this.displayB3 = true;
+        break;
+      default:
+        this.disCFile = 'ofApp.cpp';
+        this.displayB1 = true;
+        this.displayB2 = false;
+        this.displayB3 = false;
+        break;
+    }
   }
 
 }
