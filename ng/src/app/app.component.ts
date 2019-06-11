@@ -13,14 +13,14 @@ export class AppComponent implements AfterViewInit {
   public ver = '1.0';
   /////////////////////////////
   /*- Elements -*/
-  @ViewChild('p5') p5: any;
-  @ViewChild('fp5') fp5: any;
-  @ViewChild('of') of: any;
-  @ViewChild('of2') of2: any;
-  @ViewChild('of3') of3: any;
-  @ViewChild('groupApp') groupApp: any;
-  @ViewChild('debug') debug: any;
-  @ViewChild('p5_debug') p5_debug: any;
+  @ViewChild('p5', {static: true}) p5: any;
+  @ViewChild('fp5', {static: true}) fp5: any;
+  @ViewChild('of', {static: true}) of: any;
+  @ViewChild('of2', {static: true}) of2: any;
+  @ViewChild('of3', {static: true}) of3: any;
+  @ViewChild('groupApp', {static: true}) groupApp: any;
+  @ViewChild('debug', {static: true}) debug: any;
+  @ViewChild('p5_debug', {static: true}) p5_debug: any;
   /////////////////////////////
   public p5v = 'x.x.x';
   public ofv = '0.9.x';
