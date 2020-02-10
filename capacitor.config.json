@@ -1,0 +1,8 @@
+{
+  "appId": "com.ibuioli.rosetta",
+  "appName": "Rosetta",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist",
+  "cordova": {}
+}

@@ -2,6 +2,7 @@ import { Component, Renderer2, ViewChild, AfterViewInit } from '@angular/core';
 import { P52OfService } from './services/p5-2-of.service';
 import { HighlightService } from './services/highlight.service';
 import { FilesService } from './services/files.service';
+import { Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-root',
