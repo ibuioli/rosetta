@@ -33,7 +33,7 @@ cd rosetta
 Install the packages with this script:
 
 ```
-npm run install:all
+npm run install
 ```
 (don't use ```npm install```)
 
@@ -50,7 +50,7 @@ npm start
 For run in a localhost use it:
 
 ```
-npm run serve
+ng serve
 ```
 **Note:** Please use Chrome or Firefox for Serve.
 
@@ -58,12 +58,6 @@ For build a dist use it:
 
 ```
 npm run build
-```
-
-For run only Electron-app without build (faster for testing):
-
-```
-npm run electron
 ```
 
 ---

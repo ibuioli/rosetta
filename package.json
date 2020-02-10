@@ -5,8 +5,8 @@
   "author": "Ignacio Buioli",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod --build-optimizer --output-hashing=none",
+    "start": "npm run build && npx cap open electro",
+    "build": "ng build --prod --build-optimizer --output-hashing=none && npx cap copy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
