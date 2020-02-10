@@ -208,6 +208,7 @@ h1 span{
 .ref{
 	position:absolute;
 	bottom:20px;
+	padding:0 5px;
 }
 .ref a:hover{
 	text-decoration:underline;
@@ -261,7 +262,8 @@ h1 span{
 }
 /*MATERIAL*/
 mat-form-field {
-	margin:20px 5px 0 5px;
+	width:100%;
+	padding:20px 5px 0 5px;
 }
 mat-button-toggle-group {
 	position: absolute;

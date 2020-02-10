@@ -44,7 +44,7 @@
 				<pre #of3 id="of3" class="ofScroll" [hidden]="!displayB3" spellcheck="false"></pre>
 
 				<mat-button-toggle-group appearance="legacy" #groupApp="matButtonToggleGroup" (change)="onChangeFiles($event)">
-					<mat-button-toggle value="cpp_app" color="accent" checked>
+					<mat-button-toggle value="cpp_app" [checked]="true">
 						.CPP
 					</mat-button-toggle>
 					<mat-button-toggle value="cpp_main">
