@@ -24,7 +24,7 @@ export class HighlightService {
     '°>°'];
     for (let i = 0; i < brk.length; i++) {
       const re = new RegExp('(' + brk[i] + ')', 'g');
-      r_code = r_code.replace(re, '<brk>$1</brk>');
+      r_code = r_code.replace(re, '<bk>$1</bk>');
     }
     r_code = r_code.replace(/°<°/g, '<');  // For Tags
     r_code = r_code.replace(/°>°/g, '>');
@@ -35,23 +35,23 @@ export class HighlightService {
     'void ', 'new ', 'class ', 'if ', 'else ', 'for ', 'while ', 'true', 'false'];
     for (let i = 0; i < vars.length; i++) {
       const re = new RegExp('\\b(' + vars[i] + ')\\b', 'g');
-      r_code = r_code.replace(re, '<vars>$1</vars>');
+      r_code = r_code.replace(re, '<v>$1</v>');
     }
 
     // NUMs
-    r_code = r_code.replace(/\b(\d+)\b/g, '<num>$1</num>')
+    r_code = r_code.replace(/\b(\d+)\b/g, '<n>$1</n>')
 
     // COMs
     const com = ['cout', 'endl'];
     for (let i = 0; i < com.length; i++) {
       const re = new RegExp('\\b(' + com[i] + ')\\b', 'g');
-      r_code = r_code.replace(re, '<com>$1</com>');
+      r_code = r_code.replace(re, '<cm>$1</cm>');
     }
-    r_code = r_code.replace(/\#(.+)*$/gm, '<com>#$1</com>');
+    r_code = r_code.replace(/\#(.+)*$/gm, '<cm>#$1</cm>');
 
     // STRs & CHARs
-    r_code = r_code.replace(/"([^"]+)"/g, '<str>"$1"</str>');
-    r_code = r_code.replace(/\'([^']+)\'/g, '<chr>"$1"</chr>');
+    r_code = r_code.replace(/"([^"]+)"/g, '<st>"$1"</st>');
+    r_code = r_code.replace(/\'([^']+)\'/g, '<c>"$1"</c>');
 
     /////////////////////////////////////////////////////////////
 
@@ -67,7 +67,7 @@ export class HighlightService {
     'PFont', 'PGraphics', 'PVector', 'PShape', 'PShader'];
     for (let i = 0; i < vars.length; i++) {
       const re = new RegExp('\\b(' + vars[i] + ')\\b', 'g');
-      r_code = r_code.replace(re, '<p5var>$1</p5var>');
+      r_code = r_code.replace(re, '<p5v>$1</p5v>');
     }
 
     // SYSs
@@ -75,7 +75,7 @@ export class HighlightService {
     'displayHeight', 'screen', 'pixelWidth', 'pixelHeight', 'focused'];
     for (let i = 0; i < sys.length; i++) {
       const re = new RegExp('\\b(' + sys[i] + ')\\b', 'g');
-      r_code = r_code.replace(re, '<p5sys>$1</p5sys>');
+      r_code = r_code.replace(re, '<p5s>$1</p5s>');
     }
 
     // FUNs
@@ -96,7 +96,7 @@ export class HighlightService {
     'square', 'push', 'pop'];
     for (let i = 0; i < fun.length; i++) {
       const re = new RegExp('\\b(' + fun[i] + '(\\b|\\s+))(\\()', 'g');
-      r_code = r_code.replace(re, '<p5fun>$1</p5fun>$3');
+      r_code = r_code.replace(re, '<p5f>$1</p5f>$3');
     }
 
     // TYPs
@@ -104,7 +104,7 @@ export class HighlightService {
     'implements', 'import', 'extends', 'final'];
     for (let i = 0; i < typ.length; i++) {
       const re = new RegExp('\\b(' + typ[i] + ')\\b', 'g');
-      r_code = r_code.replace(re, '<p5typ>$1</p5typ>');
+      r_code = r_code.replace(re, '<p5t>$1</p5t>');
     }
 
     // CONs
@@ -113,21 +113,21 @@ export class HighlightService {
     'SHIFT', 'TAB', 'ENTER', 'RETURN', 'BACKSPACE', 'DELETE'];
     for (let i = 0; i < con.length; i++) {
       const re = new RegExp('\\b(' + con[i] + ')\\b', 'g');
-      r_code = r_code.replace(re, '<p5con>$1</p5con>');
+      r_code = r_code.replace(re, '<p5k>$1</p5k>');
     }
 
     // STRs & CHARs
-    r_code = r_code.replace(/"([^"]+)"/g, '<p5str>"$1"</p5str>');
-    r_code = r_code.replace(/\'([^']+)\'/g, '<p5str>\'$1\'</p5str>');
+    r_code = r_code.replace(/"([^"]+)"/g, '<p5r>"$1"</p5r>');
+    r_code = r_code.replace(/\'([^']+)\'/g, '<p5r>\'$1\'</p5r>');
 
     // For Comments
     const c_mc = this.t.repeted(r_code, '/*', false);
     for (let i = 0; i < c_mc; i++) {
       const m = this.t.extract(r_code, '/*', '*/');
-      const value = '<p5com>/*' + m + '*/</p5com>';
+      const value = '<p5c>/*' + m + '*/</p5c>';
       r_code = r_code.replace('/*' + m + '*/', value);
     }
-    r_code = r_code.replace(/\/\/(.+)*$/gm, '<p5com>//$1</p5com>');
+    r_code = r_code.replace(/\/\/(.+)*$/gm, '<p5c>//$1</p5c>');
 
     /////////////////////////////////////////////////////////////
 

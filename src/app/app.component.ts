@@ -38,47 +38,32 @@ export class AppComponent implements AfterViewInit {
     public d: FilesService, public renderer: Renderer2) {}
 
   public ngAfterViewInit(): void {
-    // Listener TextArea
+    // Listener TextArea Up
     this.renderer.listen(this.p5.nativeElement, 'keyup', (e) => {
-      // Get Value
       if (e.keyCode < 37 || e.keyCode > 40) {
-        const txt = (<HTMLInputElement>this.p5.nativeElement).value;
-        const hlP5 = this.hl.highlightP5(txt);
-        this.fp5.nativeElement.innerHTML = hlP5 + '&#13;&#10;&#13;&#10;';
-
-        const reset = this.conversor.reset(txt);
-        const convers = this.conversor.conversor(reset, this.ofv);
-        this.p5v = this.conversor.p5ver(reset);
-
-        const apph = this.conversor.ofApph(convers);
-        this.apph = apph;
-        this.of3.nativeElement.innerHTML = this.hl.highlightC(apph);
-
-        const maincpp = this.conversor.maincpp(convers);
-        this.main = maincpp;
-        this.of2.nativeElement.innerHTML = this.hl.highlightC(maincpp);
-
-        const appcpp = this.conversor.ofAppcpp(convers);
-        this.app = appcpp;
-        this.of.nativeElement.innerHTML = this.hl.highlightC(appcpp);
+        this.processData();
       }
     });
-    // Get Tab Event
+    // Listen Textarea Down
     this.renderer.listen(this.p5.nativeElement, 'keydown', (e) => {
       if (e.keyCode === 9) {
-          const start = this.p5.nativeElement.selectionStart;
-          const end = this.p5.nativeElement.selectionEnd;
+        const start = this.p5.nativeElement.selectionStart;
+        const end = this.p5.nativeElement.selectionEnd;
 
-          const target = (<HTMLTextAreaElement>e.target);
-          const value = target.value;
+        const target = (<HTMLTextAreaElement>e.target);
+        const value = target.value;
 
-          target.value = value.substring(0, start)
-                      + '\t'
-                      + value.substring(end);
+        target.value = value.substring(0, start)
+                    + '\t'
+                    + value.substring(end);
 
-          this.p5.nativeElement.selectionStart = this.p5.nativeElement.selectionEnd = start + 1;
+        this.p5.nativeElement.selectionStart = this.p5.nativeElement.selectionEnd = start + 1;
 
-          e.preventDefault();
+        e.preventDefault();
+      }
+
+      if (e.keyCode < 37 || e.keyCode > 40) {
+        this.processData();
       }
     });
     // Listener Scroll
@@ -88,6 +73,28 @@ export class AppComponent implements AfterViewInit {
 
       this.fp5.nativeElement.scrollTop = (window.pageYOffset || scrTop)  - (clTop || 0);
     });
+  }
+
+  public processData(): void {
+    const txt = (<HTMLInputElement>this.p5.nativeElement).value;
+    const hlP5 = this.hl.highlightP5(txt);
+    this.fp5.nativeElement.innerHTML = hlP5 + '&#13;&#10;&#13;&#10;';
+
+    const reset = this.conversor.reset(txt);
+    const convers = this.conversor.conversor(reset, this.ofv);
+    this.p5v = this.conversor.p5ver(reset);
+
+    const apph = this.conversor.ofApph(convers);
+    this.apph = apph;
+    this.of3.nativeElement.innerHTML = this.hl.highlightC(apph);
+
+    const maincpp = this.conversor.maincpp(convers);
+    this.main = maincpp;
+    this.of2.nativeElement.innerHTML = this.hl.highlightC(maincpp);
+
+    const appcpp = this.conversor.ofAppcpp(convers);
+    this.app = appcpp;
+    this.of.nativeElement.innerHTML = this.hl.highlightC(appcpp);
   }
 
   public onChange($event: any): void {
