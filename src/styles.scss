@@ -22,16 +22,16 @@ $elements-theme: mat-light-theme($elements-primary, $elements-accent, $elements-
 html {
 	-webkit-font-smoothing: none;
 	-webkit-text-size-adjust: none;
-}
-body, html{
-	width:100%;
-	height:100%;
+	width: 100%;
+	height: 100%;
 	overflow: hidden;
 }
 body {
-	position:relative;
+	position: relative;
 	font-family: Roboto, "Helvetica Neue", sans-serif;
-	font-size: 100%;
+	-webkit-font-smoothing: none;
+	-webkit-text-size-adjust: none;
+	backface-visibility: hidden;
 	font-size: 0.79em;
 	font-weight: normal;
 	line-height: 1.5em;
@@ -39,46 +39,47 @@ body {
 	background:#eee;
 	width:100%;
 	height:100%;
+	overflow: hidden;
 }
 /*HIGHLIGHT*/
 /*C++*/
-brk{
+bk{
   color:#ff0000;
 }
-vars{
+v{
   color:#0000a0;
 }
-str{
+st{
 	color:#0000ff;
 }
-chr{
+c{
 	color:#e0a000;
 }
-num{
+n{
 	color:#f000f0;
 }
-com {
+cm {
 	color:#00a000 !important;
 }
 /*P5*/
-p5var{
+p5v{
 	color:#e36d24;
 }
-p5typ{
+p5t{
 	color:#33997e;
 }
-p5fun{
+p5f{
 	color:#006699;
 }
-p5sys{
+p5s{
 	color:#d94a7a;
 }
-p5com{
-	color:#666;
+p5c{
+	color:#666 !important;
 }
-p5str{
+p5r{
 	color:#7d4793;
 }
-p5con{
+p5k{
 	color:#718a62;
 }
