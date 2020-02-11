@@ -130,26 +130,17 @@ h1 span{
 	width:90px;
 	display:block;
 }
-#oftxt2{
-	color:#ee3987;
-	left:620px;
-	top:5px;
-	width:90px;
-}
-#oftxt3{
-	color:#ee3987;
-	left:620px;
-	top:5px;
-	width:90px;
-}
 .txt{
+	background-color:#fff;
+	border-radius: 2px;
 	position:absolute;
-	border:#aaa 1px solid;
 	text-align:center;
 	z-index:10;
 	user-select: none;
 	right:20px;
 	top:5px;
+	font-size: 12px !important;
+	box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 .refdiv{
 	background:#e1e1e1;
@@ -207,7 +198,7 @@ h1 span{
 }
 .ref{
 	position:absolute;
-	bottom:20px;
+	bottom:0px;
 	padding:0 5px;
 }
 .ref a:hover{

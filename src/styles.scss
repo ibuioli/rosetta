@@ -19,12 +19,6 @@ $elements-theme: mat-light-theme($elements-primary, $elements-accent, $elements-
 @include angular-material-theme($elements-theme);
 
 /*Content*/
-@font-face {
-	font-family: "theSerif";
-	src: url("assets/font/TheSerif_B4_Plain_.eot"), url("assets/font/TheSerif_B4_Plain_.woff") format("woff");
-	font-weight: 400;
-	font-style: normal;
-}
 html {
 	-webkit-font-smoothing: none;
 	-webkit-text-size-adjust: none;
@@ -36,7 +30,7 @@ body, html{
 }
 body {
 	position:relative;
-	font-family: "theSerif", georgia, times, serif;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
 	font-size: 100%;
 	font-size: 0.79em;
 	font-weight: normal;
