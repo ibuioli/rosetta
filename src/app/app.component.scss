@@ -1,3 +1,6 @@
+$of-color: rgb(238, 57, 135);
+$p5-color: rgb(15, 70, 118);
+
 a{
 	text-decoration:none;
 }
@@ -97,21 +100,21 @@ h1 span{
 	max-height:100%;
 	background:rgba(0,0,0,0);
 	box-shadow: inset 0px 0px 8px 1px rgba(220,220,220,1);
-	border:1px solid #999;
+	border:1px solid #c8c8c8;
 	-webkit-text-fill-color:transparent;
 }
 #cp5 #fp5{
 	height:100%;
 	max-height:100%;
 	background:#fff;
-	padding:6px;
+	padding:5px;
 }
 #of, #of2, #of3 {
 	height:100%;
 	max-height:100%;
 	float:left;
 	background:#fff;
-	border:1px solid #999;
+	border:1px solid #c8c8c8;
 	box-shadow: inset 0px 0px 8px 1px rgba(220,220,220,1);
 	text-shadow: 0 1px white;
 }
@@ -121,12 +124,12 @@ h1 span{
 	float:left;
 }
 #p5txt{
-	color:#0f4676;
+	color: $p5-color;
 	width:25px;
 	display:block;
 }
 #oftxt{
-	color:#ee3987;
+	color: $of-color;
 	width:90px;
 	display:block;
 }
@@ -208,7 +211,7 @@ h1 span{
 	right:5px;
 }
 #refof a{
-	color:#ee3987;
+	color: $of-color;
 }
 #p5v{
 	margin:10px 0 0 5px;
@@ -216,7 +219,7 @@ h1 span{
 	user-select: none;
 }
 #refp5 a{
-	color:#0f4676;
+	color: $p5-color;
 }
 #debug, #p5_debug{
 	padding:5px;
@@ -234,22 +237,22 @@ h1 span{
 	max-height: 97%;
 }
 .ofScroll::-webkit-scrollbar, .p5Scroll::-webkit-scrollbar {
-  width: 14px;
+  	width: 14px;
 }
 .ofScroll::-webkit-scrollbar-track, .p5Scroll::-webkit-scrollbar-track {
-  background: #f0f0f0;
+  	background: #f0f0f0;
 }
 .ofScroll::-webkit-scrollbar-thumb {
-	background: rgba(238, 57, 135, 0.7);
+  	background: rgba($of-color, .9);
 }
 .p5Scroll::-webkit-scrollbar-thumb {
-	background: rgba(3, 69, 128, 0.7);
+	background: rgba($p5-color, .9);
 }
 .ofScroll::-webkit-scrollbar-thumb:hover{
-  background: rgba(238, 57, 135, 0.95);
+	background: rgba($of-color, .7);
 }
 .p5Scroll::-webkit-scrollbar-thumb:hover{
-  background: rgba(3, 69, 128, 0.95);
+	background: rgba($p5-color, .7);
 }
 /*MATERIAL*/
 mat-form-field {
@@ -266,6 +269,6 @@ mat-button-toggle {
 	font-weight: bold;
 }
 .mat-button-toggle-checked {
-    background-color: #ee3987;
+    background-color: $of-color;
     color: #fff;
 }
