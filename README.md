@@ -33,9 +33,8 @@ cd rosetta
 Install the packages with this script:
 
 ```
-npm run install
+npm install
 ```
-(don't use ```npm install```)
 
 Then you can run the app with:
 
