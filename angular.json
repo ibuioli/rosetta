@@ -28,7 +28,8 @@
             ],
             "scripts": [
               {
-                "input": "node_modules/document-register-element/build/document-register-element.js"
+                "input": "node_modules/document-register-element/build/document-register-element.js",
+                "inject": true
               }
             ]
           },
@@ -49,7 +50,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
