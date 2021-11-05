@@ -1,9 +1,9 @@
 /* Imports */
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap/scss/bootstrap-reboot';
 @import '~bootstrap/scss/bootstrap-grid';
-@import '~@angular/material/theming';
+@import '@angular/material/theming';
 
 /*NG Material Theme*/
 @include mat.core();
