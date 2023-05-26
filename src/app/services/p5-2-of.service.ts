@@ -488,8 +488,8 @@ export class P52OfService {
       const mouseDragged = p5.search(/void mouseDragged\(\)/);
 
       const types = p5.match(/.+ \w+\(.*\)\{/g);
-      for (let i = 0; i < types.length; i++) {
-          forfun = forfun + types[i] + ';\n\t\t';
+      for (let i = 0; i < types!.length; i++) {
+          forfun = forfun + types![i] + ';\n\t\t';
       }
 
       forfun = forfun.replace(/\)\{\;/g, ');');

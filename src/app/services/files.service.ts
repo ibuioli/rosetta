@@ -27,7 +27,7 @@ export class FilesService {
   public upload(e: any, p5: any, debug: any): void {
     if (fs !== undefined) {
 
-      if (/(?:\.([^.]+))?$/.exec(e.target.files[0].name)[1] === 'pde') {
+      if (/(?:\.([^.]+))?$/.exec(e.target.files[0].name)![1] === 'pde') {
         fs.readFile(e.target.files[0].path, 'utf8', (err: any, data: any) => {
           if (err) {
             return console.log(err);
@@ -39,7 +39,7 @@ export class FilesService {
               key : '',
               shiftKey : true,
           });
-          document.getElementById('p5').dispatchEvent(ev);
+          document.getElementById('p5')!.dispatchEvent(ev);
           this.debug.debug_console('*file load successful*', 'black', debug);
         });
 
