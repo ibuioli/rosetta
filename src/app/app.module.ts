@@ -14,6 +14,7 @@ import { Tools } from './services/tools';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { MatSelectModule } from '@angular/material/select';
     NoopAnimationsModule,
     MatButtonModule,
     MatButtonToggleModule,
+    MatInputModule,
     MatSelectModule
   ],
   providers: [

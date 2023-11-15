@@ -25,6 +25,11 @@
             "styles": [
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src", "./node_modules"
+              ]
+            },
             "scripts": [
               {
                 "input": "node_modules/document-register-element/build/document-register-element.js",
@@ -65,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "elements:build"
+            "buildTarget": "elements:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "elements:build:production"
+              "buildTarget": "elements:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "elements:build"
+            "buildTarget": "elements:build"
           }
         },
         "test": {
