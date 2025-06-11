@@ -5,9 +5,10 @@ import { FilesService } from './services/files.service';
 import { Plugins } from '@capacitor/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent implements AfterViewInit {
   public title = 'Rosetta';
