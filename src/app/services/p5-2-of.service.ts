@@ -64,9 +64,9 @@ export class P52OfService {
     /////// CALC ///////
     r_p5 = r_p5.replace(/\bconstrain\b\(/g, 'ofClamp(');
     r_p5 = r_p5.replace(/\bdist\b\(/g, 'ofDist(');
-    const c_mag = this.t.repeted(r_p5, 'mag(', false);
-    for (let i = 0; i < c_mag; i++) {
+    while (r_p5.indexOf('mag(') !== -1) {
       const m = this.t.extract(r_p5, 'mag(', ');');
+      if (m === '') break;
       if (this.t.countpar(m, ',') <= 1) {
         r_p5 = r_p5.replace('mag(' + m + ');', 'ofDist(0, 0, ' + m + ');');
       } else if (this.t.countpar(m, ',') > 1) {
@@ -78,9 +78,9 @@ export class P52OfService {
     r_p5 = r_p5.replace(/\bmax\b\(/g, 'MAX(');
     r_p5 = r_p5.replace(/\bmin\b\(/g, 'MIN(');
     r_p5 = r_p5.replace(/\bnorm\b\(/g, 'ofNormalize(');
-    const c_sq = this.t.repeted(r_p5, 'sq(', false);
-    for (let i = 0; i < c_sq; i++) {
+    while (r_p5.indexOf('sq(') !== -1) {
       const m = this.t.extract(r_p5, 'sq(', ');');
+      if (m === '') break;
       const value = 'pow(' + m + ', 2.0)';
       r_p5 = r_p5.replace('sq(' + m + ');', value);
     }
@@ -99,9 +99,9 @@ export class P52OfService {
     r_p5 = r_p5.replace(/\bscreen.ofGetHeight\b/g, 'ofGetScreenWidth');
     r_p5 = r_p5.replace(/\bframeRate\b\(/g, 'ofSetFrameRate(');
     r_p5 = r_p5.replace(/\bnoCursor\b\(/g, 'ofHideCursor(');
-    const c_cur = this.t.repeted(r_p5, 'cursor(', false);
-    for (let i = 0; i < c_cur; i++) {
+    while (r_p5.indexOf('cursor(') !== -1) {
       const m = this.t.extract(r_p5, 'cursor(', ');');
+      if (m === '') break;
       const value = 'ofShowCursor();';
       r_p5 = r_p5.replace('cursor(' + m + ');', value);
     }
@@ -151,15 +151,15 @@ export class P52OfService {
     r_p5 = r_p5.replace(/\bnoFill\b\(/g, 'ofNoFill(');
     r_p5 = r_p5.replace(/\bnoStroke\b\(/g, 'ofFill(');
     r_p5 = r_p5.replace(/\bcolor\b\(/g, 'ofColor(');
-    const c_fill = this.t.repeted(r_p5, 'fill(', false);
-    for (let i = 0; i < c_fill; i++) {
+    while (r_p5.indexOf('fill(') !== -1) {
       const m = this.t.extract(r_p5, 'fill(', ');');
+      if (m === '') break;
       const value = 'ofSetColor(' + m + ');ofFill();';
       r_p5 = r_p5.replace('fill(' + m + ');', value);
     }
-    const c_stroke = this.t.repeted(r_p5, 'stroke(', false);
-    for (let i = 0; i < c_stroke; i++) {
+    while (r_p5.indexOf('stroke(') !== -1) {
       const m = this.t.extract(r_p5, 'stroke(', ');');
+      if (m === '') break;
       const value = 'ofSetColor(' + m + ');ofNoFill();';
       r_p5 = r_p5.replace('stroke(' + m + ');', value);
     }
@@ -242,37 +242,37 @@ export class P52OfService {
         r_p5 = r_p5.replace('point(' + m + ');', value);
       }
     }
-    const c_quad = this.t.repeted(r_p5, 'quad(', false);
-    for (let i = 0; i < c_quad; i++) {
+    while (r_p5.indexOf('quad(') !== -1) {
       const m = this.t.extract(r_p5, 'quad(', ');');
+      if (m === '') break;
       const p = this.t.params(m, ',', 8);
       r_p5 = r_p5.replace('quad(' + m + ');', 'ofBeginShape();\nofVertex(' + p[0] + ',' + p[1] + ');\
-      \nofVertex(' + p[2] + ',' + p[3] + ');\nofVertex(' + p[4] + ',' + p[5] + ');\nofVertex(' + p[6] + ',' + p[7] + ');\nofEndShape();');
+        \nofVertex(' + p[2] + ',' + p[3] + ');\nofVertex(' + p[4] + ',' + p[5] + ');\nofVertex(' + p[6] + ',' + p[7] + ');\nofEndShape();');
     }
-    const c_arc = this.t.repeted(r_p5, 'arc(', false);
-    for (let i = 0; i < c_arc; i++) {
+    while (r_p5.indexOf('arc(') !== -1) {
       const m = this.t.extract(r_p5, 'arc(', ');');
+      if (m === '') break;
       const v = 'of_' + Math.random().toString(36).substr(2, 5);
       const cp = this.t.countpar(m, ',');
       const p = this.t.params(m, ',', cp + 1);
-      for (let s = 0; s < p.length; s++) {
+      for (let s = 0; s <p.length; s++) {
         p[s] = p[s].replace(/\bHALF_PI\b/g, '90');
         p[s] = p[s].replace(/\bPI\b/g, '180');
         p[s] = p[s].replace(/\bTWO_PI\b/g, '360');
       }
       if (p[6] === undefined || p[6] === 'OPEN') {
         r_p5 = r_p5.replace('arc(' + m + ');', 'ofPolyline ' + v + ';\n' + v + '.°arc°(' + p[0] + ',\
-        ' + p[1] + ',' + p[2] + ',' + p[3] + ',' + p[4] + ',' + p[5] + ');\n' + v + '.draw();');
+          ' + p[1] + ',' + p[2] + ',' + p[3] + ',' + p[4] + ',' + p[5] + ');\n' + v + '.draw();');
       } else if (p[6] === 'CHORD') {
         r_p5 = r_p5.replace('arc(' + m + ');', 'ofPolyline ' + v + ';\n' + v + '.°arc°(' + p[0] + ',\
-        ' + p[1] + ',' + p[2] + ',' + p[3] + ',' + p[4] + ',' + p[5] + ');\n' + v + '.close();\n' + v + '.draw();');
+          ' + p[1] + ',' + p[2] + ',' + p[3] + ',' + p[4] + ',' + p[5] + ');\n' + v + '.close();\n' + v + '.draw();');
       } else if (p[6] === 'PIE') {
         r_p5 = r_p5.replace('arc(' + m + ');', 'ofPolyline ' + v + ';\n' + v + '.°arc°(' + p[0] + ',\
-        ' + p[1] + ',' + p[2] + ',' + p[3] + ',' + p[4] + ',' + p[5] + ');\n'
-        + v + '.lineTo(' + p[0] + ',' + p[1] + ');\n' + v + '.close();\n' + v + '.draw();');
+          ' + p[1] + ',' + p[2] + ',' + p[3] + ',' + p[4] + ',' + p[5] + ');\n'
+          + v + '.lineTo(' + p[0] + ',' + p[1] + ');\n' + v + '.close();\n' + v + '.draw();');
       } else {
         r_p5 = r_p5.replace('arc(' + m + ');', 'ofPolyline ' + v + ';\n' + v + '.°arc°(' + p[0] + ',\
-        ' + p[1] + ',' + p[2] + ',' + p[3] + ',' + p[4] + ',' + p[5] + ');\n' + v + '.draw();');
+          ' + p[1] + ',' + p[2] + ',' + p[3] + ',' + p[4] + ',' + p[5] + ');\n' + v + '.draw();');
       }
     }
     /////// PRIMS 3D ///////
@@ -315,9 +315,9 @@ export class P52OfService {
     r_p5 = r_p5.replace(/\bbeginShape\b\(/g, 'ofBeginShape(');
     r_p5 = r_p5.replace(/\bendShape\b\(/g, 'ofEndShape(');
     /////// IMAGE ///////
-    const c_image = this.t.repeted(r_p5, 'image(', false);
-    for (let i = 0; i < c_image; i++) {
+    while (r_p5.indexOf('image(') !== -1) {
       const m = this.t.extract(r_p5, 'image(', ');');
+      if (m === '') break;
       const mc = this.t.countpar(m, ',');
       const p = this.t.params(m, ',', mc + 1);
       if (mc === 2) {
@@ -432,15 +432,15 @@ export class P52OfService {
     /////// OUT ///////
     r_p5 = r_p5.replace(/\bsave\b\(/g, 'ofSaveScreen(');
     r_p5 = r_p5.replace(/\bsaveFrame\b\(/g, 'ofSaveFrame(');
-    const c_print = this.t.repeted(r_p5, 'print(', false);
-    for (let i = 0; i < c_print; i++) {
+    while (r_p5.indexOf('print(') !== -1) {
       const m = this.t.extract(r_p5, 'print(', ');');
+      if (m === '') break;
       const value = 'cout << ' + m + '';
       r_p5 = r_p5.replace('print(' + m + ');', value);
     }
-    const c_println = this.t.repeted(r_p5, 'println(', false);
-    for (let i = 0; i < c_println; i++) {
+    while (r_p5.indexOf('println(') !== -1) {
       const m = this.t.extract(r_p5, 'println(', ');');
+      if (m === '') break;
       const value = 'cout << ' + m + ' << endl';
       r_p5 = r_p5.replace('println(' + m + ');', value);
     }
