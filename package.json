@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^20.3.37",
-    "@angular/cli": "^20.3.37",
+    "@angular/cli": "^20.3.41",
     "@angular/compiler-cli": "^20.3.32",
     "@angular/language-service": "^20.3.32",
     "@capacitor/cli": "^5.0.4",
