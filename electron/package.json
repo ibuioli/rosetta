@@ -12,7 +12,7 @@
     "electron-packager": "^16.0.0"
   },
   "devDependencies": {
-    "electron": "^22.3.24"
+    "electron": "^42.11.16"
   },
   "keywords": [
     "capacitor",
